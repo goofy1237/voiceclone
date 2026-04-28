@@ -13,18 +13,9 @@ const { verifyConnection } = require('./src/database/client');
 const webhooks = require('./src/webhooks/index');
 const { generateAndSaveSoul } = require('./src/soul/generator');
 const { createRetellAgent, updateAgentForProspect, initiateOutboundCall, getRetellCallStatus } = require('./src/agents/retell');
-const { createVapiAgent } = require('./src/agents/vapi');
-const { deployRecallBot } = require('./src/agents/recall');
-const { createTavusReplica, createTavusPersona, createTavusConversation, endTavusConversation, getTavusConversationStatus } = require('./src/agents/tavus');
 const { buildSystemPrompt } = require('./src/prompts/builder');
 const { RETELL_API_BASE } = require('./config/constants');
 const { apiKeyAuth, enforceClientIsolation } = require('./src/middleware/auth');
-const multer = require('multer');
-const upload = multer({ dest: '/tmp/tavus-uploads/' });
-const { WebSocketServer } = require('ws');
-const { createAnamPersona } = require('./src/video/anam');
-const orchestrator = require('./src/video/orchestrator');
-const { listRooms } = require('./src/video/livekit');
 
 // ============================================================
 //  ENV VAR CHECK — fail fast on hard-required, warn on optional
@@ -70,11 +61,7 @@ checkHardRequiredEnvVars([
 ]);
 
 checkSoftRequiredEnvVars([
-  { keys: ['VAPI_API_KEY'], feature: 'Vapi agent creation will be skipped' },
   { keys: ['ELEVENLABS_API_KEY'], feature: 'ElevenLabs voices unavailable, using Retell built-in voices only' },
-  { keys: ['RECALL_API_KEY'], feature: 'Google Meet bot disabled' },
-  { keys: ['TAVUS_API_KEY'], feature: 'Video avatars disabled' },
-  { keys: ['LIVEKIT_API_KEY', 'LIVEKIT_API_SECRET', 'LIVEKIT_URL'], feature: 'Hyper-real video sessions disabled' },
 ]);
 
 // ============================================================
@@ -162,7 +149,6 @@ app.get('/health', async (req, res) => {
     services: {
       supabase: 'error',
       retell: 'error',
-      livekit: 'error',
       redis: 'unavailable',
     },
   };
@@ -184,14 +170,6 @@ app.get('/health', async (req, res) => {
     health.services.retell = r.status === 200 ? 'connected' : 'error';
   } catch (e) {
     health.services.retell = 'error';
-  }
-
-  // Check LiveKit
-  try {
-    const rooms = await listRooms();
-    health.services.livekit = Array.isArray(rooms) ? 'connected' : 'error';
-  } catch (e) {
-    health.services.livekit = 'error';
   }
 
   // Check Redis (Upstash HTTP REST — optional)
@@ -276,10 +254,6 @@ app.post('/clients', async (req, res) => {
     try { retellResult = await createRetellAgent(client.id); }
     catch (err) { console.error('[server] Retell:', err.message); }
 
-    let vapiResult = null;
-    try { vapiResult = await createVapiAgent(client.id); }
-    catch (err) { console.error('[server] Vapi:', err.message); }
-
     const { data: finalClient } = await supabase
       .from('clients').select('*').eq('id', client.id).single();
 
@@ -294,78 +268,15 @@ app.post('/clients', async (req, res) => {
     console.log(`  Webhook URL:   ${env.BASE_URL}/webhooks/retell`);
     console.log(`  Dashboard:     ${env.BASE_URL}/dashboard/${finalClient.id}`);
     console.log(`  Retell Agent:  ${retellResult?.agent_id || 'not configured'}`);
-    console.log(`  Vapi Agent:    ${vapiResult?.id || 'not configured'}`);
     console.log('========================================\n');
 
     res.json({
       client: finalClient,
       soul: soul.identity?.full_name,
       retell_agent_id: retellResult?.agent_id || null,
-      vapi_agent_id: vapiResult?.id || null,
     });
   } catch (err) {
     console.error('[server] Client creation failed:', err.message);
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// ============================================================
-// POST /clients/:clientId/calendly — setup Calendly webhook
-// ============================================================
-app.post('/clients/:clientId/calendly', async (req, res) => {
-  try {
-    const { clientId } = req.params;
-    const { event_type_uri } = req.body;
-
-    if (!event_type_uri) {
-      return res.status(400).json({ error: 'event_type_uri is required' });
-    }
-
-    // Save event type URI
-    await supabase.from('clients').update({
-      calendly_event_type_uri: event_type_uri,
-    }).eq('id', clientId);
-
-    // Register Calendly webhook subscription
-    let webhookId = null;
-    if (env.CALENDLY_API_KEY) {
-      try {
-        // Get organization URI
-        const userRes = await axios.get('https://api.calendly.com/users/me', {
-          headers: { 'Authorization': `Bearer ${env.CALENDLY_API_KEY}` },
-        });
-        const orgUri = userRes.data.resource.current_organization;
-
-        const webhookRes = await axios.post('https://api.calendly.com/webhook_subscriptions', {
-          url: `${env.BASE_URL}/webhooks/calendly`,
-          events: ['invitee.created'],
-          organization: orgUri,
-          scope: 'organization',
-        }, {
-          headers: {
-            'Authorization': `Bearer ${env.CALENDLY_API_KEY}`,
-            'Content-Type': 'application/json',
-          },
-        });
-
-        webhookId = webhookRes.data.resource?.uri || webhookRes.data.uri;
-        console.log(`[server] Calendly webhook registered: ${webhookId}`);
-      } catch (err) {
-        console.warn('[server] Calendly webhook registration failed:', err.response?.data?.message || err.message);
-      }
-    }
-
-    if (webhookId) {
-      await supabase.from('clients').update({ calendly_webhook_id: webhookId }).eq('id', clientId);
-    }
-
-    res.json({
-      clientId,
-      event_type_uri,
-      calendly_webhook_id: webhookId,
-      webhook_url: `${env.BASE_URL}/webhooks/calendly`,
-    });
-  } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
@@ -580,7 +491,7 @@ app.get('/api/team/clients', async (req, res) => {
   try {
     const { data: clients, error } = await supabase
       .from('clients')
-      .select('id, agent_name, business_name, retell_agent_id, vapi_agent_id, elevenlabs_voice_id, video_mode, created_at')
+      .select('id, agent_name, business_name, retell_agent_id, elevenlabs_voice_id, created_at')
       .order('created_at', { ascending: false });
 
     if (error) return res.status(500).json({ error: error.message });
@@ -709,249 +620,6 @@ app.get('/api/team/prospects', async (req, res) => {
     res.json(prospects || []);
   } catch (err) {
     res.status(500).json({ error: err.message });
-  }
-});
-
-// ============================================================
-// POST /calls/meet — Deploy Recall bot
-// ============================================================
-app.post('/calls/meet', async (req, res) => {
-  try {
-    const { meetUrl, prospectId, clientId } = req.body;
-    if (!meetUrl || !prospectId || !clientId) {
-      return res.status(400).json({ error: 'meetUrl, prospectId, and clientId are required' });
-    }
-    const result = await deployRecallBot(meetUrl, prospectId, clientId);
-    res.json(result);
-  } catch (err) {
-    console.error('[server] Meet bot deployment failed:', err.message);
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// ============================================================
-//  SPRINT 6 — HYPER-REAL VIDEO ENDPOINTS
-// ============================================================
-
-// POST /clients/:clientId/anam/persona — create Anam CARA-3 persona
-app.post('/clients/:clientId/anam/persona', async (req, res) => {
-  try {
-    const { clientId } = req.params;
-    const result = await createAnamPersona(clientId);
-    res.json(result);
-  } catch (err) {
-    console.error('[server] Anam persona failed:', err.response?.data || err.message);
-    res.status(500).json({ error: err.response?.data?.message || err.message });
-  }
-});
-
-// POST /clients/:clientId/render-mode — set render engine
-app.post('/clients/:clientId/render-mode', async (req, res) => {
-  try {
-    const { clientId } = req.params;
-    const { render_mode } = req.body;
-    const validModes = ['phoenix_4', 'anam_cara3'];
-    if (!validModes.includes(render_mode)) {
-      return res.status(400).json({ error: `Invalid render_mode. Must be one of: ${validModes.join(', ')}` });
-    }
-    const { data: client, error } = await supabase
-      .from('clients')
-      .update({ render_mode })
-      .eq('id', clientId)
-      .select()
-      .single();
-    if (error) return res.status(400).json({ error: error.message });
-    console.log(`[server] Client ${clientId} render mode set to: ${render_mode}`);
-    res.json({ clientId, render_mode: client.render_mode, client });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// POST /calls/hyper-real/:prospectId — start hyper-real video session
-app.post('/calls/hyper-real/:prospectId', async (req, res) => {
-  try {
-    const { prospectId } = req.params;
-    const { meetUrl } = req.body || {};
-
-    const { data: prospect } = await supabase
-      .from('prospects')
-      .select('client_id')
-      .eq('id', prospectId)
-      .single();
-    if (!prospect) return res.status(404).json({ error: 'Prospect not found' });
-
-    const { data: client } = await supabase
-      .from('clients')
-      .select('render_mode, tavus_replica_id, tavus_persona_id')
-      .eq('id', prospect.client_id)
-      .single();
-
-    const renderMode = client?.render_mode || 'phoenix_4';
-    const session = await orchestrator.startVideoSession(prospect.client_id, prospectId, meetUrl, renderMode);
-    res.json({
-      sessionId: session.sessionId,
-      liveKitCompositeUrl: session.liveKitCompositeUrl,
-      videoStreamUrl: session.videoStreamUrl,
-      renderMode: session.renderMode,
-      room_name: session.room_name,
-    });
-  } catch (err) {
-    console.error('[server] Hyper-real session failed:', err.message);
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// GET /sessions/:sessionId/status — session status
-app.get('/sessions/:sessionId/status', (req, res) => {
-  const { sessionId } = req.params;
-  const session = orchestrator.getSession(sessionId);
-  if (!session) return res.status(404).json({ error: 'Session not found' });
-  res.json({
-    sessionId: session.sessionId,
-    renderMode: session.renderMode,
-    ravenActive: session.ravenActive,
-    status: session.status,
-    elapsed: Date.now() - session.startTime,
-    room_name: session.room_name,
-    videoStreamUrl: session.videoStreamUrl,
-  });
-});
-
-// POST /webhooks/livekit — LiveKit room events
-app.post('/webhooks/livekit', async (req, res) => {
-  res.status(200).json({ received: true });
-  try {
-    const event = req.body;
-    const eventType = event.event || '';
-    console.log(`[webhook:livekit] Event: ${eventType}`);
-
-    if (eventType === 'participant_joined' && event.sessionId) {
-      await orchestrator.handleProspectJoined(event.sessionId, event.videoTrack);
-    } else if (eventType === 'room_finished' && event.sessionId) {
-      await orchestrator.endVideoSession(event.sessionId);
-    }
-  } catch (err) {
-    console.error('[webhook:livekit] Error:', err.message);
-  }
-});
-
-// ============================================================
-//  SPRINT 5 — TAVUS VIDEO ENDPOINTS
-// ============================================================
-
-// POST /clients/:clientId/tavus/replica — upload training video
-app.post('/clients/:clientId/tavus/replica', upload.single('video'), async (req, res) => {
-  try {
-    const { clientId } = req.params;
-    if (!req.file) {
-      return res.status(400).json({ error: 'No video file uploaded. Use multipart form with field name "video".' });
-    }
-    const result = await createTavusReplica(clientId, req.file.path);
-    res.json(result);
-  } catch (err) {
-    console.error('[server] Tavus replica failed:', err.response?.data || err.message);
-    res.status(500).json({ error: err.response?.data?.message || err.message });
-  }
-});
-
-// POST /clients/:clientId/tavus/persona — create Tavus persona
-app.post('/clients/:clientId/tavus/persona', async (req, res) => {
-  try {
-    const { clientId } = req.params;
-    const result = await createTavusPersona(clientId);
-    res.json(result);
-  } catch (err) {
-    console.error('[server] Tavus persona failed:', err.response?.data || err.message);
-    res.status(500).json({ error: err.response?.data?.message || err.message });
-  }
-});
-
-// POST /clients/:clientId/video-mode — set video mode
-app.post('/clients/:clientId/video-mode', async (req, res) => {
-  try {
-    const { clientId } = req.params;
-    const { video_mode } = req.body;
-
-    const validModes = ['voice_only', 'video_avatar', 'video_recall', 'video_recall_v2'];
-    if (!validModes.includes(video_mode)) {
-      return res.status(400).json({ error: `Invalid video_mode. Must be one of: ${validModes.join(', ')}` });
-    }
-
-    const { data: client, error } = await supabase
-      .from('clients')
-      .update({ video_mode })
-      .eq('id', clientId)
-      .select()
-      .single();
-
-    if (error) return res.status(400).json({ error: error.message });
-    console.log(`[server] Client ${clientId} video mode set to: ${video_mode}`);
-    res.json({ clientId, video_mode: client.video_mode, client });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// POST /calls/video/:prospectId — create Tavus video conversation
-app.post('/calls/video/:prospectId', async (req, res) => {
-  try {
-    const { prospectId } = req.params;
-
-    const { data: prospect } = await supabase
-      .from('prospects')
-      .select('client_id, name')
-      .eq('id', prospectId)
-      .single();
-
-    if (!prospect) return res.status(404).json({ error: 'Prospect not found' });
-
-    const { data: client } = await supabase
-      .from('clients')
-      .select('tavus_replica_id, tavus_persona_id, video_mode')
-      .eq('id', prospect.client_id)
-      .single();
-
-    if (!client?.tavus_replica_id || !client?.tavus_persona_id) {
-      return res.status(400).json({ error: 'Tavus not configured for this client. Create a replica and persona first.' });
-    }
-
-    const result = await createTavusConversation(prospect.client_id, prospectId);
-    res.json({
-      conversation_id: result.conversation_id,
-      conversation_url: result.conversation_url,
-      call: result.call,
-    });
-  } catch (err) {
-    console.error('[server] Tavus video call failed:', err.response?.data || err.message);
-    res.status(500).json({ error: err.response?.data?.message || err.message });
-  }
-});
-
-// GET /calls/:callId/video-status — poll Tavus conversation status
-app.get('/calls/:callId/video-status', async (req, res) => {
-  try {
-    const { callId } = req.params;
-
-    const { data: call, error } = await supabase
-      .from('calls')
-      .select('conversation_id, status')
-      .eq('id', callId)
-      .single();
-
-    if (error || !call) return res.status(404).json({ error: 'Call not found' });
-    if (!call.conversation_id) return res.status(400).json({ error: 'Not a video call' });
-
-    const convo = await getTavusConversationStatus(call.conversation_id);
-
-    res.json({
-      status: convo.status || call.status,
-      duration: convo.conversation_length || convo.duration || null,
-      transcript_ready: !!(convo.transcript),
-      conversation: convo,
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.response?.data?.message || err.message });
   }
 });
 
@@ -1547,7 +1215,7 @@ async function start() {
     console.log('[server] Training cache not available:', err.message);
   }
 
-  const server = app.listen(env.PORT, () => {
+  app.listen(env.PORT, () => {
     console.log('\n===================================');
     console.log('  AI Closer Platform — LIVE');
     console.log('===================================');
@@ -1555,33 +1223,17 @@ async function start() {
     console.log(`  Env:       ${env.NODE_ENV}`);
     console.log(`  Supabase:  connected`);
     console.log(`  Retell:    connected`);
-    console.log(`  Vapi:      connected`);
-    console.log(`  Tavus:     connected`);
-    console.log(`  LiveKit:   connected`);
     console.log(`  Webhooks:  /webhooks/*`);
     console.log(`  Dashboard: /dashboard`);
     console.log('===================================\n');
 
     console.log(`[server] Endpoints:`);
     console.log(`  POST   /clients`);
-    console.log(`  POST   /clients/:id/calendly`);
     console.log(`  GET    /clients/:id/prompt/:prospectId`);
     console.log(`  GET    /prospects/:id/memory`);
     console.log(`  POST   /calls/phone/:prospectId`);
-    console.log(`  POST   /calls/meet`);
-    console.log(`[server] Sprint 6 Hyper-Real:`);
-    console.log(`  POST   /clients/:id/anam/persona`);
-    console.log(`  POST   /clients/:id/render-mode`);
-    console.log(`  POST   /calls/hyper-real/:prospectId`);
-    console.log(`  GET    /sessions/:id/status`);
-    console.log(`  POST   /webhooks/livekit`);
-    console.log(`  WS     /ws/video/:sessionId`);
-    console.log(`[server] Sprint 5 Tavus:`);
-    console.log(`  POST   /clients/:id/tavus/replica`);
-    console.log(`  POST   /clients/:id/tavus/persona`);
-    console.log(`  POST   /clients/:id/video-mode`);
-    console.log(`  POST   /calls/video/:prospectId`);
-    console.log(`  GET    /calls/:id/video-status`);
+    console.log(`  POST   /calls/quick`);
+    console.log(`  GET    /calls/:id/status`);
     console.log(`[server] Sprint 4 API:`);
     console.log(`  GET    /api/clients/:id/stats`);
     console.log(`  GET    /api/clients/:id/calls`);
@@ -1597,53 +1249,6 @@ async function start() {
     console.log(`  GET    /dashboard/:clientId/prospect/:prospectId`);
     console.log(`  GET    /dashboard/:clientId/calls/:callId\n`);
   });
-
-  // WebSocket server for live video session monitoring
-  const wss = new WebSocketServer({ noServer: true });
-
-  server.on('upgrade', (request, socket, head) => {
-    if (request.url && request.url.startsWith('/ws/video')) {
-      wss.handleUpgrade(request, socket, head, (ws) => {
-        wss.emit('connection', ws, request);
-      });
-    } else {
-      socket.destroy();
-    }
-  });
-  wss.on('connection', (ws, req) => {
-    const urlParts = (req.url || '').split('/');
-    const sessionId = urlParts[urlParts.length - 1] || '';
-
-    const session = orchestrator.getSession(sessionId);
-
-    // Send initial status
-    ws.send(JSON.stringify({
-      type: 'session_status',
-      data: session || { sessionId, status: 'not_found' },
-    }));
-
-    // Heartbeat every 5 seconds
-    const heartbeat = setInterval(() => {
-      if (ws.readyState !== ws.OPEN) {
-        clearInterval(heartbeat);
-        return;
-      }
-      const s = orchestrator.getSession(sessionId);
-      ws.send(JSON.stringify({
-        type: 'heartbeat',
-        data: {
-          ravenActive: s?.ravenActive || false,
-          renderMode: s?.renderMode || 'unknown',
-          status: s?.status || 'inactive',
-          elapsed: s ? Date.now() - s.startTime : 0,
-        },
-      }));
-    }, 5000);
-
-    ws.on('close', () => clearInterval(heartbeat));
-  });
-
-  console.log('[server] WebSocket server ready at /ws/video');
 }
 
 start().catch(err => {

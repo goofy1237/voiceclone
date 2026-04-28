@@ -19,16 +19,9 @@ railway add
 ```bash
 railway variables set ANTHROPIC_API_KEY=sk-ant-api03-...
 railway variables set RETELL_API_KEY=key_ff9c78ea...
-railway variables set VAPI_API_KEY=6b501e85-...
+railway variables set RETELL_PHONE_NUMBER=+1XXXXXXXXXX
 railway variables set ELEVENLABS_API_KEY=2b2c2b47...
 railway variables set ELEVENLABS_VOICE_ID=BIvP0GN1...
-railway variables set RECALL_API_KEY=3d3016ab...
-railway variables set CALENDLY_API_KEY=eyJraWQ...
-railway variables set TAVUS_API_KEY=093bb1ad...
-railway variables set LIVEKIT_URL=wss://voice-2waod9ra.livekit.cloud
-railway variables set LIVEKIT_API_KEY=APImvxjYmahJu4B
-railway variables set LIVEKIT_API_SECRET=fBdZGzMva8...
-railway variables set ANAM_API_KEY=N2Y5OWVh...
 railway variables set SUPABASE_URL=https://sfnwkvpnpwntmyigycrd.supabase.co
 railway variables set SUPABASE_SERVICE_ROLE_KEY=eyJhbGci...
 railway variables set SUPABASE_ACCESS_TOKEN=sbp_83c2...
@@ -62,26 +55,6 @@ railway up
 2. Settings → Webhooks
 3. Add URL: `https://your-app.railway.app/webhooks/retell`
 
-### Calendly
-Already handled via API when you call:
-```
-POST /clients/:id/calendly
-```
-The webhook URL auto-registers using BASE_URL.
-
-### Recall
-Already set in `deployRecallBot()` — uses BASE_URL automatically.
-
-### Tavus
-1. Go to Tavus dashboard
-2. Webhooks → Add endpoint
-3. URL: `https://your-app.railway.app/webhooks/tavus`
-
-### LiveKit
-1. Go to LiveKit Cloud dashboard
-2. Webhooks → Add endpoint
-3. URL: `https://your-app.railway.app/webhooks/livekit`
-
 ## Custom Domain (Optional)
 
 ### 1. Add Domain in Railway
@@ -112,13 +85,12 @@ Expected response:
 ```json
 {
   "status": "ok",
-  "timestamp": "2026-04-06T...",
+  "timestamp": "2026-04-29T...",
   "version": "1.0.0",
   "services": {
     "supabase": "connected",
     "retell": "connected",
-    "livekit": "connected",
-    "redis": "unavailable"
+    "redis": "not configured"
   },
   "uptime": 123.456
 }

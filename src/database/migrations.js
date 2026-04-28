@@ -151,23 +151,7 @@ CREATE TABLE IF NOT EXISTS calls (
 }
 
 function getAlterSQL() {
-  return `
-ALTER TABLE clients ADD COLUMN IF NOT EXISTS tavus_replica_id text;
-ALTER TABLE clients ADD COLUMN IF NOT EXISTS tavus_persona_id text;
-ALTER TABLE clients ADD COLUMN IF NOT EXISTS tavus_enabled boolean DEFAULT false;
-ALTER TABLE clients ADD COLUMN IF NOT EXISTS video_mode text DEFAULT 'voice_only';
-ALTER TABLE calls ADD COLUMN IF NOT EXISTS conversation_id text;
-ALTER TABLE calls ADD COLUMN IF NOT EXISTS conversation_url text;
-ALTER TABLE calls ADD COLUMN IF NOT EXISTS video_mode text;
-ALTER TABLE clients ADD COLUMN IF NOT EXISTS anam_persona_id text;
-ALTER TABLE clients ADD COLUMN IF NOT EXISTS livekit_room_prefix text;
-ALTER TABLE clients ADD COLUMN IF NOT EXISTS render_mode text DEFAULT 'phoenix_4';
-ALTER TABLE calls ADD COLUMN IF NOT EXISTS livekit_room_name text;
-ALTER TABLE calls ADD COLUMN IF NOT EXISTS anam_session_id text;
-ALTER TABLE calls ADD COLUMN IF NOT EXISTS render_mode text;
-ALTER TABLE calls ADD COLUMN IF NOT EXISTS raven_signals jsonb DEFAULT '[]'::jsonb;
-ALTER TABLE calls ADD COLUMN IF NOT EXISTS perception_signal_count integer DEFAULT 0;
-  `;
+  return '';
 }
 
 module.exports = { runMigrations, runDDLviaManagementAPI, getFullMigrationSQL, getAlterSQL };

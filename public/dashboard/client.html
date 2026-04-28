@@ -151,59 +151,10 @@
               </div>
               <div style="display:flex;flex-direction:column;gap:0.6rem;font-size:0.9rem;">
                 <div><span class="text-muted">Retell Agent:</span> <span id="retellId" class="font-mono">--</span></div>
-                <div><span class="text-muted">Vapi Agent:</span> <span id="vapiId" class="font-mono">--</span></div>
                 <div><span class="text-muted">Personality:</span> <span id="agentPersonality">--</span></div>
                 <div><span class="text-muted">API Key:</span> <span id="apiKeyDisplay" class="font-mono">--</span></div>
                 <div><span class="text-muted">Webhook URL:</span> <span id="webhookUrl" class="font-mono" style="word-break:break-all;">--</span></div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Video Setup -->
-        <div class="section">
-          <div class="section-header">
-            <h3 class="section-title">Video Mode</h3>
-          </div>
-          <div class="card" style="padding:1.25rem;">
-            <div style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;">
-              <button class="btn btn-sm video-mode-btn" id="modeVoiceOnly" onclick="setVideoMode('voice_only')">Voice Only</button>
-              <button class="btn btn-sm video-mode-btn" id="modeVideoAvatar" onclick="setVideoMode('video_avatar')">Video Avatar</button>
-              <button class="btn btn-sm video-mode-btn" id="modeVideoRecall" onclick="setVideoMode('video_recall')">Video Recall</button>
-              <button class="btn btn-sm video-mode-btn" id="modeHyperReal" onclick="setVideoMode('video_recall_v2')">Hyper-Real (BETA)</button>
-            </div>
-            <div id="tavusSetup" class="hidden" style="border-top:1px solid var(--border);padding-top:1rem;margin-top:0.5rem;">
-              <div style="display:flex;flex-direction:column;gap:0.75rem;font-size:0.9rem;">
-                <div style="display:flex;align-items:center;justify-content:space-between;">
-                  <span><span class="text-muted">Replica:</span> <span id="replicaStatus">Not created</span></span>
-                  <label class="btn btn-ghost btn-sm" style="cursor:pointer;">
-                    Upload Video
-                    <input type="file" accept="video/*" style="display:none;" onchange="uploadReplica(this)">
-                  </label>
-                </div>
-                <div style="display:flex;align-items:center;justify-content:space-between;">
-                  <span><span class="text-muted">Persona:</span> <span id="personaStatus">Not created</span></span>
-                  <button class="btn btn-ghost btn-sm" onclick="createPersona()">Create Persona</button>
-                </div>
-              </div>
-            </div>
-            <div id="hyperRealSetup" class="hidden" style="border-top:1px solid var(--border);padding-top:1rem;margin-top:0.5rem;">
-              <div style="margin-bottom:0.75rem;font-weight:600;font-size:0.9rem;">Render Engine</div>
-              <div style="display:flex;gap:0.5rem;margin-bottom:0.75rem;">
-                <button class="btn btn-sm render-mode-btn" id="renderPhoenix" onclick="setRenderMode('phoenix_4')">Phoenix-4</button>
-                <button class="btn btn-sm render-mode-btn" id="renderAnam" onclick="setRenderMode('anam_cara3')">Anam CARA-3</button>
-              </div>
-              <div id="anamSetup" class="hidden" style="display:flex;align-items:center;justify-content:space-between;font-size:0.9rem;">
-                <span><span class="text-muted">Anam Persona:</span> <span id="anamPersonaStatus">Not created</span></span>
-                <button class="btn btn-ghost btn-sm" onclick="createAnamPersona()">Create Anam Persona</button>
-              </div>
-              <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;font-size:0.85rem;">
-                <div class="status-dot" id="livekitDot" style="background:var(--green);"></div>
-                <span class="text-muted">LiveKit + Raven ready</span>
-              </div>
-            </div>
-            <div id="videoCallAction" class="hidden" style="border-top:1px solid var(--border);padding-top:1rem;margin-top:0.5rem;">
-              <button class="btn btn-primary btn-sm" onclick="openVideoCallModal()">Create Video Call Link</button>
             </div>
           </div>
         </div>
@@ -349,20 +300,8 @@
       document.getElementById('agentRole').textContent = 'AI Closer at ' + (client.business_name || '--');
       document.getElementById('agentPersonality').textContent = client.agent_personality || '--';
       document.getElementById('retellId').textContent = client.retell_agent_id || 'Not configured';
-      document.getElementById('vapiId').textContent = client.vapi_agent_id || 'Not configured';
       document.getElementById('apiKeyDisplay').textContent = client.api_key ? client.api_key.slice(0, 8) + '...' : 'Not set';
       document.getElementById('webhookUrl').textContent = (client.base_url || window.location.origin) + '/webhooks/retell';
-
-      // Video mode UI
-      updateVideoModeUI(client.video_mode || 'voice_only');
-      if (client.tavus_replica_id) {
-        document.getElementById('replicaStatus').textContent = 'Ready';
-        document.getElementById('replicaStatus').style.color = 'var(--green)';
-      }
-      if (client.tavus_persona_id) {
-        document.getElementById('personaStatus').textContent = 'Ready';
-        document.getElementById('personaStatus').style.color = 'var(--green)';
-      }
 
       document.title = (client.agent_name || 'Dashboard') + ' — AI Closer Platform';
 
@@ -374,8 +313,6 @@
         { name: 'Booking', active: client.booking_enabled },
         { name: 'CRM', active: client.crm_enabled },
         { name: 'Phone (Retell)', active: !!client.retell_agent_id },
-        { name: 'Phone (Vapi)', active: !!client.vapi_agent_id },
-        { name: 'Video (Tavus)', active: !!client.tavus_persona_id },
       ];
       capabilities.forEach(cap => {
         const tag = document.createElement('span');
@@ -424,7 +361,7 @@
 
         return '<tr style="cursor:pointer;" onclick="viewCall(\'' + call.id + '\')">' +
           '<td>' + escapeHtml(call.prospect_name || 'Unknown') + '</td>' +
-          '<td>' + getCallTypeIcon(call.call_type, call.video_mode) + ' <span class="badge badge-muted">' + escapeHtml(call.call_type || 'phone') + '</span></td>' +
+          '<td>' + getCallTypeIcon(call.call_type) + ' <span class="badge badge-muted">' + escapeHtml(call.call_type || 'phone') + '</span></td>' +
           '<td>' + duration + '</td>' +
           '<td>' + escapeHtml(call.outcome || call.status || '--') + '</td>' +
           '<td><span class="risk-score ' + riskClass + '">' + (call.detection_risk_score != null ? call.detection_risk_score : '--') + '</span></td>' +
@@ -597,10 +534,7 @@
     }
 
     // --- Utilities ---
-    function getCallTypeIcon(callType, videoMode) {
-      if (videoMode === 'video_recall') return '<span title="Video Recall">&#129302;</span>';
-      if (videoMode === 'video_avatar' || callType === 'video_avatar') return '<span title="Video Avatar">&#128249;</span>';
-      if (callType === 'google_meet') return '<span title="Google Meet">&#127908;</span>';
+    function getCallTypeIcon(callType) {
       return '<span title="Phone">&#127897;&#65039;</span>';
     }
 
@@ -635,144 +569,6 @@
       toast.textContent = message;
       toast.className = 'toast visible ' + (type || '');
       setTimeout(() => { toast.className = 'toast'; }, 3000);
-    }
-
-    // --- Video Mode ---
-    function updateVideoModeUI(mode) {
-      document.querySelectorAll('.video-mode-btn').forEach(b => b.classList.remove('btn-primary'));
-      const modeMap = { voice_only: 'modeVoiceOnly', video_avatar: 'modeVideoAvatar', video_recall: 'modeVideoRecall', video_recall_v2: 'modeHyperReal' };
-      const btn = document.getElementById(modeMap[mode]);
-      if (btn) btn.classList.add('btn-primary');
-
-      const tavusSetup = document.getElementById('tavusSetup');
-      const videoAction = document.getElementById('videoCallAction');
-      const hyperRealSetup = document.getElementById('hyperRealSetup');
-
-      tavusSetup.classList.add('hidden');
-      videoAction.classList.add('hidden');
-      hyperRealSetup.classList.add('hidden');
-
-      if (mode === 'video_recall_v2') {
-        hyperRealSetup.classList.remove('hidden');
-        tavusSetup.classList.remove('hidden');
-        updateRenderModeUI(clientData?.render_mode || 'phoenix_4');
-      } else if (mode !== 'voice_only') {
-        tavusSetup.classList.remove('hidden');
-        if (clientData?.tavus_replica_id && clientData?.tavus_persona_id) {
-          videoAction.classList.remove('hidden');
-        }
-      }
-    }
-
-    function updateRenderModeUI(mode) {
-      document.querySelectorAll('.render-mode-btn').forEach(b => b.classList.remove('btn-primary'));
-      const btn = document.getElementById(mode === 'anam_cara3' ? 'renderAnam' : 'renderPhoenix');
-      if (btn) btn.classList.add('btn-primary');
-      const anamSetup = document.getElementById('anamSetup');
-      if (mode === 'anam_cara3') {
-        anamSetup.classList.remove('hidden');
-        if (clientData?.anam_persona_id) {
-          document.getElementById('anamPersonaStatus').textContent = 'Ready';
-          document.getElementById('anamPersonaStatus').style.color = 'var(--green)';
-        }
-      } else {
-        anamSetup.classList.add('hidden');
-      }
-    }
-
-    async function setRenderMode(mode) {
-      try {
-        const res = await fetch('/clients/' + clientId + '/render-mode', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ render_mode: mode }),
-        });
-        if (!res.ok) throw new Error((await res.json()).error);
-        if (clientData) clientData.render_mode = mode;
-        updateRenderModeUI(mode);
-        showToast('Render mode set to ' + mode.replace(/_/g, ' '), 'success');
-      } catch (err) {
-        showToast('Failed: ' + err.message, 'error');
-      }
-    }
-
-    async function createAnamPersona() {
-      const status = document.getElementById('anamPersonaStatus');
-      status.textContent = 'Creating...';
-      status.style.color = 'var(--amber)';
-      try {
-        const res = await fetch('/clients/' + clientId + '/anam/persona', { method: 'POST' });
-        if (!res.ok) throw new Error((await res.json()).error);
-        status.textContent = 'Ready';
-        status.style.color = 'var(--green)';
-        showToast('Anam persona created', 'success');
-        loadClientInfo();
-      } catch (err) {
-        status.textContent = 'Failed';
-        status.style.color = 'var(--red)';
-        showToast('Anam persona failed: ' + err.message, 'error');
-      }
-    }
-
-    async function setVideoMode(mode) {
-      try {
-        const res = await fetch('/clients/' + clientId + '/video-mode', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ video_mode: mode }),
-        });
-        if (!res.ok) throw new Error((await res.json()).error);
-        if (clientData) clientData.video_mode = mode;
-        updateVideoModeUI(mode);
-        showToast('Video mode set to ' + mode.replace(/_/g, ' '), 'success');
-      } catch (err) {
-        showToast('Failed: ' + err.message, 'error');
-      }
-    }
-
-    async function uploadReplica(input) {
-      if (!input.files[0]) return;
-      const status = document.getElementById('replicaStatus');
-      status.textContent = 'Uploading...';
-      status.style.color = 'var(--amber)';
-      try {
-        const form = new FormData();
-        form.append('video', input.files[0]);
-        const res = await fetch('/clients/' + clientId + '/tavus/replica', { method: 'POST', body: form });
-        if (!res.ok) throw new Error((await res.json()).error);
-        const data = await res.json();
-        status.textContent = data.ready ? 'Ready' : 'Processing...';
-        status.style.color = data.ready ? 'var(--green)' : 'var(--amber)';
-        showToast('Replica uploaded', 'success');
-      } catch (err) {
-        status.textContent = 'Upload failed';
-        status.style.color = 'var(--red)';
-        showToast('Replica upload failed: ' + err.message, 'error');
-      }
-    }
-
-    async function createPersona() {
-      const status = document.getElementById('personaStatus');
-      status.textContent = 'Creating...';
-      status.style.color = 'var(--amber)';
-      try {
-        const res = await fetch('/clients/' + clientId + '/tavus/persona', { method: 'POST' });
-        if (!res.ok) throw new Error((await res.json()).error);
-        status.textContent = 'Ready';
-        status.style.color = 'var(--green)';
-        showToast('Persona created', 'success');
-        // Refresh client data
-        loadClientInfo();
-      } catch (err) {
-        status.textContent = 'Failed';
-        status.style.color = 'var(--red)';
-        showToast('Persona creation failed: ' + err.message, 'error');
-      }
-    }
-
-    function openVideoCallModal() {
-      showToast('Creating video call link...', 'success');
-      // This would normally open a modal to select prospect — simplified for now
     }
 
     // --- Real Call Modal ---

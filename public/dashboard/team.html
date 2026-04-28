@@ -317,9 +317,7 @@
             <p class="text-muted" id="detailBizName" style="margin-bottom:1rem;font-size:0.9rem;"></p>
 
             <div class="info-row"><span class="info-label">Retell Agent ID</span><span class="info-value" id="detailRetellId">--</span></div>
-            <div class="info-row"><span class="info-label">Vapi Agent ID</span><span class="info-value" id="detailVapiId">--</span></div>
             <div class="info-row"><span class="info-label">Voice ID</span><span class="info-value" id="detailVoiceId">--</span></div>
-            <div class="info-row"><span class="info-label">Video Mode</span><span class="info-value" id="detailVideoMode">--</span></div>
             <div class="info-row"><span class="info-label">Calls</span><span class="info-value" id="detailCallCount">0</span></div>
             <div class="info-row"><span class="info-label">Last Call</span><span class="info-value" id="detailLastCall">--</span></div>
 
@@ -641,9 +639,7 @@
         document.getElementById('detailAgentName').textContent = client.agent_name || 'Agent';
         document.getElementById('detailBizName').textContent = client.business_name || '';
         document.getElementById('detailRetellId').textContent = client.retell_agent_id || '--';
-        document.getElementById('detailVapiId').textContent = client.vapi_agent_id || '--';
         document.getElementById('detailVoiceId').textContent = client.elevenlabs_voice_id || '--';
-        document.getElementById('detailVideoMode').textContent = (client.video_mode || 'voice_only').replace(/_/g, ' ');
 
         // Soul doc
         const soulContent = document.getElementById('soulDocContent');
