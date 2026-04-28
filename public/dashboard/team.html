@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Dashboard — AI Closer Platform</title>
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <style>
+    body { display: flex; min-height: 100vh; margin: 0; }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background: #0d0d0d;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 200;
+    }
+    .sidebar-logo {
+      padding: 1.25rem 1rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+    .sidebar-nav {
+      flex: 1;
+      padding: 0.75rem 0;
+    }
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.7rem 1rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 150ms ease;
+      border-left: 3px solid transparent;
+    }
+    .sidebar-nav a:hover, .sidebar-nav a.active {
+      color: var(--text);
+      background: rgba(124, 58, 237, 0.08);
+      border-left-color: var(--accent);
+    }
+    .sidebar-nav a .nav-icon { font-size: 1.1rem; }
+    .sidebar-footer {
+      padding: 1rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .health-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-dim);
+      transition: background 300ms;
+    }
+    .health-dot.ok { background: var(--green); }
+    .health-dot.fail { background: var(--red); }
+
+    /* Main area */
+    .main-content {
+      margin-left: 240px;
+      flex: 1;
+      min-height: 100vh;
+    }
+    .main-header {
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .main-header h1 { font-size: 1.1rem; font-weight: 600; }
+    .main-body { padding: 1.5rem; max-width: 1200px; }
+
+    /* Page sections */
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+
+    /* Agents grid */
+    .agents-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .agent-card-grid {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+    .agent-card-grid:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(124,58,237,0.15);
+    }
+    .agent-card-grid .agent-name { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .agent-card-grid .agent-biz { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .agent-card-grid .agent-meta { display: flex; gap: 1rem; font-size: 0.8rem; color: var(--text-dim); }
+    .agent-card-grid .agent-meta span { display: flex; align-items: center; gap: 0.3rem; }
+    .agent-card-grid.pinned { border-color: rgba(124,58,237,0.4); background: linear-gradient(135deg, rgba(124,58,237,0.08), var(--card)); }
+
+    /* Agent detail */
+    .agent-detail { display: none; }
+    .agent-detail.active { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 900px) { .agent-detail.active { grid-template-columns: 1fr; } }
+
+    .detail-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+    }
+
+    .call-btn {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: all 150ms;
+      margin-bottom: 1rem;
+    }
+    .call-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .call-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .call-status-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      display: none;
+    }
+    .call-status-box.visible { display: block; }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-label { color: var(--text-muted); }
+    .info-value { color: var(--text); font-family: 'SF Mono', monospace; font-size: 0.8rem; max-width: 180px; overflow: hidden; text-overflow: ellipsis; }
+
+    .expandable-header {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .expandable-content { display: none; max-height: 300px; overflow-y: auto; }
+    .expandable-content.open { display: block; }
+
+    /* Env banner */
+    .env-banner {
+      background: var(--amber-bg);
+      border: 1px solid var(--amber);
+      border-radius: var(--radius);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: var(--amber);
+    }
+
+    .client-switch {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      padding: 0.4rem 0.75rem;
+      font-size: 0.85rem;
+      font-family: inherit;
+    }
+
+    /* Quick prospect form */
+    .quick-form { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+    .quick-form .form-row-sm { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">AI Closer</div>
+    <nav class="sidebar-nav">
+      <a href="#overview" class="active" onclick="showPage('overview', this)">
+        <span class="nav-icon">&#127968;</span> Overview
+      </a>
+      <a href="#agents" onclick="showPage('agents', this)">
+        <span class="nav-icon">&#129302;</span> Agents
+      </a>
+      <a href="#calls" onclick="showPage('calls', this)">
+        <span class="nav-icon">&#128222;</span> Calls
+      </a>
+      <a href="#prospects" onclick="showPage('prospects', this)">
+        <span class="nav-icon">&#128101;</span> Prospects
+      </a>
+      <a href="/dashboard/signup">
+        <span class="nav-icon">&#9881;&#65039;</span> Settings
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="health-dot" id="healthDot"></div>
+      <span id="healthText">Checking...</span>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main-content">
+    <div class="main-header">
+      <h1 id="pageTitle">Team Dashboard</h1>
+      <div style="display:flex;align-items:center;gap:0.75rem;">
+        <select class="client-switch" id="clientSwitch" onchange="switchClient(this.value)">
+          <option value="">Switch Client...</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="main-body">
+
+      <!-- RETELL_PHONE_NUMBER banner -->
+      <div class="env-banner" id="phoneBanner" style="display:none;">
+        &#9888;&#65039; No outbound phone number configured. Go to app.retellai.com &#8594; Phone Numbers to get one, then add RETELL_PHONE_NUMBER to your Railway env vars.
+      </div>
+
+      <!-- OVERVIEW PAGE -->
+      <div class="page-section active" id="page-overview">
+        <div class="stats-grid" id="teamStats">
+          <div class="stat-card"><div class="stat-label">Total Agents</div><div class="stat-value" id="statAgents">--</div></div>
+          <div class="stat-card"><div class="stat-label">Total Calls</div><div class="stat-value" id="statTotalCalls">--</div></div>
+          <div class="stat-card"><div class="stat-label">Total Prospects</div><div class="stat-value" id="statTotalProspects">--</div></div>
+          <div class="stat-card"><div class="stat-label">Avg Detection Risk</div><div class="stat-value" id="statAvgRisk">--</div></div>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <h3 class="section-title">Agents</h3>
+          </div>
+          <div class="agents-grid" id="agentsGrid">
+            <div class="loading-state"><div class="spinner"></div><span>Loading agents...</span></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <h3 class="section-title">Recent Calls</h3>
+          </div>
+          <div class="card" style="padding:0;">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Prospect</th>
+                    <th>Agent</th>
+                    <th>Duration</th>
+                    <th>Outcome</th>
+                    <th>Risk</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody id="recentCallsBody">
+                  <tr><td colspan="6" class="text-center text-muted" style="padding:2rem;">Loading...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AGENTS PAGE -->
+      <div class="page-section" id="page-agents">
+        <div class="section">
+          <div class="section-header">
+            <h3 class="section-title">All Agents</h3>
+            <a href="/dashboard/signup" class="btn btn-primary btn-sm">+ New Agent</a>
+          </div>
+          <div class="agents-grid" id="agentsGridFull"></div>
+        </div>
+
+        <!-- Agent Detail View -->
+        <div class="agent-detail" id="agentDetail">
+          <div class="detail-panel">
+            <h3 id="detailAgentName" style="margin-bottom:0.25rem;"></h3>
+            <p class="text-muted" id="detailBizName" style="margin-bottom:1rem;font-size:0.9rem;"></p>
+
+            <div class="info-row"><span class="info-label">Retell Agent ID</span><span class="info-value" id="detailRetellId">--</span></div>
+            <div class="info-row"><span class="info-label">Vapi Agent ID</span><span class="info-value" id="detailVapiId">--</span></div>
+            <div class="info-row"><span class="info-label">Voice ID</span><span class="info-value" id="detailVoiceId">--</span></div>
+            <div class="info-row"><span class="info-label">Video Mode</span><span class="info-value" id="detailVideoMode">--</span></div>
+            <div class="info-row"><span class="info-label">Calls</span><span class="info-value" id="detailCallCount">0</span></div>
+            <div class="info-row"><span class="info-label">Last Call</span><span class="info-value" id="detailLastCall">--</span></div>
+
+            <div style="margin-top:1rem;">
+              <div class="expandable-header" onclick="toggleExpand('soulDoc')">
+                Soul Document <span id="soulDocArrow">&#9660;</span>
+              </div>
+              <div class="expandable-content" id="soulDoc">
+                <pre class="prompt-preview" id="soulDocContent" style="max-height:200px;"></pre>
+              </div>
+            </div>
+
+            <div>
+              <div class="expandable-header" onclick="toggleExpand('sysPrompt')">
+                System Prompt <span id="sysPromptArrow">&#9660;</span>
+              </div>
+              <div class="expandable-content" id="sysPrompt">
+                <pre class="prompt-preview" id="sysPromptContent" style="max-height:200px;"></pre>
+              </div>
+            </div>
+
+            <!-- Recent calls for this agent -->
+            <div style="margin-top:1rem;">
+              <h4 style="font-size:0.95rem;margin-bottom:0.75rem;">Recent Calls</h4>
+              <div style="max-height:300px;overflow-y:auto;">
+                <table style="width:100%;">
+                  <thead><tr><th>Date</th><th>Prospect</th><th>Duration</th><th>Outcome</th><th>Risk</th></tr></thead>
+                  <tbody id="detailCallsBody">
+                    <tr><td colspan="5" class="text-center text-muted" style="padding:1rem;">No calls</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right panel — Call section -->
+          <div class="detail-panel">
+            <h4 style="margin-bottom:1rem;">Test Call</h4>
+
+            <button class="call-btn" id="callMeNowBtn" onclick="callMeNow()">&#128222; Call Me Now</button>
+
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input class="form-input" type="tel" id="callPhone" placeholder="+61400000000">
+              <div class="form-hint">Number to call. Saved for next time.</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Agent</label>
+              <select class="form-select" id="callAgent"></select>
+            </div>
+
+            <div class="call-status-box" id="callStatusBox">
+              <div id="callStatusText">Ready</div>
+            </div>
+
+            <!-- Call result -->
+            <div id="callResult" style="display:none;">
+              <div class="detail-panel" style="background:var(--bg);margin-top:0.5rem;">
+                <div class="info-row"><span class="info-label">Detection Risk</span><span class="info-value" id="resultRisk">--</span></div>
+                <div class="info-row"><span class="info-label">Duration</span><span class="info-value" id="resultDuration">--</span></div>
+                <div class="info-row"><span class="info-label">Status</span><span class="info-value" id="resultStatus">--</span></div>
+                <div id="resultAnalysis" style="margin-top:0.75rem;font-size:0.85rem;color:var(--text-muted);"></div>
+              </div>
+            </div>
+
+            <!-- Quick prospect add -->
+            <div class="quick-form">
+              <h4 style="font-size:0.9rem;margin-bottom:0.75rem;">Quick Add Prospect</h4>
+              <div class="quick-form .form-row-sm" style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:0.5rem;">
+                <input class="form-input" type="text" id="qpName" placeholder="Name">
+                <input class="form-input" type="tel" id="qpPhone" placeholder="Phone">
+              </div>
+              <div class="quick-form .form-row-sm" style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:0.5rem;">
+                <input class="form-input" type="email" id="qpEmail" placeholder="Email">
+                <input class="form-input" type="text" id="qpPain" placeholder="Pain point">
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="quickAddProspect()">Add Prospect</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CALLS PAGE -->
+      <div class="page-section" id="page-calls">
+        <div class="section">
+          <div class="section-header">
+            <h3 class="section-title">All Calls</h3>
+          </div>
+          <div class="card" style="padding:0;">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Prospect</th>
+                    <th>Agent</th>
+                    <th>Type</th>
+                    <th>Duration</th>
+                    <th>Outcome</th>
+                    <th>Risk</th>
+                    <th>Summary</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody id="allCallsBody">
+                  <tr><td colspan="8" class="text-center text-muted" style="padding:2rem;">Loading...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROSPECTS PAGE -->
+      <div class="page-section" id="page-prospects">
+        <div class="section">
+          <div class="section-header">
+            <h3 class="section-title">All Prospects</h3>
+          </div>
+          <div class="card" style="padding:0;">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Stage</th>
+                    <th>Calls</th>
+                    <th>Last Contact</th>
+                    <th>Next Action</th>
+                  </tr>
+                </thead>
+                <tbody id="allProspectsBody">
+                  <tr><td colspan="6" class="text-center text-muted" style="padding:2rem;">Loading...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // State
+    let allClients = [];
+    let selectedClientId = null;
+    let activeCallId = null;
+    let pollInterval = null;
+    const SARAH_ID = 'agent_a65b3f0e09eddb372e7c7a9426';
+
+    // Load saved phone
+    const savedPhone = localStorage.getItem('ai_closer_phone') || '';
+
+    // --- Init ---
+    async function init() {
+      checkHealth();
+      setInterval(checkHealth, 30000);
+
+      // Load phone from localStorage
+      const phoneInput = document.getElementById('callPhone');
+      if (phoneInput && savedPhone) phoneInput.value = savedPhone;
+
+      await Promise.all([loadStats(), loadClients(), loadRecentCalls()]);
+
+      // Check if RETELL_PHONE_NUMBER missing via a test call
+      checkPhoneConfig();
+    }
+
+    async function checkHealth() {
+      try {
+        const res = await fetch('/health');
+        const data = await res.json();
+        const dot = document.getElementById('healthDot');
+        const text = document.getElementById('healthText');
+        if (data.status === 'ok') {
+          dot.className = 'health-dot ok';
+          text.textContent = 'System OK';
+        } else {
+          dot.className = 'health-dot fail';
+          text.textContent = 'Degraded';
+        }
+      } catch {
+        document.getElementById('healthDot').className = 'health-dot fail';
+        document.getElementById('healthText').textContent = 'Offline';
+      }
+    }
+
+    async function checkPhoneConfig() {
+      try {
+        const res = await fetch('/calls/quick', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ client_id: 'test', phone_number: '+10000000000' }),
+        });
+        const data = await res.json();
+        if (data.setup_required) {
+          document.getElementById('phoneBanner').style.display = 'block';
+        }
+      } catch {}
+    }
+
+    async function loadStats() {
+      try {
+        const res = await fetch('/api/team/stats');
+        const stats = await res.json();
+        document.getElementById('statAgents').textContent = stats.total_agents || 0;
+        document.getElementById('statTotalCalls').textContent = stats.total_calls || 0;
+        document.getElementById('statTotalProspects').textContent = stats.total_prospects || 0;
+        const risk = stats.avg_detection_risk;
+        const riskEl = document.getElementById('statAvgRisk');
+        riskEl.textContent = risk != null ? risk : '--';
+        if (risk != null) {
+          const r = parseFloat(risk);
+          riskEl.style.color = r <= 3 ? 'var(--green)' : r <= 6 ? 'var(--amber)' : 'var(--red)';
+        }
+      } catch {}
+    }
+
+    async function loadClients() {
+      try {
+        const res = await fetch('/api/team/clients');
+        allClients = await res.json();
+
+        renderAgentsGrid(document.getElementById('agentsGrid'), true);
+        renderAgentsGrid(document.getElementById('agentsGridFull'), false);
+        populateClientSwitch();
+        populateAgentSelector();
+      } catch (err) {
+        console.error('Failed to load clients:', err);
+      }
+    }
+
+    function renderAgentsGrid(container, pinSarah) {
+      if (!allClients.length) {
+        container.innerHTML = '<div class="empty-state"><p>No agents yet.</p><a href="/dashboard/signup" class="btn btn-primary btn-sm">Create First Agent</a></div>';
+        return;
+      }
+
+      // Sort: Sarah first if pinning
+      let sorted = [...allClients];
+      if (pinSarah) {
+        sorted.sort((a, b) => {
+          if (a.retell_agent_id === SARAH_ID) return -1;
+          if (b.retell_agent_id === SARAH_ID) return 1;
+          return (b.call_count || 0) - (a.call_count || 0);
+        });
+      }
+
+      container.innerHTML = sorted.map(c => {
+        const isSarah = c.retell_agent_id === SARAH_ID;
+        const lastCall = c.last_call_date ? new Date(c.last_call_date).toLocaleDateString() : 'Never';
+        const voiceStatus = c.elevenlabs_voice_id ? '&#9989;' : '&#10060;';
+
+        return '<div class="agent-card-grid' + (isSarah ? ' pinned' : '') + '" onclick="selectAgent(\'' + c.id + '\')">' +
+          '<div class="agent-name">' + esc(c.agent_name || 'Agent') + (isSarah ? ' &#11088;' : '') + '</div>' +
+          '<div class="agent-biz">' + esc(c.business_name || '') + '</div>' +
+          '<div class="agent-meta">' +
+            '<span>' + voiceStatus + ' Voice</span>' +
+            '<span>&#128222; ' + (c.call_count || 0) + ' calls</span>' +
+            '<span>Last: ' + lastCall + '</span>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    function populateClientSwitch() {
+      const sel = document.getElementById('clientSwitch');
+      sel.innerHTML = '<option value="">Switch Client...</option>' +
+        allClients.map(c => '<option value="' + c.id + '">' + esc(c.agent_name || c.business_name || c.id.slice(0,8)) + '</option>').join('');
+    }
+
+    function populateAgentSelector() {
+      const sel = document.getElementById('callAgent');
+      if (!sel) return;
+
+      // Default to Sarah if present
+      let sarahFirst = [...allClients].sort((a, b) => {
+        if (a.retell_agent_id === SARAH_ID) return -1;
+        if (b.retell_agent_id === SARAH_ID) return 1;
+        return 0;
+      });
+
+      sel.innerHTML = sarahFirst.map(c =>
+        '<option value="' + c.id + '"' + (c.retell_agent_id === SARAH_ID ? ' selected' : '') + '>' +
+        esc(c.agent_name || 'Agent') + ' — ' + esc(c.business_name || '') +
+        '</option>'
+      ).join('');
+
+      // If Sarah exists, auto-select her
+      const sarah = allClients.find(c => c.retell_agent_id === SARAH_ID);
+      if (sarah) {
+        selectedClientId = sarah.id;
+      } else if (allClients.length) {
+        selectedClientId = allClients[0].id;
+      }
+    }
+
+    function switchClient(clientId) {
+      if (clientId) window.location.href = '/dashboard/' + clientId;
+    }
+
+    async function selectAgent(clientId) {
+      selectedClientId = clientId;
+      showPage('agents', document.querySelector('[href="#agents"]'));
+
+      const detail = document.getElementById('agentDetail');
+      detail.classList.add('active');
+
+      // Load client info
+      try {
+        const res = await fetch('/api/clients/' + clientId + '/info');
+        const client = await res.json();
+
+        document.getElementById('detailAgentName').textContent = client.agent_name || 'Agent';
+        document.getElementById('detailBizName').textContent = client.business_name || '';
+        document.getElementById('detailRetellId').textContent = client.retell_agent_id || '--';
+        document.getElementById('detailVapiId').textContent = client.vapi_agent_id || '--';
+        document.getElementById('detailVoiceId').textContent = client.elevenlabs_voice_id || '--';
+        document.getElementById('detailVideoMode').textContent = (client.video_mode || 'voice_only').replace(/_/g, ' ');
+
+        // Soul doc
+        const soulContent = document.getElementById('soulDocContent');
+        soulContent.textContent = client.soul_document ? JSON.stringify(client.soul_document, null, 2) : 'Not generated';
+
+        // System prompt
+        const promptContent = document.getElementById('sysPromptContent');
+        promptContent.textContent = client.system_prompt || 'Not generated';
+
+        // Update agent selector
+        const sel = document.getElementById('callAgent');
+        if (sel) sel.value = clientId;
+
+        // Load calls for this agent
+        await loadAgentCalls(clientId);
+        await loadAgentStats(clientId);
+      } catch (err) {
+        console.error('Failed to load agent:', err);
+      }
+    }
+
+    async function loadAgentStats(clientId) {
+      try {
+        const res = await fetch('/api/clients/' + clientId + '/stats');
+        const stats = await res.json();
+        document.getElementById('detailCallCount').textContent = stats.total_calls || 0;
+      } catch {}
+    }
+
+    async function loadAgentCalls(clientId) {
+      try {
+        const res = await fetch('/api/clients/' + clientId + '/calls?limit=10');
+        const data = await res.json();
+        const calls = data.calls || [];
+        const tbody = document.getElementById('detailCallsBody');
+
+        if (!calls.length) {
+          tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted" style="padding:1rem;">No calls</td></tr>';
+          return;
+        }
+
+        const lastCallEl = document.getElementById('detailLastCall');
+        if (calls[0]) lastCallEl.textContent = new Date(calls[0].created_at).toLocaleDateString();
+
+        tbody.innerHTML = calls.map(c => {
+          const d = c.duration_seconds ? Math.floor(c.duration_seconds/60) + ':' + String(c.duration_seconds%60).padStart(2,'0') : '--';
+          const date = c.created_at ? new Date(c.created_at).toLocaleDateString() : '--';
+          const riskClass = c.detection_risk_score != null ? (c.detection_risk_score <= 3 ? 'risk-low' : c.detection_risk_score <= 6 ? 'risk-medium' : 'risk-high') : '';
+          return '<tr>' +
+            '<td class="text-muted">' + date + '</td>' +
+            '<td>' + esc(c.prospect_name || 'Unknown') + '</td>' +
+            '<td>' + d + '</td>' +
+            '<td>' + esc(c.outcome || c.status || '--') + '</td>' +
+            '<td><span class="risk-score ' + riskClass + '">' + (c.detection_risk_score != null ? c.detection_risk_score : '--') + '</span></td>' +
+          '</tr>';
+        }).join('');
+      } catch {}
+    }
+
+    async function loadRecentCalls() {
+      try {
+        const res = await fetch('/api/team/calls?limit=10');
+        const calls = await res.json();
+        renderCallsTable(document.getElementById('recentCallsBody'), calls, true);
+
+        // Also load for calls page
+        const res2 = await fetch('/api/team/calls?limit=50');
+        const calls2 = await res2.json();
+        renderCallsTable(document.getElementById('allCallsBody'), calls2, true);
+      } catch {}
+    }
+
+    function renderCallsTable(tbody, calls, showAgent) {
+      if (!calls.length) {
+        const cols = showAgent ? 6 : 5;
+        tbody.innerHTML = '<tr><td colspan="' + cols + '" class="text-center text-muted" style="padding:2rem;">No calls yet</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = calls.map(c => {
+        const d = c.duration_seconds ? Math.floor(c.duration_seconds/60) + ':' + String(c.duration_seconds%60).padStart(2,'0') : '--';
+        const date = c.created_at ? new Date(c.created_at).toLocaleDateString() : '--';
+        const riskClass = c.detection_risk_score != null ? (c.detection_risk_score <= 3 ? 'risk-low' : c.detection_risk_score <= 6 ? 'risk-medium' : 'risk-high') : '';
+
+        let row = '<td>' + esc(c.prospect_name || 'Unknown') + '</td>';
+        if (showAgent) row += '<td>' + esc(c.agent_name || '--') + '</td>';
+        if (c.call_type) row += '<td><span class="badge badge-muted">' + esc(c.call_type) + '</span></td>';
+        row += '<td>' + d + '</td>';
+        row += '<td>' + esc(c.outcome || c.status || '--') + '</td>';
+        row += '<td><span class="risk-score ' + riskClass + '">' + (c.detection_risk_score != null ? c.detection_risk_score : '--') + '</span></td>';
+        if (c.call_summary) row += '<td class="truncate" style="max-width:200px;">' + esc(c.call_summary.slice(0,60)) + '</td>';
+        row += '<td class="text-muted">' + date + '</td>';
+
+        return '<tr style="cursor:pointer;" onclick="viewCallDetail(\'' + c.id + '\',\'' + (c.client_id||'') + '\')">' + row + '</tr>';
+      }).join('');
+    }
+
+    async function loadAllProspects() {
+      try {
+        const res = await fetch('/api/team/prospects');
+        const prospects = await res.json();
+        const tbody = document.getElementById('allProspectsBody');
+
+        if (!prospects.length) {
+          tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted" style="padding:2rem;">No prospects</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = prospects.map(p => {
+          const stage = p.funnel_stage || 'lead';
+          const stageClass = stage === 'closed_won' ? 'badge-green' : stage === 'closed_lost' ? 'badge-red' : 'badge-purple';
+          const lastContact = p.last_contact ? new Date(p.last_contact).toLocaleDateString() : '--';
+
+          return '<tr>' +
+            '<td>' + esc(p.name || 'Unknown') + '</td>' +
+            '<td class="font-mono">' + esc(p.phone || '--') + '</td>' +
+            '<td><span class="badge ' + stageClass + '">' + esc(stage) + '</span></td>' +
+            '<td>' + (p.call_count || 0) + '</td>' +
+            '<td class="text-muted">' + lastContact + '</td>' +
+            '<td class="truncate" style="max-width:150px;">' + esc(p.next_action || '--') + '</td>' +
+          '</tr>';
+        }).join('');
+      } catch {}
+    }
+
+    // --- Navigation ---
+    function showPage(page, link) {
+      document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+      document.getElementById('page-' + page).classList.add('active');
+
+      document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+      if (link) link.classList.add('active');
+
+      const titles = { overview: 'Team Dashboard', agents: 'Agents', calls: 'All Calls', prospects: 'All Prospects' };
+      document.getElementById('pageTitle').textContent = titles[page] || 'Dashboard';
+
+      // Lazy load
+      if (page === 'prospects') loadAllProspects();
+      if (page === 'calls') loadRecentCalls();
+
+      // Hide agent detail when going to overview
+      if (page === 'overview') {
+        document.getElementById('agentDetail').classList.remove('active');
+      }
+    }
+
+    function toggleExpand(id) {
+      const content = document.getElementById(id);
+      content.classList.toggle('open');
+    }
+
+    // --- Call Me Now ---
+    async function callMeNow() {
+      const phone = document.getElementById('callPhone').value.trim();
+      if (!phone) {
+        showToast('Enter a phone number first', 'error');
+        return;
+      }
+
+      // Save to localStorage
+      localStorage.setItem('ai_closer_phone', phone);
+
+      const agentSel = document.getElementById('callAgent');
+      const clientId = agentSel ? agentSel.value : selectedClientId;
+
+      if (!clientId) {
+        showToast('No agent selected', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('callMeNowBtn');
+      btn.disabled = true;
+      btn.textContent = 'Calling ' + phone + '...';
+
+      const statusBox = document.getElementById('callStatusBox');
+      const statusText = document.getElementById('callStatusText');
+      statusBox.classList.add('visible');
+      statusText.textContent = '&#128241; Initiating call...';
+
+      try {
+        const res = await fetch('/calls/quick', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            client_id: clientId,
+            phone_number: phone,
+            prospect_name: 'Test Call',
+          }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || data.message || 'Call failed');
+        }
+
+        activeCallId = data.call_id;
+        statusText.innerHTML = '&#128222; Ringing...';
+
+        // Start polling
+        if (pollInterval) clearInterval(pollInterval);
+        pollInterval = setInterval(() => pollCallStatus(activeCallId), 3000);
+
+        showToast('Call initiated!', 'success');
+      } catch (err) {
+        statusText.innerHTML = '&#10060; ' + esc(err.message);
+        btn.disabled = false;
+        btn.textContent = '&#128222; Call Me Now';
+      }
+    }
+
+    async function pollCallStatus(callId) {
+      try {
+        const res = await fetch('/calls/' + callId + '/status');
+        const data = await res.json();
+
+        const statusText = document.getElementById('callStatusText');
+        const btn = document.getElementById('callMeNowBtn');
+
+        switch (data.status) {
+          case 'initiated':
+          case 'ringing':
+            statusText.innerHTML = '&#128241; Ringing...';
+            break;
+          case 'in_progress':
+            const dur = data.duration_seconds || 0;
+            statusText.innerHTML = '&#128308; Live &mdash; ' + dur + 's';
+            break;
+          case 'processing':
+            statusText.innerHTML = '&#9989; Call ended &mdash; processing memory...';
+            break;
+          case 'complete':
+            statusText.innerHTML = '&#9989; Memory updated';
+            clearInterval(pollInterval);
+            pollInterval = null;
+            btn.disabled = false;
+            btn.textContent = '&#128222; Call Me Now';
+
+            // Show results
+            if (data.claude_analysis || data.detection_risk_score != null) {
+              const resultDiv = document.getElementById('callResult');
+              resultDiv.style.display = 'block';
+              document.getElementById('resultRisk').textContent = data.detection_risk_score != null ? data.detection_risk_score : '--';
+              document.getElementById('resultDuration').textContent = data.duration_seconds ? data.duration_seconds + 's' : '--';
+              document.getElementById('resultStatus').textContent = 'Complete';
+              if (data.claude_analysis) {
+                document.getElementById('resultAnalysis').textContent = typeof data.claude_analysis === 'string' ? data.claude_analysis : JSON.stringify(data.claude_analysis, null, 2);
+              }
+            }
+
+            // Refresh calls
+            loadRecentCalls();
+            if (selectedClientId) loadAgentCalls(selectedClientId);
+            break;
+          case 'ended':
+            statusText.innerHTML = '&#129504; Claude analysing transcript...';
+            break;
+          case 'error':
+            statusText.innerHTML = '&#10060; Call error';
+            clearInterval(pollInterval);
+            pollInterval = null;
+            btn.disabled = false;
+            btn.textContent = '&#128222; Call Me Now';
+            break;
+          default:
+            statusText.innerHTML = '&#128260; Status: ' + data.status;
+        }
+      } catch {
+        // Ignore poll errors
+      }
+    }
+
+    // --- Quick Add Prospect ---
+    async function quickAddProspect() {
+      const name = document.getElementById('qpName').value.trim();
+      const phone = document.getElementById('qpPhone').value.trim();
+      const email = document.getElementById('qpEmail').value.trim();
+      const pain = document.getElementById('qpPain').value.trim();
+
+      if (!name || !phone) {
+        showToast('Name and phone are required', 'error');
+        return;
+      }
+
+      const agentSel = document.getElementById('callAgent');
+      const clientId = agentSel ? agentSel.value : selectedClientId;
+      if (!clientId) {
+        showToast('No agent selected', 'error');
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/clients/' + clientId + '/prospects', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            phone,
+            email: email || undefined,
+            pain_points: pain ? [pain] : undefined,
+            funnel_stage: 'lead',
+          }),
+        });
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || 'Failed to create prospect');
+        }
+
+        showToast('Prospect created!', 'success');
+        document.getElementById('qpName').value = '';
+        document.getElementById('qpPhone').value = '';
+        document.getElementById('qpEmail').value = '';
+        document.getElementById('qpPain').value = '';
+
+        // Set phone for calling
+        document.getElementById('callPhone').value = phone;
+        localStorage.setItem('ai_closer_phone', phone);
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    }
+
+    function viewCallDetail(callId, clientId) {
+      if (clientId) {
+        window.location.href = '/dashboard/' + clientId + '/calls/' + callId;
+      }
+    }
+
+    // --- Utility ---
+    function esc(str) {
+      if (!str) return '';
+      const d = document.createElement('div');
+      d.textContent = str;
+      return d.innerHTML;
+    }
+
+    function showToast(msg, type) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = 'toast visible ' + (type || '');
+      setTimeout(() => { t.className = 'toast'; }, 3000);
+    }
+
+    // --- Start ---
+    init();
+  </script>
+</body>
+</html>

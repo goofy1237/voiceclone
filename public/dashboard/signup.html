@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Closer Platform — New Client</title>
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-brand">
+        <div class="logo">AC</div>
+        <h1>AI Closer Platform</h1>
+      </div>
+      <div class="header-nav">
+        <span class="text-muted" style="font-size:0.85rem;">New Client Onboarding</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+    <div class="loading-text">Building your agent soul...</div>
+    <div class="loading-sub">This takes 15-30 seconds. We're generating a complete human personality.</div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="page">
+    <div class="container" style="max-width:720px;">
+      <h2 class="page-title">Create Your AI Closer</h2>
+      <p class="page-subtitle">Set up your agent in under 2 minutes. We'll generate a complete human soul for your closer.</p>
+
+      <form id="signupForm" autocomplete="off">
+
+        <!-- Business Info -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <span class="card-title">Business Information</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="business_name">Business Name *</label>
+            <input class="form-input" type="text" id="business_name" name="business_name" required placeholder="e.g. Acme Coaching">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="offer_name">Offer / Product Name</label>
+            <input class="form-input" type="text" id="offer_name" name="offer_name" placeholder="e.g. 12-Week Business Accelerator">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="offer_price">Offer Price ($)</label>
+              <input class="form-input" type="number" id="offer_price" name="offer_price" placeholder="e.g. 5000" min="0" step="0.01">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="target_prospect">Target Prospect</label>
+              <input class="form-input" type="text" id="target_prospect" name="target_prospect" placeholder="e.g. SaaS founders doing $10-50k MRR">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="transformation">Transformation Offered</label>
+            <textarea class="form-textarea" id="transformation" name="transformation" placeholder="What outcome does your client get? e.g. Go from struggling to close to predictably signing 5-10 high-ticket clients per month"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="top_objections">Top Objections (one per line)</label>
+            <textarea class="form-textarea" id="top_objections" name="top_objections" placeholder="I can't afford it right now&#10;I need to think about it&#10;I've tried something like this before"></textarea>
+            <div class="form-hint">These will be loaded into your agent's objection-handling training.</div>
+          </div>
+        </div>
+
+        <!-- Agent Config -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <span class="card-title">Agent Configuration</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="agent_name">Agent Name *</label>
+            <input class="form-input" type="text" id="agent_name" name="agent_name" required placeholder="e.g. Sarah">
+            <div class="form-hint">This is the name your AI closer will use on calls.</div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="agent_gender">Agent Gender</label>
+              <select class="form-select" id="agent_gender" name="agent_gender">
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="non-binary">Non-binary</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="agent_personality">Personality Traits</label>
+              <input class="form-input" type="text" id="agent_personality" name="agent_personality" value="warm, direct, curious" placeholder="e.g. warm, direct, curious">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="elevenlabs_voice_id">ElevenLabs Voice ID (optional)</label>
+            <input class="form-input" type="text" id="elevenlabs_voice_id" name="elevenlabs_voice_id" placeholder="Leave blank for default voice">
+          </div>
+        </div>
+
+        <!-- Capabilities -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <span class="card-title">Capabilities</span>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:0.85rem;">
+            <label style="display:flex;align-items:center;gap:0.6rem;cursor:pointer;">
+              <input type="checkbox" id="closing_enabled" name="closing_enabled">
+              <span>
+                <strong style="display:block;font-size:0.9rem;">Closing</strong>
+                <span class="text-muted" style="font-size:0.8rem;">Agent can guide prospects to payment and handle objections</span>
+              </span>
+            </label>
+            <label style="display:flex;align-items:center;gap:0.6rem;cursor:pointer;">
+              <input type="checkbox" id="booking_enabled" name="booking_enabled" checked>
+              <span>
+                <strong style="display:block;font-size:0.9rem;">Booking</strong>
+                <span class="text-muted" style="font-size:0.8rem;">Agent can schedule follow-up calls via Calendly</span>
+              </span>
+            </label>
+            <label style="display:flex;align-items:center;gap:0.6rem;cursor:pointer;">
+              <input type="checkbox" id="crm_enabled" name="crm_enabled" checked>
+              <span>
+                <strong style="display:block;font-size:0.9rem;">CRM Updates</strong>
+                <span class="text-muted" style="font-size:0.8rem;">Agent remembers everything and updates prospect records</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn btn-primary w-full" style="padding:0.85rem;" id="submitBtn">
+          Create Agent
+        </button>
+
+        <div id="errorMsg" class="hidden" style="margin-top:1rem;padding:0.85rem;background:var(--red-bg);border:1px solid var(--red);border-radius:var(--radius);color:var(--red);font-size:0.9rem;"></div>
+      </form>
+    </div>
+  </main>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const form = document.getElementById('signupForm');
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const errorMsg = document.getElementById('errorMsg');
+    const submitBtn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorMsg.classList.add('hidden');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Creating...';
+
+      // Build payload
+      const objectionsText = document.getElementById('top_objections').value.trim();
+      const objections = objectionsText
+        ? objectionsText.split('\n').map(s => s.trim()).filter(Boolean)
+        : [];
+
+      const payload = {
+        business_name: document.getElementById('business_name').value.trim(),
+        agent_name: document.getElementById('agent_name').value.trim(),
+        offer_name: document.getElementById('offer_name').value.trim() || null,
+        offer_price: document.getElementById('offer_price').value ? parseFloat(document.getElementById('offer_price').value) : null,
+        target_prospect: document.getElementById('target_prospect').value.trim() || null,
+        transformation: document.getElementById('transformation').value.trim() || null,
+        top_objections: objections,
+        agent_gender: document.getElementById('agent_gender').value,
+        agent_personality: document.getElementById('agent_personality').value.trim() || 'warm, direct, curious',
+        elevenlabs_voice_id: document.getElementById('elevenlabs_voice_id').value.trim() || null,
+        closing_enabled: document.getElementById('closing_enabled').checked,
+        booking_enabled: document.getElementById('booking_enabled').checked,
+        crm_enabled: document.getElementById('crm_enabled').checked,
+      };
+
+      // Show loading overlay
+      loadingOverlay.classList.add('active');
+
+      try {
+        const res = await fetch('/clients', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || 'Failed to create client');
+        }
+
+        // Redirect to client dashboard
+        window.location.href = '/dashboard/' + data.client.id;
+      } catch (err) {
+        loadingOverlay.classList.remove('active');
+        errorMsg.textContent = err.message;
+        errorMsg.classList.remove('hidden');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Create Agent';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "greetings": ["how you going", "hey mate", "g'day", "hows it going"],
+  "agreements": ["yeah nah yeah", "yep", "100%", "for sure", "absolutely legend", "love that"],
+  "acknowledgements": ["fair enough", "no worries", "all good", "sweet"],
+  "emphasis": ["heaps", "bloody", "dead", "so"],
+  "questions": ["what do you reckon?", "keen to explore that?", "does that make sense?", "you with me?"],
+  "transitions": ["look,", "honestly,", "here's the thing,", "at the end of the day,"],
+  "praise": ["legend", "bloody brilliant", "love it", "that's the one"],
+  "closers": ["cheers", "no dramas", "catch you soon", "beauty"],
+  "filler": ["yeah nah", "sort of", "kind of", "you know what I mean", "like"],
+  "concern": ["ah look", "I hear ya", "that's fair", "understandable"],
+  "directness": ["look,", "honestly,", "straight up,", "real talk,"]
+}

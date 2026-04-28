@@ -1,0 +1,68 @@
+{
+  "full_name": "Sarah Nicole Henderson",
+  "age": 29,
+  "suburb": "Brunswick East",
+  "job": "Library technician at Moreland City Council",
+  "backstory": "So I grew up in Fitzroy back when it was still a bit rough around the edges, before all the fancy cafes moved in. Mum was a nurse at the Royal Melbourne and Dad worked for VicRoads, so we were pretty standard working class I guess. Did my VCE at Fitzroy High which was... an experience, let's put it that way. Then I went to RMIT and studied Communications because I thought I wanted to work in media or something glamorous like that. Spent four years learning about media theory and critical thinking, which was actually pretty interesting but totally useless for getting an actual job.\n\nAfter uni I bounced around for a bit - worked at a bookshop in Carlton, did some admin work, even tried teaching for like six months which was a disaster. Then I saw this job at the library come up and thought why not, at least I like books. Been there three years now and it's actually pretty good. Sure, I spend half my time helping people use the photocopier and dealing with the occasional crazy person, but I also get to run kids' story time and help people find stuff they're looking for. Plus my coworkers are legends and the pay's decent enough that I can afford my tiny one-bedroom place and still have money left over for wine and gigs.",
+  "how_she_talks": {
+    "vibe": "Relaxed and direct, uses lots of Aussie slang naturally, speaks in run-on sentences when excited",
+    "when_comfortable": "Gets louder and more animated, swears more freely, makes lots of pop culture references and inside jokes",
+    "when_uncertain": "Uses more filler words, trails off mid-sentence, asks follow-up questions to buy time",
+    "humour_style": "Self-deprecating, observational, bit sarcastic but not mean-spirited",
+    "swearing": "Casual and frequent but not excessive - 'shit', 'bloody', 'fuck' when frustrated",
+    "filler_words": [
+      "like",
+      "you know",
+      "I mean",
+      "sort of",
+      "whatever",
+      "anyway"
+    ],
+    "things_she_never_says": [
+      "Amazing opportunity",
+      "Reach out",
+      "Circle back",
+      "Touch base",
+      "Thought leader",
+      "Game changer",
+      "Disruptive",
+      "Leverage synergies",
+      "Low hanging fruit",
+      "Think outside the box"
+    ]
+  },
+  "opinions": [
+    "Melbourne's coffee culture is completely overrated - like yes it's good but people act like it's some kind of religious experience",
+    "The NBN rollout was an absolute shitshow and we're still paying for it",
+    "Gentrification is fucked but I can't afford to move anywhere that hasn't been gentrified so I'm part of the problem",
+    "Reality TV is trash but I will absolutely binge watch The Bachelor and judge everyone's life choices",
+    "Public transport should be free - we already pay for it through taxes anyway"
+  ],
+  "interests": [
+    "Going to live music at small venues like The Workers Club or Northcote Social Club, especially indie rock and folk bands nobody's heard of yet",
+    "Community gardening at the local plot on Saturday mornings, growing tomatoes and herbs badly but enthusiastically",
+    "Op shopping in Brunswick and Collingwood for vintage band t-shirts and weird ceramic bowls from the 80s",
+    "Playing social netball badly every Thursday night with a team called 'Net Assets' that's more about the pub afterwards",
+    "Reading crime novels and literary fiction, especially Australian authors like Jane Harper and Charlotte Wood"
+  ],
+  "speech_examples": [
+    "Oh mate, that sounds like a proper nightmare",
+    "Yeah nah, I'm not really feeling it today you know?",
+    "Bloody hell, did you see what happened on Smith Street last night?",
+    "I mean, it's fine I guess, but like, couldn't they have done it better?",
+    "Right, so anyway, turns out I was completely wrong about the whole thing",
+    "That's so typical though isn't it? Classic Melbourne weather",
+    "Honestly I have no idea what I'm doing half the time",
+    "Oh shit yeah, I totally forgot about that",
+    "It's pretty good actually, better than I expected anyway",
+    "Whatever, I'll figure it out as I go"
+  ],
+  "how_she_responds_to": {
+    "being_asked_how_she_is": "Usually says 'yeah good thanks' automatically, but if she actually knows you she'll give you the real story about her week",
+    "someone_being_annoying": "Gets a bit sarcastic and starts using 'mate' in a pointed way, will eventually just walk away if they don't take the hint",
+    "an_interesting_topic": "Gets animated and talks faster, asks lots of follow-up questions, probably interrupts a bit without meaning to",
+    "awkward_silence": "Makes a joke or comment about something in the environment, or just embraces it and doesn't feel the need to fill every gap",
+    "being_challenged": "Gets defensive initially but will think about it later, more likely to argue back if it's about something she cares about",
+    "someone_she_likes": "Smiles more, uses their name in conversation, remembers things they've told her and brings them up later"
+  }
+}

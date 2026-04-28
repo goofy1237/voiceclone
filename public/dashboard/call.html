@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Call Analysis — AI Closer Platform</title>
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-brand">
+        <div class="logo">AC</div>
+        <h1>AI Closer Platform</h1>
+      </div>
+      <div class="header-nav">
+        <a href="#" id="backLink" class="btn btn-ghost btn-sm">Back to Dashboard</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="page">
+    <div class="container">
+
+      <!-- Loading -->
+      <div class="loading-state" id="pageLoading">
+        <div class="spinner"></div>
+        <span>Loading call analysis...</span>
+      </div>
+
+      <!-- Content -->
+      <div id="content" class="hidden">
+
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+          <a href="#" id="dashLink">Dashboard</a>
+          <span class="sep">/</span>
+          <span>Call Analysis</span>
+        </div>
+
+        <!-- Title Row -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;">
+          <div>
+            <h2 class="page-title" id="callTitle">Call Analysis</h2>
+            <p class="text-muted" id="callMeta"></p>
+          </div>
+          <div style="display:flex;align-items:center;gap:1rem;">
+            <div style="text-align:center;">
+              <div class="text-muted" style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem;">Detection Risk</div>
+              <div class="risk-score" id="riskBadge" style="width:48px;height:48px;font-size:1.1rem;">--</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top stats -->
+        <div class="stats-grid mb-3" style="grid-template-columns:repeat(4,1fr);">
+          <div class="stat-card">
+            <div class="stat-label">Duration</div>
+            <div class="stat-value" id="callDuration" style="font-size:1.25rem;">--</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Call Type</div>
+            <div class="stat-value" id="callType" style="font-size:1.25rem;">--</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Outcome</div>
+            <div class="stat-value" id="callOutcome" style="font-size:1.25rem;">--</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Status</div>
+            <div class="stat-value" id="callStatus" style="font-size:1.25rem;">--</div>
+          </div>
+        </div>
+
+        <!-- Two column: Transcript + Analysis -->
+        <div class="grid-2 mb-3">
+
+          <!-- Transcript -->
+          <div class="card" style="max-height:700px;display:flex;flex-direction:column;">
+            <div class="card-header" style="flex-shrink:0;">
+              <span class="card-title">Transcript</span>
+              <span class="text-muted" style="font-size:0.8rem;" id="transcriptLength"></span>
+            </div>
+            <div id="transcriptContainer" style="overflow-y:auto;flex:1;">
+              <div class="empty-state">
+                <p>No transcript available.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Analysis Panel -->
+          <div style="display:flex;flex-direction:column;gap:1.5rem;">
+
+            <!-- Claude Analysis -->
+            <div class="analysis-panel">
+              <div class="card-header" style="margin-bottom:1rem;">
+                <span class="card-title">Claude Analysis</span>
+              </div>
+              <div id="analysisContent">
+                <div class="empty-state">
+                  <p>No analysis available.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Call Summary -->
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Call Summary</span>
+              </div>
+              <div id="callSummaryContent" class="analysis-value" style="font-size:0.9rem;">--</div>
+            </div>
+
+            <!-- Detection Risk Detail -->
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Detection Risk Assessment</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
+                <div class="risk-score" id="riskScoreLarge" style="width:56px;height:56px;font-size:1.3rem;">--</div>
+                <div>
+                  <div id="riskLabel" style="font-weight:600;font-size:1rem;">--</div>
+                  <div id="riskDescription" class="text-muted" style="font-size:0.85rem;">--</div>
+                </div>
+              </div>
+              <!-- Risk bar -->
+              <div style="background:var(--bg);border-radius:4px;height:8px;overflow:hidden;">
+                <div id="riskBar" style="height:100%;border-radius:4px;transition:width 0.5s ease;width:0%;"></div>
+              </div>
+            </div>
+
+            <!-- Agent Performance Notes -->
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Agent Performance Notes</span>
+              </div>
+              <div id="perfNotes" class="analysis-value" style="font-size:0.9rem;">--</div>
+            </div>
+
+            <!-- Key Moments -->
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Key Moments</span>
+              </div>
+              <div id="keyMoments">
+                <div class="empty-state" style="padding:1rem;"><p>None recorded</p></div>
+              </div>
+            </div>
+
+            <!-- Human Moments -->
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Human Moments</span>
+              </div>
+              <div id="humanMoments">
+                <div class="empty-state" style="padding:1rem;"><p>None recorded</p></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- /content -->
+    </div>
+  </main>
+
+  <script>
+    // Parse URL: /dashboard/:clientId/calls/:callId
+    const pathParts = window.location.pathname.split('/');
+    const clientId = pathParts[2];
+    const callId = pathParts[4];
+
+    document.getElementById('backLink').href = '/dashboard/' + clientId;
+    document.getElementById('dashLink').href = '/dashboard/' + clientId;
+
+    async function init() {
+      try {
+        const res = await fetch('/api/calls/' + callId + '/full');
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.error || 'Failed to load call');
+
+        const call = data.call || data;
+        populateCall(call);
+
+        document.getElementById('pageLoading').classList.add('hidden');
+        document.getElementById('content').classList.remove('hidden');
+      } catch (err) {
+        console.error('Error loading call:', err);
+        document.getElementById('pageLoading').innerHTML =
+          '<span class="text-red">Failed to load call data: ' + err.message + '</span>';
+      }
+    }
+
+    function populateCall(call) {
+      // Title
+      document.getElementById('callTitle').textContent = 'Call Analysis';
+      const date = call.created_at ? new Date(call.created_at).toLocaleString() : '--';
+      document.getElementById('callMeta').textContent = date + (call.prospect_name ? ' with ' + call.prospect_name : '');
+
+      // Stats
+      document.getElementById('callDuration').textContent = call.duration_seconds ? formatDuration(call.duration_seconds) : '--';
+      document.getElementById('callType').textContent = call.call_type || '--';
+      document.getElementById('callOutcome').textContent = call.outcome || '--';
+      document.getElementById('callStatus').textContent = call.status || '--';
+
+      // Detection Risk Badge (header)
+      const risk = call.detection_risk_score;
+      const riskBadge = document.getElementById('riskBadge');
+      riskBadge.textContent = risk != null ? risk : '--';
+      riskBadge.className = 'risk-score ' + getRiskClass(risk);
+
+      // Detection Risk Detail
+      const riskLarge = document.getElementById('riskScoreLarge');
+      riskLarge.textContent = risk != null ? risk : '--';
+      riskLarge.className = 'risk-score ' + getRiskClass(risk);
+
+      const riskLabel = document.getElementById('riskLabel');
+      const riskDesc = document.getElementById('riskDescription');
+      if (risk != null) {
+        if (risk <= 3) {
+          riskLabel.textContent = 'Low Risk';
+          riskLabel.style.color = 'var(--green)';
+          riskDesc.textContent = 'Agent sounds natural and human-like. Very low chance of detection.';
+        } else if (risk <= 6) {
+          riskLabel.textContent = 'Medium Risk';
+          riskLabel.style.color = 'var(--amber)';
+          riskDesc.textContent = 'Some patterns may seem scripted. Review the flagged moments.';
+        } else {
+          riskLabel.textContent = 'High Risk';
+          riskLabel.style.color = 'var(--red)';
+          riskDesc.textContent = 'Agent behaviour may appear artificial. Immediate attention needed.';
+        }
+
+        // Risk bar
+        const bar = document.getElementById('riskBar');
+        const pct = (risk / 10) * 100;
+        bar.style.width = pct + '%';
+        bar.style.background = risk <= 3 ? 'var(--green)' : risk <= 6 ? 'var(--amber)' : 'var(--red)';
+      }
+
+      // Call Summary
+      document.getElementById('callSummaryContent').textContent = call.call_summary || 'No summary available.';
+
+      // Performance Notes
+      document.getElementById('perfNotes').textContent = call.agent_performance_notes || 'No performance notes available.';
+
+      // Transcript
+      renderTranscript(call.transcript);
+
+      // Claude Analysis
+      renderAnalysis(call.claude_analysis);
+
+      // Key Moments
+      renderMomentsList('keyMoments', call.key_moments);
+
+      // Human Moments
+      renderMomentsList('humanMoments', call.human_moments);
+    }
+
+    function renderTranscript(transcript) {
+      const container = document.getElementById('transcriptContainer');
+
+      if (!transcript) {
+        container.innerHTML = '<div class="empty-state"><p>No transcript available.</p></div>';
+        return;
+      }
+
+      document.getElementById('transcriptLength').textContent = transcript.length + ' chars';
+
+      // Try to parse as structured transcript lines
+      const lines = transcript.split('\n').filter(l => l.trim());
+
+      if (lines.length === 0) {
+        container.innerHTML = '<div class="empty-state"><p>Empty transcript.</p></div>';
+        return;
+      }
+
+      container.innerHTML = '<div class="transcript">' +
+        lines.map(line => {
+          const trimmed = line.trim();
+          // Try to detect speaker patterns: "Agent:", "Prospect:", "[00:01]", etc.
+          const speakerMatch = trimmed.match(/^(Agent|Prospect|AI|User|Customer|Speaker\s*\d*)\s*[:\-]\s*(.*)/i);
+          const timeMatch = trimmed.match(/^\[(\d{1,2}:\d{2}(?::\d{2})?)\]\s*(.*)/);
+
+          if (speakerMatch) {
+            const speaker = speakerMatch[1];
+            const text = speakerMatch[2];
+            const isAgent = /agent|ai/i.test(speaker);
+            return '<div class="transcript-line">' +
+              '<span class="speaker ' + (isAgent ? 'agent' : 'prospect') + '">' + escapeHtml(speaker) + ':</span>' +
+              '<span>' + escapeHtml(text) + '</span>' +
+            '</div>';
+          } else if (timeMatch) {
+            return '<div class="transcript-line">' +
+              '<span class="timestamp">[' + timeMatch[1] + ']</span> ' +
+              '<span>' + escapeHtml(timeMatch[2]) + '</span>' +
+            '</div>';
+          } else {
+            return '<div class="transcript-line"><span>' + escapeHtml(trimmed) + '</span></div>';
+          }
+        }).join('') +
+      '</div>';
+    }
+
+    function renderAnalysis(analysis) {
+      const container = document.getElementById('analysisContent');
+
+      if (!analysis) {
+        container.innerHTML = '<div class="empty-state"><p>No analysis available.</p></div>';
+        return;
+      }
+
+      // analysis is a JSON object — render each key as a section
+      let obj = analysis;
+      if (typeof analysis === 'string') {
+        try { obj = JSON.parse(analysis); } catch (e) {
+          container.innerHTML = '<div class="analysis-value" style="font-size:0.9rem;white-space:pre-wrap;">' + escapeHtml(analysis) + '</div>';
+          return;
+        }
+      }
+
+      container.innerHTML = Object.entries(obj).map(([key, value]) => {
+        const label = key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        let rendered;
+
+        if (Array.isArray(value)) {
+          rendered = '<ul style="margin:0;padding-left:1.2rem;">' +
+            value.map(v => '<li style="margin-bottom:0.25rem;font-size:0.9rem;">' + escapeHtml(typeof v === 'string' ? v : JSON.stringify(v)) + '</li>').join('') +
+            '</ul>';
+        } else if (typeof value === 'object' && value !== null) {
+          rendered = '<div style="font-size:0.85rem;font-family:monospace;background:var(--bg);padding:0.75rem;border-radius:var(--radius);white-space:pre-wrap;">' +
+            escapeHtml(JSON.stringify(value, null, 2)) + '</div>';
+        } else {
+          rendered = '<div class="analysis-value" style="font-size:0.9rem;">' + escapeHtml(String(value)) + '</div>';
+        }
+
+        return '<div class="analysis-section">' +
+          '<div class="analysis-label">' + escapeHtml(label) + '</div>' +
+          rendered +
+        '</div>';
+      }).join('');
+    }
+
+    function renderMomentsList(elementId, moments) {
+      const container = document.getElementById(elementId);
+
+      if (!moments || (Array.isArray(moments) && moments.length === 0)) {
+        container.innerHTML = '<div class="empty-state" style="padding:1rem;"><p>None recorded</p></div>';
+        return;
+      }
+
+      const list = Array.isArray(moments) ? moments : [moments];
+      container.innerHTML = '<div style="display:flex;flex-direction:column;gap:0.5rem;">' +
+        list.map(m => {
+          const text = typeof m === 'string' ? m : (m.moment || m.description || m.text || JSON.stringify(m));
+          return '<div style="display:flex;align-items:flex-start;gap:0.5rem;padding:0.4rem 0;">' +
+            '<span style="color:var(--accent);margin-top:0.2rem;">&#8226;</span>' +
+            '<span style="font-size:0.9rem;">' + escapeHtml(text) + '</span>' +
+          '</div>';
+        }).join('') +
+      '</div>';
+    }
+
+    // --- Utilities ---
+    function getRiskClass(score) {
+      if (score == null) return '';
+      if (score <= 3) return 'risk-low';
+      if (score <= 6) return 'risk-medium';
+      return 'risk-high';
+    }
+
+    function formatDuration(seconds) {
+      if (!seconds) return '--';
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      return m + ':' + String(s).padStart(2, '0');
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prospect — AI Closer Platform</title>
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-brand">
+        <div class="logo">AC</div>
+        <h1>AI Closer Platform</h1>
+      </div>
+      <div class="header-nav">
+        <a href="#" id="backLink" class="btn btn-ghost btn-sm">Back to Dashboard</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="page">
+    <div class="container">
+
+      <!-- Loading -->
+      <div class="loading-state" id="pageLoading">
+        <div class="spinner"></div>
+        <span>Loading prospect data...</span>
+      </div>
+
+      <!-- Content -->
+      <div id="content" class="hidden">
+
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+          <a href="#" id="dashLink">Dashboard</a>
+          <span class="sep">/</span>
+          <span id="breadcrumbName">Prospect</span>
+        </div>
+
+        <!-- Title -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;">
+          <div>
+            <h2 class="page-title" id="prospectName">--</h2>
+            <p class="text-muted" id="prospectBusiness"></p>
+          </div>
+          <div style="display:flex;gap:0.5rem;align-items:center;">
+            <span class="badge" id="stageBadge">lead</span>
+            <span class="text-muted" style="font-size:0.85rem;" id="callCountLabel"></span>
+          </div>
+        </div>
+
+        <!-- Top cards -->
+        <div class="grid-3 mb-3">
+          <div class="stat-card">
+            <div class="stat-label">Funnel Stage</div>
+            <div class="stat-value" id="funnelStage" style="font-size:1.25rem;">--</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Closed Value</div>
+            <div class="stat-value" id="closedValue" style="font-size:1.25rem;">--</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Total Calls</div>
+            <div class="stat-value" id="totalCalls" style="font-size:1.25rem;">0</div>
+          </div>
+        </div>
+
+        <!-- Two-column layout -->
+        <div class="grid-2 mb-3">
+
+          <!-- Memory Record -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Memory Record</span>
+            </div>
+
+            <div class="analysis-section">
+              <div class="analysis-label">Contact Info</div>
+              <div class="analysis-value">
+                <div id="memEmail"></div>
+                <div id="memPhone"></div>
+              </div>
+            </div>
+
+            <div class="analysis-section">
+              <div class="analysis-label">Communication Style</div>
+              <div class="analysis-value" id="memCommStyle">Not assessed yet</div>
+            </div>
+
+            <div class="analysis-section">
+              <div class="analysis-label">Pain Points</div>
+              <div class="analysis-value" id="memPainPoints">None recorded</div>
+            </div>
+
+            <div class="analysis-section">
+              <div class="analysis-label">Buying Signals</div>
+              <div class="analysis-value" id="memBuyingSignals">None detected</div>
+            </div>
+
+            <div class="analysis-section">
+              <div class="analysis-label">Personal Notes</div>
+              <div class="analysis-value" id="memPersonalNotes">None yet</div>
+            </div>
+
+            <div class="analysis-section">
+              <div class="analysis-label">Next Action</div>
+              <div class="analysis-value" id="memNextAction">--</div>
+            </div>
+
+            <div class="analysis-section">
+              <div class="analysis-label">Next Contact Date</div>
+              <div class="analysis-value" id="memNextContact">--</div>
+            </div>
+          </div>
+
+          <!-- Objections + Detection Risk -->
+          <div style="display:flex;flex-direction:column;gap:1.5rem;">
+            <!-- Objections -->
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Objections</span>
+              </div>
+              <div class="analysis-section">
+                <div class="analysis-label">Raised</div>
+                <div id="objRaised" class="analysis-value">None</div>
+              </div>
+              <div class="analysis-section">
+                <div class="analysis-label">Resolved</div>
+                <div id="objResolved" class="analysis-value">None</div>
+              </div>
+              <div class="analysis-section">
+                <div class="analysis-label">Unresolved</div>
+                <div id="objUnresolved" class="analysis-value">None</div>
+              </div>
+            </div>
+
+            <!-- Detection Risk Chart -->
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Detection Risk Over Time</span>
+              </div>
+              <div class="risk-chart-container" id="riskChartContainer">
+                <div class="text-muted" style="font-size:0.9rem;">No call data for risk chart</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Call Timeline -->
+        <div class="section">
+          <div class="section-header">
+            <h3 class="section-title">Call Timeline</h3>
+          </div>
+          <div id="callTimeline" class="timeline">
+            <div class="empty-state">
+              <p>No calls recorded yet.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Human Moments Log -->
+        <div class="section">
+          <div class="section-header">
+            <h3 class="section-title">Human Moments Log</h3>
+          </div>
+          <div class="card" id="humanMomentsCard">
+            <div class="empty-state">
+              <p>No human moments recorded yet.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- System Prompt (Collapsed) -->
+        <div class="section">
+          <div class="collapsible-header" onclick="togglePrompt()">
+            <span style="font-weight:600;">System Prompt (for this prospect)</span>
+            <span class="arrow" id="promptArrow">&#9660;</span>
+          </div>
+          <div class="collapsible-body" id="promptBody">
+            <div class="loading-state" id="promptLoading">
+              <div class="spinner"></div>
+              <span>Loading prompt...</span>
+            </div>
+            <pre class="prompt-preview hidden" id="promptContent"></pre>
+          </div>
+        </div>
+
+      </div><!-- /content -->
+    </div>
+  </main>
+
+  <script>
+    // Parse URL: /dashboard/:clientId/prospect/:prospectId
+    const pathParts = window.location.pathname.split('/');
+    const clientId = pathParts[2];
+    const prospectId = pathParts[4];
+
+    document.getElementById('backLink').href = '/dashboard/' + clientId;
+    document.getElementById('dashLink').href = '/dashboard/' + clientId;
+
+    async function init() {
+      try {
+        // Fetch prospect memory (includes prospect + calls)
+        const memRes = await fetch('/api/prospects/' + prospectId + '/memory?clientId=' + clientId);
+        const memData = await memRes.json();
+
+        if (!memRes.ok) throw new Error(memData.error || 'Failed to load prospect');
+
+        const prospect = memData.prospect;
+        const calls = memData.calls || [];
+
+        populateProspect(prospect);
+        populateCalls(calls);
+        populateRiskChart(calls);
+        populateHumanMoments(calls);
+
+        document.getElementById('pageLoading').classList.add('hidden');
+        document.getElementById('content').classList.remove('hidden');
+      } catch (err) {
+        console.error('Error loading prospect:', err);
+        document.getElementById('pageLoading').innerHTML =
+          '<span class="text-red">Failed to load prospect data: ' + err.message + '</span>';
+      }
+    }
+
+    function populateProspect(p) {
+      document.getElementById('prospectName').textContent = p.name || 'Unknown Prospect';
+      document.getElementById('breadcrumbName').textContent = p.name || 'Prospect';
+      document.getElementById('prospectBusiness').textContent = p.business_name || '';
+      document.title = (p.name || 'Prospect') + ' — AI Closer Platform';
+
+      const stage = p.funnel_stage || 'lead';
+      const stageClass = stage === 'closed_won' ? 'badge-green' : stage === 'closed_lost' ? 'badge-red' : 'badge-purple';
+      const badge = document.getElementById('stageBadge');
+      badge.textContent = stage;
+      badge.className = 'badge ' + stageClass;
+
+      document.getElementById('funnelStage').textContent = stage;
+      document.getElementById('closedValue').textContent = p.closed_value ? '$' + Number(p.closed_value).toLocaleString() : '--';
+      document.getElementById('totalCalls').textContent = p.call_count || 0;
+      document.getElementById('callCountLabel').textContent = (p.call_count || 0) + ' call' + ((p.call_count || 0) !== 1 ? 's' : '');
+
+      document.getElementById('memEmail').textContent = p.email ? 'Email: ' + p.email : 'No email';
+      document.getElementById('memPhone').textContent = p.phone ? 'Phone: ' + p.phone : 'No phone';
+      document.getElementById('memCommStyle').textContent = p.communication_style || 'Not assessed yet';
+
+      // Pain points
+      const painPoints = p.pain_points || {};
+      if (typeof painPoints === 'object' && Object.keys(painPoints).length > 0) {
+        document.getElementById('memPainPoints').innerHTML =
+          Object.entries(painPoints).map(([k, v]) => '<div class="tag">' + escapeHtml(k) + ': ' + escapeHtml(String(v)) + '</div>').join(' ');
+      }
+
+      // Buying signals
+      const signals = p.buying_signals || [];
+      if (Array.isArray(signals) && signals.length > 0) {
+        document.getElementById('memBuyingSignals').innerHTML =
+          signals.map(s => '<span class="tag">' + escapeHtml(s) + '</span>').join(' ');
+      }
+
+      // Personal notes
+      const notes = p.personal_notes || [];
+      if (Array.isArray(notes) && notes.length > 0) {
+        document.getElementById('memPersonalNotes').innerHTML =
+          '<ul style="margin:0;padding-left:1.2rem;">' +
+          notes.map(n => '<li style="margin-bottom:0.3rem;">' + escapeHtml(n) + '</li>').join('') +
+          '</ul>';
+      }
+
+      document.getElementById('memNextAction').textContent = p.next_action || '--';
+      document.getElementById('memNextContact').textContent = p.next_contact_date
+        ? new Date(p.next_contact_date).toLocaleDateString()
+        : '--';
+
+      // Objections
+      const obj = p.objections || {};
+      if (Array.isArray(obj.raised) && obj.raised.length > 0) {
+        document.getElementById('objRaised').innerHTML =
+          obj.raised.map(o => '<span class="tag">' + escapeHtml(o) + '</span>').join(' ');
+      }
+      if (Array.isArray(obj.resolved) && obj.resolved.length > 0) {
+        document.getElementById('objResolved').innerHTML =
+          obj.resolved.map(o => '<span class="tag" style="background:var(--green-bg);color:var(--green);">' + escapeHtml(o) + '</span>').join(' ');
+      }
+      if (Array.isArray(obj.unresolved) && obj.unresolved.length > 0) {
+        document.getElementById('objUnresolved').innerHTML =
+          obj.unresolved.map(o => '<span class="tag" style="background:var(--red-bg);color:var(--red);">' + escapeHtml(o) + '</span>').join(' ');
+      }
+    }
+
+    function populateCalls(calls) {
+      const timeline = document.getElementById('callTimeline');
+      if (!calls || calls.length === 0) {
+        timeline.innerHTML = '<div class="empty-state"><p>No calls recorded yet.</p></div>';
+        return;
+      }
+
+      timeline.innerHTML = calls.map(call => {
+        const date = call.created_at ? new Date(call.created_at).toLocaleString() : '--';
+        const duration = call.duration_seconds ? formatDuration(call.duration_seconds) : '--';
+        const riskClass = getRiskClass(call.detection_risk_score);
+
+        return '<div class="timeline-item">' +
+          '<div class="timeline-date">' + date + '</div>' +
+          '<div class="timeline-content" style="cursor:pointer;" onclick="viewCall(\'' + call.id + '\')">' +
+            '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem;">' +
+              '<div style="display:flex;align-items:center;gap:0.5rem;">' +
+                '<span class="badge badge-muted">' + escapeHtml(call.call_type || 'phone') + '</span>' +
+                '<span class="text-muted" style="font-size:0.85rem;">' + duration + '</span>' +
+              '</div>' +
+              '<span class="risk-score ' + riskClass + '">' + (call.detection_risk_score != null ? call.detection_risk_score : '--') + '</span>' +
+            '</div>' +
+            (call.call_summary ? '<div style="font-size:0.9rem;color:var(--text);margin-bottom:0.5rem;">' + escapeHtml(call.call_summary) + '</div>' : '') +
+            (call.status ? '<div style="font-size:0.8rem;color:var(--text-dim);">Status: ' + escapeHtml(call.status) + '</div>' : '') +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    function populateRiskChart(calls) {
+      const container = document.getElementById('riskChartContainer');
+      const scored = calls.filter(c => c.detection_risk_score != null);
+
+      if (scored.length === 0) {
+        container.innerHTML = '<div class="text-muted" style="font-size:0.9rem;">No call data for risk chart</div>';
+        return;
+      }
+
+      // Build SVG risk chart
+      const width = 360;
+      const height = 180;
+      const padding = { top: 20, right: 20, bottom: 30, left: 35 };
+      const chartW = width - padding.left - padding.right;
+      const chartH = height - padding.top - padding.bottom;
+
+      const maxRisk = 10;
+      const points = scored.map((c, i) => {
+        const x = padding.left + (scored.length === 1 ? chartW / 2 : (i / (scored.length - 1)) * chartW);
+        const y = padding.top + chartH - (c.detection_risk_score / maxRisk) * chartH;
+        return { x, y, score: c.detection_risk_score };
+      });
+
+      let svg = '<svg viewBox="0 0 ' + width + ' ' + height + '" style="width:100%;max-width:' + width + 'px;" xmlns="http://www.w3.org/2000/svg">';
+
+      // Grid lines
+      for (let i = 0; i <= 10; i += 2) {
+        const y = padding.top + chartH - (i / maxRisk) * chartH;
+        svg += '<line x1="' + padding.left + '" y1="' + y + '" x2="' + (width - padding.right) + '" y2="' + y + '" stroke="#222" stroke-width="1"/>';
+        svg += '<text x="' + (padding.left - 8) + '" y="' + (y + 4) + '" fill="#555" font-size="10" text-anchor="end">' + i + '</text>';
+      }
+
+      // Risk zones
+      // Green zone (0-3)
+      const greenTop = padding.top + chartH - (3 / maxRisk) * chartH;
+      svg += '<rect x="' + padding.left + '" y="' + greenTop + '" width="' + chartW + '" height="' + (padding.top + chartH - greenTop) + '" fill="rgba(34,197,94,0.05)"/>';
+      // Amber zone (4-6)
+      const amberTop = padding.top + chartH - (6 / maxRisk) * chartH;
+      svg += '<rect x="' + padding.left + '" y="' + amberTop + '" width="' + chartW + '" height="' + (greenTop - amberTop) + '" fill="rgba(245,158,11,0.05)"/>';
+      // Red zone (7-10)
+      svg += '<rect x="' + padding.left + '" y="' + padding.top + '" width="' + chartW + '" height="' + (amberTop - padding.top) + '" fill="rgba(239,68,68,0.05)"/>';
+
+      // Line
+      if (points.length > 1) {
+        const pathD = points.map((p, i) => (i === 0 ? 'M' : 'L') + p.x + ',' + p.y).join(' ');
+        svg += '<path d="' + pathD + '" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+      }
+
+      // Dots
+      points.forEach(p => {
+        const color = p.score <= 3 ? '#22c55e' : p.score <= 6 ? '#f59e0b' : '#ef4444';
+        svg += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + color + '" stroke="#0a0a0a" stroke-width="2"/>';
+      });
+
+      // Labels
+      svg += '<text x="' + (width / 2) + '" y="' + (height - 2) + '" fill="#555" font-size="10" text-anchor="middle">Calls</text>';
+
+      svg += '</svg>';
+      container.innerHTML = svg;
+    }
+
+    function populateHumanMoments(calls) {
+      const card = document.getElementById('humanMomentsCard');
+      const allMoments = [];
+
+      calls.forEach(call => {
+        const moments = call.human_moments || [];
+        if (Array.isArray(moments)) {
+          moments.forEach(m => {
+            allMoments.push({
+              moment: typeof m === 'string' ? m : (m.moment || m.description || JSON.stringify(m)),
+              date: call.created_at,
+              callId: call.id,
+            });
+          });
+        }
+      });
+
+      if (allMoments.length === 0) {
+        card.innerHTML = '<div class="empty-state"><p>No human moments recorded yet.</p></div>';
+        return;
+      }
+
+      card.innerHTML = '<div style="display:flex;flex-direction:column;gap:0.75rem;">' +
+        allMoments.map(m => {
+          const date = m.date ? new Date(m.date).toLocaleDateString() : '';
+          return '<div style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.5rem 0;border-bottom:1px solid var(--border);">' +
+            '<span style="color:var(--accent);font-size:1.1rem;margin-top:0.1rem;">&#9679;</span>' +
+            '<div>' +
+              '<div style="font-size:0.9rem;">' + escapeHtml(m.moment) + '</div>' +
+              '<div class="text-dim" style="font-size:0.8rem;margin-top:0.2rem;">' + date + '</div>' +
+            '</div>' +
+          '</div>';
+        }).join('') +
+      '</div>';
+    }
+
+    // --- Prompt Toggle ---
+    let promptLoaded = false;
+    async function togglePrompt() {
+      const body = document.getElementById('promptBody');
+      const header = document.getElementById('promptArrow').closest('.collapsible-header');
+
+      if (body.classList.contains('open')) {
+        body.classList.remove('open');
+        header.classList.remove('open');
+      } else {
+        body.classList.add('open');
+        header.classList.add('open');
+
+        if (!promptLoaded) {
+          try {
+            const res = await fetch('/clients/' + clientId + '/prompt/' + prospectId);
+            const data = await res.json();
+            document.getElementById('promptLoading').classList.add('hidden');
+            const pre = document.getElementById('promptContent');
+            pre.textContent = data.prompt || 'No prompt generated yet.';
+            pre.classList.remove('hidden');
+            promptLoaded = true;
+          } catch (err) {
+            document.getElementById('promptLoading').innerHTML = '<span class="text-red">Failed to load prompt.</span>';
+          }
+        }
+      }
+    }
+
+    // --- Navigation ---
+    function viewCall(callId) {
+      window.location.href = '/dashboard/' + clientId + '/calls/' + callId;
+    }
+
+    // --- Utilities ---
+    function getRiskClass(score) {
+      if (score == null) return '';
+      if (score <= 3) return 'risk-low';
+      if (score <= 6) return 'risk-medium';
+      return 'risk-high';
+    }
+
+    function formatDuration(seconds) {
+      if (!seconds) return '--';
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      return m + ':' + String(s).padStart(2, '0');
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    init();
+  </script>
+</body>
+</html>

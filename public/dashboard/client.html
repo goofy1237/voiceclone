@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — AI Closer Platform</title>
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-brand">
+        <a href="/dashboard" style="color:var(--text-muted);font-size:0.85rem;margin-right:0.75rem;text-decoration:none;">&larr; Back to Team Dashboard</a>
+        <div class="logo">AC</div>
+        <h1 id="headerTitle">Dashboard</h1>
+      </div>
+      <div class="header-nav">
+        <div class="header-status">
+          <div class="status-dot"></div>
+          <span id="headerStatus">Agent Active</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="page">
+    <div class="container">
+
+      <!-- Loading state -->
+      <div class="loading-state" id="pageLoading">
+        <div class="spinner"></div>
+        <span>Loading dashboard...</span>
+      </div>
+
+      <!-- Dashboard content (hidden until loaded) -->
+      <div id="dashboardContent" class="hidden">
+
+        <!-- Page Title -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;">
+          <div>
+            <h2 class="page-title" id="agentTitle">Agent Dashboard</h2>
+            <p class="text-muted" id="businessName" style="font-size:0.95rem;"></p>
+          </div>
+          <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+            <button class="btn btn-primary btn-sm" onclick="openTestCallModal()">&#128222; Test Call</button>
+            <button class="btn btn-primary btn-sm" style="background:#7c3aed;" onclick="openRealCallModal()">&#128222; Call Me Now</button>
+            <button class="btn btn-secondary btn-sm" onclick="copyWebhookUrl()">Copy Webhook URL</button>
+            <button class="btn btn-ghost btn-sm" onclick="copyApiKey()">Copy API Key</button>
+          </div>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="stats-grid" id="statsGrid">
+          <div class="stat-card">
+            <div class="stat-label">Total Calls</div>
+            <div class="stat-value" id="statCalls">--</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Closed Deals</div>
+            <div class="stat-value" id="statDeals">--</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Avg. Detection Risk</div>
+            <div class="stat-value" id="statRisk">--</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Pipeline Value</div>
+            <div class="stat-value" id="statPipeline">--</div>
+          </div>
+        </div>
+
+        <!-- Recent Calls -->
+        <div class="section">
+          <div class="section-header">
+            <h3 class="section-title">Recent Calls</h3>
+            <span class="text-muted" style="font-size:0.85rem;" id="callsCount"></span>
+          </div>
+          <div class="card" style="padding:0;">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Prospect</th>
+                    <th>Type</th>
+                    <th>Duration</th>
+                    <th>Outcome</th>
+                    <th>Risk</th>
+                    <th>Summary</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody id="callsTableBody">
+                  <tr><td colspan="7" class="text-center text-muted" style="padding:2rem;">No calls yet</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- Pagination -->
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;border-top:1px solid var(--border);" id="callsPagination" class="hidden">
+              <button class="btn btn-ghost btn-sm" id="callsPrev" onclick="changePage(-1)">Previous</button>
+              <span class="text-muted" style="font-size:0.85rem;" id="callsPageInfo"></span>
+              <button class="btn btn-ghost btn-sm" id="callsNext" onclick="changePage(1)">Next</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prospects -->
+        <div class="section">
+          <div class="section-header">
+            <h3 class="section-title">Prospects</h3>
+            <span class="text-muted" style="font-size:0.85rem;" id="prospectsCount"></span>
+          </div>
+          <div class="card" style="padding:0;">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Business</th>
+                    <th>Stage</th>
+                    <th>Calls</th>
+                    <th>Closed Value</th>
+                    <th>Last Contact</th>
+                    <th>Next Action</th>
+                  </tr>
+                </thead>
+                <tbody id="prospectsTableBody">
+                  <tr><td colspan="7" class="text-center text-muted" style="padding:2rem;">No prospects yet</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Agent Card -->
+        <div class="section">
+          <div class="section-header">
+            <h3 class="section-title">Your Agent</h3>
+          </div>
+          <div class="grid-2">
+            <div class="agent-card">
+              <div class="agent-name" id="agentName">--</div>
+              <div class="agent-role" id="agentRole">AI Closer</div>
+              <div class="agent-capabilities" id="agentCapabilities"></div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Quick Info</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:0.6rem;font-size:0.9rem;">
+                <div><span class="text-muted">Retell Agent:</span> <span id="retellId" class="font-mono">--</span></div>
+                <div><span class="text-muted">Vapi Agent:</span> <span id="vapiId" class="font-mono">--</span></div>
+                <div><span class="text-muted">Personality:</span> <span id="agentPersonality">--</span></div>
+                <div><span class="text-muted">API Key:</span> <span id="apiKeyDisplay" class="font-mono">--</span></div>
+                <div><span class="text-muted">Webhook URL:</span> <span id="webhookUrl" class="font-mono" style="word-break:break-all;">--</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Setup -->
+        <div class="section">
+          <div class="section-header">
+            <h3 class="section-title">Video Mode</h3>
+          </div>
+          <div class="card" style="padding:1.25rem;">
+            <div style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;">
+              <button class="btn btn-sm video-mode-btn" id="modeVoiceOnly" onclick="setVideoMode('voice_only')">Voice Only</button>
+              <button class="btn btn-sm video-mode-btn" id="modeVideoAvatar" onclick="setVideoMode('video_avatar')">Video Avatar</button>
+              <button class="btn btn-sm video-mode-btn" id="modeVideoRecall" onclick="setVideoMode('video_recall')">Video Recall</button>
+              <button class="btn btn-sm video-mode-btn" id="modeHyperReal" onclick="setVideoMode('video_recall_v2')">Hyper-Real (BETA)</button>
+            </div>
+            <div id="tavusSetup" class="hidden" style="border-top:1px solid var(--border);padding-top:1rem;margin-top:0.5rem;">
+              <div style="display:flex;flex-direction:column;gap:0.75rem;font-size:0.9rem;">
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                  <span><span class="text-muted">Replica:</span> <span id="replicaStatus">Not created</span></span>
+                  <label class="btn btn-ghost btn-sm" style="cursor:pointer;">
+                    Upload Video
+                    <input type="file" accept="video/*" style="display:none;" onchange="uploadReplica(this)">
+                  </label>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                  <span><span class="text-muted">Persona:</span> <span id="personaStatus">Not created</span></span>
+                  <button class="btn btn-ghost btn-sm" onclick="createPersona()">Create Persona</button>
+                </div>
+              </div>
+            </div>
+            <div id="hyperRealSetup" class="hidden" style="border-top:1px solid var(--border);padding-top:1rem;margin-top:0.5rem;">
+              <div style="margin-bottom:0.75rem;font-weight:600;font-size:0.9rem;">Render Engine</div>
+              <div style="display:flex;gap:0.5rem;margin-bottom:0.75rem;">
+                <button class="btn btn-sm render-mode-btn" id="renderPhoenix" onclick="setRenderMode('phoenix_4')">Phoenix-4</button>
+                <button class="btn btn-sm render-mode-btn" id="renderAnam" onclick="setRenderMode('anam_cara3')">Anam CARA-3</button>
+              </div>
+              <div id="anamSetup" class="hidden" style="display:flex;align-items:center;justify-content:space-between;font-size:0.9rem;">
+                <span><span class="text-muted">Anam Persona:</span> <span id="anamPersonaStatus">Not created</span></span>
+                <button class="btn btn-ghost btn-sm" onclick="createAnamPersona()">Create Anam Persona</button>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;font-size:0.85rem;">
+                <div class="status-dot" id="livekitDot" style="background:var(--green);"></div>
+                <span class="text-muted">LiveKit + Raven ready</span>
+              </div>
+            </div>
+            <div id="videoCallAction" class="hidden" style="border-top:1px solid var(--border);padding-top:1rem;margin-top:0.5rem;">
+              <button class="btn btn-primary btn-sm" onclick="openVideoCallModal()">Create Video Call Link</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prompt Preview -->
+        <div class="section">
+          <div class="collapsible-header" onclick="togglePrompt()">
+            <span style="font-weight:600;">System Prompt Preview</span>
+            <span class="arrow" id="promptArrow">&#9660;</span>
+          </div>
+          <div class="collapsible-body" id="promptBody">
+            <div class="loading-state" id="promptLoading">
+              <div class="spinner"></div>
+              <span>Loading prompt...</span>
+            </div>
+            <pre class="prompt-preview hidden" id="promptContent"></pre>
+          </div>
+        </div>
+
+      </div><!-- /dashboardContent -->
+    </div>
+  </main>
+
+  <!-- Test Call Modal -->
+  <div class="modal-overlay" id="testCallModal">
+    <div class="modal">
+      <h3 class="modal-title">Test Call</h3>
+      <div class="form-group">
+        <label class="form-label" for="testPhone">Phone Number</label>
+        <input class="form-input" type="tel" id="testPhone" placeholder="+1 555 123 4567">
+        <div class="form-hint">We'll create a test prospect and simulate the call setup.</div>
+      </div>
+      <div id="testCallResult" class="hidden" style="margin-top:1rem;padding:0.85rem;background:var(--green-bg);border:1px solid var(--green);border-radius:var(--radius);color:var(--green);font-size:0.9rem;"></div>
+      <div id="testCallError" class="hidden" style="margin-top:1rem;padding:0.85rem;background:var(--red-bg);border:1px solid var(--red);border-radius:var(--radius);color:var(--red);font-size:0.9rem;"></div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeTestCallModal()">Cancel</button>
+        <button class="btn btn-primary" id="testCallBtn" onclick="runTestCall()">Run Test</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Real Call Modal -->
+  <div class="modal-overlay" id="realCallModal">
+    <div class="modal">
+      <h3 class="modal-title">&#128222; Call Me Now</h3>
+      <div class="form-group">
+        <label class="form-label" for="realPhone">Phone Number</label>
+        <input class="form-input" type="tel" id="realPhone" placeholder="+61400000000">
+        <div class="form-hint">Your phone number. We'll call you from the AI agent.</div>
+      </div>
+      <div id="realCallStatus" style="margin-top:1rem;padding:0.85rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);font-size:0.9rem;display:none;"></div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeRealCallModal()">Cancel</button>
+        <button class="btn btn-primary" id="realCallBtn" onclick="makeRealCall()">&#128222; Call Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // Extract clientId from URL: /dashboard/:clientId
+    const pathParts = window.location.pathname.split('/');
+    const clientId = pathParts[2];
+
+    if (!clientId) {
+      window.location.href = '/dashboard/signup';
+    }
+
+    let clientData = null;
+    let currentPage = 1;
+    const pageLimit = 20;
+
+    // --- Init ---
+    async function init() {
+      try {
+        const [statsRes, callsRes, prospectsRes] = await Promise.all([
+          fetch('/api/clients/' + clientId + '/stats'),
+          fetch('/api/clients/' + clientId + '/calls?page=1&limit=' + pageLimit),
+          fetch('/api/clients/' + clientId + '/prospects'),
+        ]);
+
+        const stats = await statsRes.json();
+        const calls = await callsRes.json();
+        const prospects = await prospectsRes.json();
+
+        // We need client data too — extract from stats or fetch separately
+        // Fetch client info
+        const clientRes = await fetch('/api/clients/' + clientId + '/stats');
+        const clientStats = await clientRes.json();
+
+        // Try to get client details from prospects if available, or from the stats endpoint
+        // We'll use a dedicated approach: the stats already return what we need
+        // Fetch the prompt preview to get client info
+        const promptRes = await fetch('/api/clients/' + clientId + '/prompt/preview');
+        const promptData = await promptRes.json();
+
+        // Populate page
+        renderStats(stats);
+        renderCalls(calls);
+        renderProspects(prospects);
+
+        // For client info, we'll load it from the stats endpoint's client object
+        // Since we may not have it, we'll try another approach:
+        loadClientInfo();
+
+        document.getElementById('pageLoading').classList.add('hidden');
+        document.getElementById('dashboardContent').classList.remove('hidden');
+      } catch (err) {
+        console.error('Failed to load dashboard:', err);
+        document.getElementById('pageLoading').innerHTML =
+          '<span class="text-red">Failed to load dashboard. Check that the client ID is valid.</span>';
+      }
+    }
+
+    async function loadClientInfo() {
+      try {
+        // We'll use the prompt preview endpoint which returns client-related data
+        // Or we can try querying prospects for client info
+        // Best approach: call the stats endpoint which has client data embedded,
+        // or just use a simple fetch to the generic prompt preview
+        const res = await fetch('/api/clients/' + clientId + '/prompt/preview');
+        const data = await res.json();
+
+        // We also need the raw client — get it from supabase via our endpoint
+        // Let's use a separate request to load basic info
+        const infoRes = await fetch('/api/clients/' + clientId + '/info');
+        if (infoRes.ok) {
+          clientData = await infoRes.json();
+          populateClientInfo(clientData);
+        }
+      } catch (err) {
+        console.error('Error loading client info:', err);
+      }
+    }
+
+    function populateClientInfo(client) {
+      document.getElementById('headerTitle').textContent = (client.agent_name || 'Agent') + ' Dashboard';
+      document.getElementById('agentTitle').textContent = (client.agent_name || 'Agent') + ' Dashboard';
+      document.getElementById('businessName').textContent = client.business_name || '';
+      document.getElementById('agentName').textContent = client.agent_name || '--';
+      document.getElementById('agentRole').textContent = 'AI Closer at ' + (client.business_name || '--');
+      document.getElementById('agentPersonality').textContent = client.agent_personality || '--';
+      document.getElementById('retellId').textContent = client.retell_agent_id || 'Not configured';
+      document.getElementById('vapiId').textContent = client.vapi_agent_id || 'Not configured';
+      document.getElementById('apiKeyDisplay').textContent = client.api_key ? client.api_key.slice(0, 8) + '...' : 'Not set';
+      document.getElementById('webhookUrl').textContent = (client.base_url || window.location.origin) + '/webhooks/retell';
+
+      // Video mode UI
+      updateVideoModeUI(client.video_mode || 'voice_only');
+      if (client.tavus_replica_id) {
+        document.getElementById('replicaStatus').textContent = 'Ready';
+        document.getElementById('replicaStatus').style.color = 'var(--green)';
+      }
+      if (client.tavus_persona_id) {
+        document.getElementById('personaStatus').textContent = 'Ready';
+        document.getElementById('personaStatus').style.color = 'var(--green)';
+      }
+
+      document.title = (client.agent_name || 'Dashboard') + ' — AI Closer Platform';
+
+      // Capabilities
+      const caps = document.getElementById('agentCapabilities');
+      caps.innerHTML = '';
+      const capabilities = [
+        { name: 'Closing', active: client.closing_enabled },
+        { name: 'Booking', active: client.booking_enabled },
+        { name: 'CRM', active: client.crm_enabled },
+        { name: 'Phone (Retell)', active: !!client.retell_agent_id },
+        { name: 'Phone (Vapi)', active: !!client.vapi_agent_id },
+        { name: 'Video (Tavus)', active: !!client.tavus_persona_id },
+      ];
+      capabilities.forEach(cap => {
+        const tag = document.createElement('span');
+        tag.className = 'capability-tag' + (cap.active ? ' active' : '');
+        tag.textContent = cap.name;
+        caps.appendChild(tag);
+      });
+    }
+
+    function renderStats(stats) {
+      document.getElementById('statCalls').textContent = stats.total_calls || 0;
+      document.getElementById('statDeals').textContent = stats.closed_deals || 0;
+
+      const riskEl = document.getElementById('statRisk');
+      const avgRisk = stats.avg_detection_risk != null ? parseFloat(stats.avg_detection_risk).toFixed(1) : '--';
+      riskEl.textContent = avgRisk;
+      if (avgRisk !== '--') {
+        const risk = parseFloat(avgRisk);
+        if (risk <= 3) riskEl.style.color = 'var(--green)';
+        else if (risk <= 6) riskEl.style.color = 'var(--amber)';
+        else riskEl.style.color = 'var(--red)';
+      }
+
+      const pipeline = stats.total_pipeline_value || 0;
+      document.getElementById('statPipeline').textContent = '$' + Number(pipeline).toLocaleString();
+    }
+
+    function renderCalls(calls) {
+      const tbody = document.getElementById('callsTableBody');
+      const list = calls.calls || calls;
+
+      if (!Array.isArray(list) || list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted" style="padding:2rem;">No calls yet</td></tr>';
+        document.getElementById('callsPagination').classList.add('hidden');
+        document.getElementById('callsCount').textContent = '';
+        return;
+      }
+
+      document.getElementById('callsCount').textContent = (calls.total || list.length) + ' total';
+
+      tbody.innerHTML = list.map(call => {
+        const riskClass = getRiskClass(call.detection_risk_score);
+        const duration = call.duration_seconds ? formatDuration(call.duration_seconds) : '--';
+        const date = call.created_at ? new Date(call.created_at).toLocaleDateString() : '--';
+        const summary = call.call_summary ? truncate(call.call_summary, 60) : '--';
+
+        return '<tr style="cursor:pointer;" onclick="viewCall(\'' + call.id + '\')">' +
+          '<td>' + escapeHtml(call.prospect_name || 'Unknown') + '</td>' +
+          '<td>' + getCallTypeIcon(call.call_type, call.video_mode) + ' <span class="badge badge-muted">' + escapeHtml(call.call_type || 'phone') + '</span></td>' +
+          '<td>' + duration + '</td>' +
+          '<td>' + escapeHtml(call.outcome || call.status || '--') + '</td>' +
+          '<td><span class="risk-score ' + riskClass + '">' + (call.detection_risk_score != null ? call.detection_risk_score : '--') + '</span></td>' +
+          '<td class="truncate" style="max-width:200px;">' + escapeHtml(summary) + '</td>' +
+          '<td class="text-muted">' + date + '</td>' +
+          '</tr>';
+      }).join('');
+
+      // Pagination
+      if (calls.total && calls.total > pageLimit) {
+        document.getElementById('callsPagination').classList.remove('hidden');
+        const totalPages = Math.ceil(calls.total / pageLimit);
+        document.getElementById('callsPageInfo').textContent = 'Page ' + currentPage + ' of ' + totalPages;
+        document.getElementById('callsPrev').disabled = currentPage <= 1;
+        document.getElementById('callsNext').disabled = currentPage >= totalPages;
+      } else {
+        document.getElementById('callsPagination').classList.add('hidden');
+      }
+    }
+
+    function renderProspects(prospects) {
+      const tbody = document.getElementById('prospectsTableBody');
+      const list = Array.isArray(prospects) ? prospects : (prospects.prospects || []);
+
+      if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted" style="padding:2rem;">No prospects yet</td></tr>';
+        document.getElementById('prospectsCount').textContent = '';
+        return;
+      }
+
+      document.getElementById('prospectsCount').textContent = list.length + ' total';
+
+      tbody.innerHTML = list.map(p => {
+        const lastContact = p.last_contact ? new Date(p.last_contact).toLocaleDateString() : '--';
+        const stage = p.funnel_stage || 'lead';
+        const stageClass = stage === 'closed_won' ? 'badge-green' : stage === 'closed_lost' ? 'badge-red' : 'badge-purple';
+
+        return '<tr style="cursor:pointer;" onclick="viewProspect(\'' + p.id + '\')">' +
+          '<td>' + escapeHtml(p.name || 'Unknown') + '</td>' +
+          '<td>' + escapeHtml(p.business_name || '--') + '</td>' +
+          '<td><span class="badge ' + stageClass + '">' + escapeHtml(stage) + '</span></td>' +
+          '<td>' + (p.call_count || 0) + '</td>' +
+          '<td>' + (p.closed_value ? '$' + Number(p.closed_value).toLocaleString() : '--') + '</td>' +
+          '<td class="text-muted">' + lastContact + '</td>' +
+          '<td class="truncate" style="max-width:150px;">' + escapeHtml(p.next_action || '--') + '</td>' +
+          '</tr>';
+      }).join('');
+    }
+
+    // --- Pagination ---
+    async function changePage(delta) {
+      currentPage += delta;
+      if (currentPage < 1) currentPage = 1;
+      try {
+        const res = await fetch('/api/clients/' + clientId + '/calls?page=' + currentPage + '&limit=' + pageLimit);
+        const data = await res.json();
+        renderCalls(data);
+      } catch (err) {
+        console.error('Pagination error:', err);
+      }
+    }
+
+    // --- Prompt Preview ---
+    let promptLoaded = false;
+    async function togglePrompt() {
+      const body = document.getElementById('promptBody');
+      const arrow = document.getElementById('promptArrow');
+      const header = arrow.closest('.collapsible-header');
+
+      if (body.classList.contains('open')) {
+        body.classList.remove('open');
+        header.classList.remove('open');
+      } else {
+        body.classList.add('open');
+        header.classList.add('open');
+
+        if (!promptLoaded) {
+          try {
+            const res = await fetch('/api/clients/' + clientId + '/prompt/preview');
+            const data = await res.json();
+            document.getElementById('promptLoading').classList.add('hidden');
+            const pre = document.getElementById('promptContent');
+            pre.textContent = data.prompt || 'No prompt generated yet.';
+            pre.classList.remove('hidden');
+            promptLoaded = true;
+          } catch (err) {
+            document.getElementById('promptLoading').innerHTML = '<span class="text-red">Failed to load prompt.</span>';
+          }
+        }
+      }
+    }
+
+    // --- Test Call Modal ---
+    function openTestCallModal() {
+      document.getElementById('testCallModal').classList.add('active');
+      document.getElementById('testCallResult').classList.add('hidden');
+      document.getElementById('testCallError').classList.add('hidden');
+      document.getElementById('testPhone').value = '';
+    }
+
+    function closeTestCallModal() {
+      document.getElementById('testCallModal').classList.remove('active');
+    }
+
+    async function runTestCall() {
+      const phone = document.getElementById('testPhone').value.trim();
+      if (!phone) {
+        document.getElementById('testCallError').textContent = 'Please enter a phone number.';
+        document.getElementById('testCallError').classList.remove('hidden');
+        return;
+      }
+
+      const btn = document.getElementById('testCallBtn');
+      btn.disabled = true;
+      btn.textContent = 'Running...';
+      document.getElementById('testCallResult').classList.add('hidden');
+      document.getElementById('testCallError').classList.add('hidden');
+
+      try {
+        const res = await fetch('/api/calls/test', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ clientId: clientId, phoneNumber: phone }),
+        });
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.error || 'Test call failed');
+
+        document.getElementById('testCallResult').textContent =
+          'Test call created. Prospect: ' + (data.prospect?.name || 'Test') + ', Call ID: ' + (data.call?.id || '--');
+        document.getElementById('testCallResult').classList.remove('hidden');
+      } catch (err) {
+        document.getElementById('testCallError').textContent = err.message;
+        document.getElementById('testCallError').classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Run Test';
+      }
+    }
+
+    // --- Copy helpers ---
+    function copyWebhookUrl() {
+      const url = (clientData?.base_url || window.location.origin) + '/webhooks/retell';
+      copyToClipboard(url, 'Webhook URL copied');
+    }
+
+    function copyApiKey() {
+      if (clientData?.api_key) {
+        copyToClipboard(clientData.api_key, 'API key copied');
+      } else {
+        showToast('No API key set', 'error');
+      }
+    }
+
+    function copyToClipboard(text, message) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(message, 'success');
+      }).catch(() => {
+        showToast('Failed to copy', 'error');
+      });
+    }
+
+    // --- Navigation ---
+    function viewCall(callId) {
+      window.location.href = '/dashboard/' + clientId + '/calls/' + callId;
+    }
+
+    function viewProspect(prospectId) {
+      window.location.href = '/dashboard/' + clientId + '/prospect/' + prospectId;
+    }
+
+    // --- Utilities ---
+    function getCallTypeIcon(callType, videoMode) {
+      if (videoMode === 'video_recall') return '<span title="Video Recall">&#129302;</span>';
+      if (videoMode === 'video_avatar' || callType === 'video_avatar') return '<span title="Video Avatar">&#128249;</span>';
+      if (callType === 'google_meet') return '<span title="Google Meet">&#127908;</span>';
+      return '<span title="Phone">&#127897;&#65039;</span>';
+    }
+
+    function getRiskClass(score) {
+      if (score == null) return '';
+      if (score <= 3) return 'risk-low';
+      if (score <= 6) return 'risk-medium';
+      return 'risk-high';
+    }
+
+    function formatDuration(seconds) {
+      if (!seconds) return '--';
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      return m + ':' + String(s).padStart(2, '0');
+    }
+
+    function truncate(str, len) {
+      if (!str) return '';
+      return str.length > len ? str.slice(0, len) + '...' : str;
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function showToast(message, type) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.className = 'toast visible ' + (type || '');
+      setTimeout(() => { toast.className = 'toast'; }, 3000);
+    }
+
+    // --- Video Mode ---
+    function updateVideoModeUI(mode) {
+      document.querySelectorAll('.video-mode-btn').forEach(b => b.classList.remove('btn-primary'));
+      const modeMap = { voice_only: 'modeVoiceOnly', video_avatar: 'modeVideoAvatar', video_recall: 'modeVideoRecall', video_recall_v2: 'modeHyperReal' };
+      const btn = document.getElementById(modeMap[mode]);
+      if (btn) btn.classList.add('btn-primary');
+
+      const tavusSetup = document.getElementById('tavusSetup');
+      const videoAction = document.getElementById('videoCallAction');
+      const hyperRealSetup = document.getElementById('hyperRealSetup');
+
+      tavusSetup.classList.add('hidden');
+      videoAction.classList.add('hidden');
+      hyperRealSetup.classList.add('hidden');
+
+      if (mode === 'video_recall_v2') {
+        hyperRealSetup.classList.remove('hidden');
+        tavusSetup.classList.remove('hidden');
+        updateRenderModeUI(clientData?.render_mode || 'phoenix_4');
+      } else if (mode !== 'voice_only') {
+        tavusSetup.classList.remove('hidden');
+        if (clientData?.tavus_replica_id && clientData?.tavus_persona_id) {
+          videoAction.classList.remove('hidden');
+        }
+      }
+    }
+
+    function updateRenderModeUI(mode) {
+      document.querySelectorAll('.render-mode-btn').forEach(b => b.classList.remove('btn-primary'));
+      const btn = document.getElementById(mode === 'anam_cara3' ? 'renderAnam' : 'renderPhoenix');
+      if (btn) btn.classList.add('btn-primary');
+      const anamSetup = document.getElementById('anamSetup');
+      if (mode === 'anam_cara3') {
+        anamSetup.classList.remove('hidden');
+        if (clientData?.anam_persona_id) {
+          document.getElementById('anamPersonaStatus').textContent = 'Ready';
+          document.getElementById('anamPersonaStatus').style.color = 'var(--green)';
+        }
+      } else {
+        anamSetup.classList.add('hidden');
+      }
+    }
+
+    async function setRenderMode(mode) {
+      try {
+        const res = await fetch('/clients/' + clientId + '/render-mode', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ render_mode: mode }),
+        });
+        if (!res.ok) throw new Error((await res.json()).error);
+        if (clientData) clientData.render_mode = mode;
+        updateRenderModeUI(mode);
+        showToast('Render mode set to ' + mode.replace(/_/g, ' '), 'success');
+      } catch (err) {
+        showToast('Failed: ' + err.message, 'error');
+      }
+    }
+
+    async function createAnamPersona() {
+      const status = document.getElementById('anamPersonaStatus');
+      status.textContent = 'Creating...';
+      status.style.color = 'var(--amber)';
+      try {
+        const res = await fetch('/clients/' + clientId + '/anam/persona', { method: 'POST' });
+        if (!res.ok) throw new Error((await res.json()).error);
+        status.textContent = 'Ready';
+        status.style.color = 'var(--green)';
+        showToast('Anam persona created', 'success');
+        loadClientInfo();
+      } catch (err) {
+        status.textContent = 'Failed';
+        status.style.color = 'var(--red)';
+        showToast('Anam persona failed: ' + err.message, 'error');
+      }
+    }
+
+    async function setVideoMode(mode) {
+      try {
+        const res = await fetch('/clients/' + clientId + '/video-mode', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ video_mode: mode }),
+        });
+        if (!res.ok) throw new Error((await res.json()).error);
+        if (clientData) clientData.video_mode = mode;
+        updateVideoModeUI(mode);
+        showToast('Video mode set to ' + mode.replace(/_/g, ' '), 'success');
+      } catch (err) {
+        showToast('Failed: ' + err.message, 'error');
+      }
+    }
+
+    async function uploadReplica(input) {
+      if (!input.files[0]) return;
+      const status = document.getElementById('replicaStatus');
+      status.textContent = 'Uploading...';
+      status.style.color = 'var(--amber)';
+      try {
+        const form = new FormData();
+        form.append('video', input.files[0]);
+        const res = await fetch('/clients/' + clientId + '/tavus/replica', { method: 'POST', body: form });
+        if (!res.ok) throw new Error((await res.json()).error);
+        const data = await res.json();
+        status.textContent = data.ready ? 'Ready' : 'Processing...';
+        status.style.color = data.ready ? 'var(--green)' : 'var(--amber)';
+        showToast('Replica uploaded', 'success');
+      } catch (err) {
+        status.textContent = 'Upload failed';
+        status.style.color = 'var(--red)';
+        showToast('Replica upload failed: ' + err.message, 'error');
+      }
+    }
+
+    async function createPersona() {
+      const status = document.getElementById('personaStatus');
+      status.textContent = 'Creating...';
+      status.style.color = 'var(--amber)';
+      try {
+        const res = await fetch('/clients/' + clientId + '/tavus/persona', { method: 'POST' });
+        if (!res.ok) throw new Error((await res.json()).error);
+        status.textContent = 'Ready';
+        status.style.color = 'var(--green)';
+        showToast('Persona created', 'success');
+        // Refresh client data
+        loadClientInfo();
+      } catch (err) {
+        status.textContent = 'Failed';
+        status.style.color = 'var(--red)';
+        showToast('Persona creation failed: ' + err.message, 'error');
+      }
+    }
+
+    function openVideoCallModal() {
+      showToast('Creating video call link...', 'success');
+      // This would normally open a modal to select prospect — simplified for now
+    }
+
+    // --- Real Call Modal ---
+    function openRealCallModal() {
+      document.getElementById('realCallModal').classList.add('active');
+      document.getElementById('realCallStatus').style.display = 'none';
+      const saved = localStorage.getItem('ai_closer_phone') || '';
+      document.getElementById('realPhone').value = saved;
+    }
+
+    function closeRealCallModal() {
+      document.getElementById('realCallModal').classList.remove('active');
+    }
+
+    async function makeRealCall() {
+      const phone = document.getElementById('realPhone').value.trim();
+      if (!phone) {
+        document.getElementById('realCallStatus').textContent = 'Please enter a phone number.';
+        document.getElementById('realCallStatus').style.display = 'block';
+        document.getElementById('realCallStatus').style.borderColor = 'var(--red)';
+        document.getElementById('realCallStatus').style.color = 'var(--red)';
+        return;
+      }
+
+      localStorage.setItem('ai_closer_phone', phone);
+
+      const btn = document.getElementById('realCallBtn');
+      btn.disabled = true;
+      btn.textContent = 'Calling...';
+
+      const statusEl = document.getElementById('realCallStatus');
+      statusEl.style.display = 'block';
+      statusEl.style.borderColor = 'var(--accent)';
+      statusEl.style.color = 'var(--accent)';
+      statusEl.textContent = 'Initiating call to ' + phone + '...';
+
+      try {
+        const res = await fetch('/calls/quick', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            client_id: clientId,
+            phone_number: phone,
+            prospect_name: 'Test Call',
+          }),
+        });
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || data.message || 'Call failed');
+
+        statusEl.style.borderColor = 'var(--green)';
+        statusEl.style.color = 'var(--green)';
+        statusEl.textContent = 'Call initiated! Call ID: ' + (data.call_id || data.retell_call_id || '--');
+
+        showToast('Call initiated!', 'success');
+      } catch (err) {
+        statusEl.style.borderColor = 'var(--red)';
+        statusEl.style.color = 'var(--red)';
+        statusEl.textContent = err.message;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '\u{1F4DE} Call Now';
+      }
+    }
+
+    // --- Start ---
+    init();
+  </script>
+</body>
+</html>

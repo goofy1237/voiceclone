@@ -1,0 +1,6 @@
+pipecat-ai[deepgram,anthropic,websocket]
+python-dotenv
+httpx
+fastapi
+uvicorn[standard]
+onnxruntime

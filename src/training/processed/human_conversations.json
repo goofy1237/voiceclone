@@ -1,0 +1,4002 @@
+[
+  {
+    "a": "Hi!",
+    "b": "What is your favorite holiday?"
+  },
+  {
+    "a": "What is your favorite holiday?",
+    "b": "one where I get to meet lots of different people."
+  },
+  {
+    "a": "one where I get to meet lots of different people.",
+    "b": "What was the most number of people you have ever met during a holiday?"
+  },
+  {
+    "a": "What was the most number of people you have ever met during a holiday?",
+    "b": "Hard to keep a count. Maybe 25."
+  },
+  {
+    "a": "Hard to keep a count. Maybe 25.",
+    "b": "Which holiday was that?"
+  },
+  {
+    "a": "Which holiday was that?",
+    "b": "I think it was Australia"
+  },
+  {
+    "a": "I think it was Australia",
+    "b": "Do you still talk to the people you met?"
+  },
+  {
+    "a": "Do you still talk to the people you met?",
+    "b": "Not really. The interactions are usually short-lived but it's fascinating to learn where people are coming from and what matters to them"
+  },
+  {
+    "a": "Not really. The interactions are usually short-lived but it's fascinating to learn where people are coming from and what matters to them",
+    "b": "Yea, me too. I feel like God often puts strangers in front of you, and gives you an opportunity to connect with them in that moment in deeply meaningful ways. Do you ever feel like you know things about strangers without them telling you?"
+  },
+  {
+    "a": "Yea, me too. I feel like God often puts strangers in front of you, and gives you an opportunity to connect with them in that moment in deeply meaningful ways. Do you ever feel like you know things about strangers without them telling you?",
+    "b": "what do you mean?"
+  },
+  {
+    "a": "Any plans for the weekend?",
+    "b": "my friends are gonna visit me this weekend. we might go hiking!"
+  },
+  {
+    "a": "my friends are gonna visit me this weekend. we might go hiking!",
+    "b": "That's great! How's the weather over the weekend? I hope its warm."
+  },
+  {
+    "a": "That's great! How's the weather over the weekend? I hope its warm.",
+    "b": "Should be very sunny! you?"
+  },
+  {
+    "a": "Should be very sunny! you?",
+    "b": "Cool! very depressing plans ... stay home and work 😞 I have a project deadline very close."
+  },
+  {
+    "a": "Cool! very depressing plans ... stay home and work 😞 I have a project deadline very close.",
+    "b": "😐 hope you get your work done very soon! a bug free weekend!"
+  },
+  {
+    "a": "😐 hope you get your work done very soon! a bug free weekend!",
+    "b": "Right, very anxious! where do you plan to go for a hike?"
+  },
+  {
+    "a": "Right, very anxious! where do you plan to go for a hike?",
+    "b": "I am going to Diablo!"
+  },
+  {
+    "a": "I am going to Diablo!",
+    "b": "Nice, where is that place? I haven't been there"
+  },
+  {
+    "a": "Nice, where is that place? I haven't been there",
+    "b": "hours drive from here. still in bay area"
+  },
+  {
+    "a": "hours drive from here. still in bay area",
+    "b": "That's cool! How long is the hike?"
+  },
+  {
+    "a": "That's cool! How long is the hike?",
+    "b": "Actually no idea, but it will take the entire day for that."
+  },
+  {
+    "a": "Actually no idea, but it will take the entire day for that.",
+    "b": "nice! sounds fun!"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hey there! What's up???"
+  },
+  {
+    "a": "Hey there! What's up???",
+    "b": "Nothing much, how you doin?"
+  },
+  {
+    "a": "Nothing much, how you doin?",
+    "b": "I'm in New York this week for Thanksgiving. I'm squatting in the office today and I caught up with an old friend of mine :D"
+  },
+  {
+    "a": "I'm in New York this week for Thanksgiving. I'm squatting in the office today and I caught up with an old friend of mine :D",
+    "b": "Oh wow! Sounds like fun! When was the last time you had seen this friend?"
+  },
+  {
+    "a": "Oh wow! Sounds like fun! When was the last time you had seen this friend?",
+    "b": "The last time in New York, back in June."
+  },
+  {
+    "a": "The last time in New York, back in June.",
+    "b": "Ohh okay. I was going to say if it had been a long time maybe it'd be awkward..."
+  },
+  {
+    "a": "Ohh okay. I was going to say if it had been a long time maybe it'd be awkward...",
+    "b": "Haha, I guess if it's been a very long time there's almost too many life events to catch up on.. especially recently"
+  },
+  {
+    "a": "Haha, I guess if it's been a very long time there's almost too many life events to catch up on.. especially recently",
+    "b": "Oh really? Has a lot changed in your life recently?"
+  },
+  {
+    "a": "Oh really? Has a lot changed in your life recently?",
+    "b": "Haha it's probably too much to go into at the moment. Let's just say life is an exciting experience. How about you?"
+  },
+  {
+    "a": "Haha it's probably too much to go into at the moment. Let's just say life is an exciting experience. How about you?",
+    "b": "Ahhh sounds exciting indeed! My life is pretty bland. I like routine, but sometimes I wish I had more time for adventures!"
+  },
+  {
+    "a": "Ahhh sounds exciting indeed! My life is pretty bland. I like routine, but sometimes I wish I had more time for adventures!",
+    "b": "What kinds of adventures?? Any ones that I would be able to join you on?"
+  },
+  {
+    "a": "What kinds of adventures?? Any ones that I would be able to join you on?",
+    "b": "Hmmmm. I really want to try bull riding. Do you have any interest in that?"
+  },
+  {
+    "a": "Hmmmm. I really want to try bull riding. Do you have any interest in that?",
+    "b": "I'd love to try! Can we schedule something for next week?"
+  },
+  {
+    "a": "I'd love to try! Can we schedule something for next week?",
+    "b": "Sure! What does your Saturday look like?"
+  },
+  {
+    "a": "Sure! What does your Saturday look like?",
+    "b": "Saturday looks pretty good, shall we shoot for something in the morning?"
+  },
+  {
+    "a": "hey",
+    "b": "is it raining pretty bad today?"
+  },
+  {
+    "a": "is it raining pretty bad today?",
+    "b": "yeah, can walk too far to see all the foodtruck options"
+  },
+  {
+    "a": "yeah, can walk too far to see all the foodtruck options",
+    "b": "surprising that the rain started early this year... I don't like them too much. They make days gloomy"
+  },
+  {
+    "a": "surprising that the rain started early this year... I don't like them too much. They make days gloomy",
+    "b": "yeah but I think it's good to have some rainy days in bay area, it's pretty dry here 😛"
+  },
+  {
+    "a": "yeah but I think it's good to have some rainy days in bay area, it's pretty dry here 😛",
+    "b": "Where I grew up, we had lots of water trouble too..."
+  },
+  {
+    "a": "Where I grew up, we had lots of water trouble too...",
+    "b": "yeah like wise, I've seen a pretty bad snowstorm when I was at my undergrad school, all flights canceled and traffics went down"
+  },
+  {
+    "a": "yeah like wise, I've seen a pretty bad snowstorm when I was at my undergrad school, all flights canceled and traffics went down",
+    "b": "Haha... I don't think I can survive in that weather ever. Just the rains at 50 degrees make me want to sit in heated rroms"
+  },
+  {
+    "a": "Haha... I don't think I can survive in that weather ever. Just the rains at 50 degrees make me want to sit in heated rroms",
+    "b": "yeah how do you like it in bay area though? I think we need more rain here"
+  },
+  {
+    "a": "yeah how do you like it in bay area though? I think we need more rain here",
+    "b": "people say there is drought here... but we have 24 hours water supply here ... lol... never seen that in a drought ridden area"
+  },
+  {
+    "a": "people say there is drought here... but we have 24 hours water supply here ... lol... never seen that in a drought ridden area",
+    "b": "it is pretty dry in the mountains I believe, that's what causes fire"
+  },
+  {
+    "a": "it is pretty dry in the mountains I believe, that's what causes fire",
+    "b": "hmm.... okay. Climate change talk this morning was pretty darn interesting. did you see it?"
+  },
+  {
+    "a": "hmm.... okay. Climate change talk this morning was pretty darn interesting. did you see it?",
+    "b": "nope, what does it say?"
+  },
+  {
+    "a": "nope, what does it say?",
+    "b": "they were talking about how AI is helping climate change. Nice use of upcoming tech."
+  },
+  {
+    "a": "Helloooooo!",
+    "b": "How are you? How is your day?"
+  },
+  {
+    "a": "How are you? How is your day?",
+    "b": "Good. Don't have much to do today, feels good. How are you?"
+  },
+  {
+    "a": "Good. Don't have much to do today, feels good. How are you?",
+    "b": "I'm dressed very wel today so I feel good! I've been reading a lot about the psychology of positive outlook."
+  },
+  {
+    "a": "I'm dressed very wel today so I feel good! I've been reading a lot about the psychology of positive outlook.",
+    "b": "So what's your outlook? Something blue?"
+  },
+  {
+    "a": "So what's your outlook? Something blue?",
+    "b": "Yes. Blue is a tranquil colour. It's a good metaphor. Do you have good advice for positivity?"
+  },
+  {
+    "a": "Yes. Blue is a tranquil colour. It's a good metaphor. Do you have good advice for positivity?",
+    "b": "You should drink more water, do some push up, and sleep early."
+  },
+  {
+    "a": "Hi!",
+    "b": "Hey, how are you?"
+  },
+  {
+    "a": "Hey, how are you?",
+    "b": "I'm a bit sad. I miss my cat."
+  },
+  {
+    "a": "I'm a bit sad. I miss my cat.",
+    "b": "Oh no… Have you sent out the missing cat posters? Hope your cat is alright!"
+  },
+  {
+    "a": "Oh no… Have you sent out the missing cat posters? Hope your cat is alright!",
+    "b": "Posters is a great idea. So far I've just tried banging her catfood dish and shouting her name. Anyway, how is your day going so far?"
+  },
+  {
+    "a": "Posters is a great idea. So far I've just tried banging her catfood dish and shouting her name. Anyway, how is your day going so far?",
+    "b": "Yea, I know they love the plastic bag sound all the time. I am good, nothing special though."
+  },
+  {
+    "a": "Yea, I know they love the plastic bag sound all the time. I am good, nothing special though.",
+    "b": "If you could go anywhere on vacation, where would you go?"
+  },
+  {
+    "a": "If you could go anywhere on vacation, where would you go?",
+    "b": "I like rainforest, but I know it requires extensive training beforehand."
+  },
+  {
+    "a": "I like rainforest, but I know it requires extensive training beforehand.",
+    "b": "I heard there are rainforests in southeast Asia where you can zipline from tree to tree."
+  },
+  {
+    "a": "I heard there are rainforests in southeast Asia where you can zipline from tree to tree.",
+    "b": "I am afraid I will be scared of doing this :)"
+  },
+  {
+    "a": "I am afraid I will be scared of doing this :)",
+    "b": "I won't lie, it sounds scary. I'm scared right now just thinking about it."
+  },
+  {
+    "a": "I won't lie, it sounds scary. I'm scared right now just thinking about it.",
+    "b": "I don't know if there is any medication for acrophobia. I want to take plenty of it if I really have to do it."
+  },
+  {
+    "a": "I don't know if there is any medication for acrophobia. I want to take plenty of it if I really have to do it.",
+    "b": "If there isn't one, you should invent it, and then make millions"
+  },
+  {
+    "a": "If there isn't one, you should invent it, and then make millions",
+    "b": "That's a great idea! Maybe alcohol is such a thing."
+  },
+  {
+    "a": "That's a great idea! Maybe alcohol is such a thing.",
+    "b": "Ha! Don't drink and zipline, mate!"
+  },
+  {
+    "a": "Ha! Don't drink and zipline, mate!",
+    "b": "Oops. I won't do it again. Ha"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hey sup"
+  },
+  {
+    "a": "Hey sup",
+    "b": "not much. any plans this weekend?"
+  },
+  {
+    "a": "not much. any plans this weekend?",
+    "b": "I'm going to try that thing where you hang from a wire as you go down. do you know what is it called?"
+  },
+  {
+    "a": "ziplining?",
+    "b": "that's the one! have you ever tried it?"
+  },
+  {
+    "a": "that's the one! have you ever tried it?",
+    "b": "i have a couple years ago. it's quite a unique experience"
+  },
+  {
+    "a": "i have a couple years ago. it's quite a unique experience",
+    "b": "where did you do it?"
+  },
+  {
+    "a": "where did you do it?",
+    "b": "i forgot where it was, it wasn't local i don't think though"
+  },
+  {
+    "a": "i forgot where it was, it wasn't local i don't think though",
+    "b": "no worries. what's the most exciting thing you ever done?"
+  },
+  {
+    "a": "no worries. what's the most exciting thing you ever done?",
+    "b": "that's a hard question and i'm tired so i'm going to go. see you"
+  },
+  {
+    "a": "that's a hard question and i'm tired so i'm going to go. see you",
+    "b": "sure. are you just going home now?"
+  },
+  {
+    "a": "sure. are you just going home now?",
+    "b": "no, i'm going to get a massage first"
+  },
+  {
+    "a": "no, i'm going to get a massage first",
+    "b": "nice. what type?"
+  },
+  {
+    "a": "nice. what type?",
+    "b": "traditional kind"
+  },
+  {
+    "a": "traditional kind",
+    "b": "yeah I want to get one too soon"
+  },
+  {
+    "a": "yeah I want to get one too soon",
+    "b": "you should! it's relaxing after a long day. talk to you later!"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hello, have you seen any good movies lately?"
+  },
+  {
+    "a": "Hello, have you seen any good movies lately?",
+    "b": "I watched a few lately, but nothing is as good as Avatar. what's your favorite?"
+  },
+  {
+    "a": "I watched a few lately, but nothing is as good as Avatar. what's your favorite?",
+    "b": "I have never seen Avatar, what is it about? I really enjoy the Avenger movies"
+  },
+  {
+    "a": "I have never seen Avatar, what is it about? I really enjoy the Avenger movies",
+    "b": "it's a science-fiction movie with beautiful landscape of an imaginary nature with non-human creatures. people figured out a way to join that nature through Avatar transformation. the movie ends with a meaningful story of how human behaviors, e.g., cutting trees, have affected nature"
+  },
+  {
+    "a": "it's a science-fiction movie with beautiful landscape of an imaginary nature with non-human creatures. people figured out a way to join that nature through Avatar transformation. the movie ends with a meaningful story of how human behaviors, e.g., cutting trees, have affected nature",
+    "b": "That sounds really cool! I think that movie did really well when it was in the box office so it must be good!"
+  },
+  {
+    "a": "That sounds really cool! I think that movie did really well when it was in the box office so it must be good!",
+    "b": "yea. what else do you like to do beside movies?"
+  },
+  {
+    "a": "yea. what else do you like to do beside movies?",
+    "b": "I enjoy baking cookies. I am on a quest to bake the best chocolate chip cookie 🙂 What about you?"
+  },
+  {
+    "a": "I enjoy baking cookies. I am on a quest to bake the best chocolate chip cookie 🙂 What about you?",
+    "b": "I enjoy eating 🙂"
+  },
+  {
+    "a": "I enjoy eating 🙂",
+    "b": "so definitely would like to try your best chocolate cookie"
+  },
+  {
+    "a": "so definitely would like to try your best chocolate cookie",
+    "b": "I will have to bake some soon and let you know. What types of food do you like to eat?"
+  },
+  {
+    "a": "I will have to bake some soon and let you know. What types of food do you like to eat?",
+    "b": "thanks! I generally love noodle soups like Pho or Ramen :)"
+  },
+  {
+    "a": "thanks! I generally love noodle soups like Pho or Ramen :)",
+    "b": "Noodle soup is delicious! Do you make homemade noodle soup or do you prefer to go out?"
+  },
+  {
+    "a": "Noodle soup is delicious! Do you make homemade noodle soup or do you prefer to go out?",
+    "b": "I prefer to go out. I'm not a good cook haha"
+  },
+  {
+    "a": "I prefer to go out. I'm not a good cook haha",
+    "b": "Same! Even though I bake, I cannot cook"
+  },
+  {
+    "a": "Same! Even though I bake, I cannot cook",
+    "b": "seems like we share a thing in common, yay!"
+  },
+  {
+    "a": "Hi!",
+    "b": "Good afternoon!"
+  },
+  {
+    "a": "Good afternoon!",
+    "b": "How has your week been?"
+  },
+  {
+    "a": "How has your week been?",
+    "b": "So far so good. It is holiday season. So just chilling"
+  },
+  {
+    "a": "So far so good. It is holiday season. So just chilling",
+    "b": "I think I'm getting sick with a cold 😞 So you should chill on my behalf too cause I'm out the game for all of December."
+  },
+  {
+    "a": "I think I'm getting sick with a cold 😞 So you should chill on my behalf too cause I'm out the game for all of December.",
+    "b": "lol Sorry to hear that. Are you planning anything fun for December?"
+  },
+  {
+    "a": "lol Sorry to hear that. Are you planning anything fun for December?",
+    "b": "Nothing exciting. I'll be posted up at home for the most part. I did a lot of travelling this year so my budget would have stopped me even if I wasn't sick."
+  },
+  {
+    "a": "Do you have big plans?",
+    "b": "Yes! I am going to Hawaii! This will be my first time visiting Hawaii. Really excited about it."
+  },
+  {
+    "a": "Yes! I am going to Hawaii! This will be my first time visiting Hawaii. Really excited about it.",
+    "b": "I love Hawaii. It's a good place to be. I like going there cause it's humid so I never have to put on lotion."
+  },
+  {
+    "a": "I love Hawaii. It's a good place to be. I like going there cause it's humid so I never have to put on lotion.",
+    "b": "lol this is the first time I heard from a boy who cares about humidity and lotion. I cannot agree more."
+  },
+  {
+    "a": "lol this is the first time I heard from a boy who cares about humidity and lotion. I cannot agree more.",
+    "b": "Brooooo!!! It's so important. When I got to California beaches I have to carry 3 litres of lotion for the whole day."
+  },
+  {
+    "a": "Hi!",
+    "b": "Oh hello. Long time no talk. How's the day going for yuo?"
+  },
+  {
+    "a": "Oh hello. Long time no talk. How's the day going for yuo?",
+    "b": "Very well, thanks for asking. How has your day been?"
+  },
+  {
+    "a": "Very well, thanks for asking. How has your day been?",
+    "b": "Getting better. I just recovered from a cold. I got wet in the rain last week. Are you planning anything for the holidays?"
+  },
+  {
+    "a": "Getting better. I just recovered from a cold. I got wet in the rain last week. Are you planning anything for the holidays?",
+    "b": "Glad to hear you're better. Sorry to hear you were sick. I was sick a couple of weeks ago with a bad cough. There's definitely a bug going around. Admit I just want to stay healthy for the holidays and plan to relax."
+  },
+  {
+    "a": "Glad to hear you're better. Sorry to hear you were sick. I was sick a couple of weeks ago with a bad cough. There's definitely a bug going around. Admit I just want to stay healthy for the holidays and plan to relax.",
+    "b": "Oh same here. I think relaxing at home should be counted among the best ways to enjoy the holidays."
+  },
+  {
+    "a": "Oh same here. I think relaxing at home should be counted among the best ways to enjoy the holidays.",
+    "b": "Definitely! I know a lot of folks travel for the holidays, but I'm happy to stay home myself!"
+  },
+  {
+    "a": "Definitely! I know a lot of folks travel for the holidays, but I'm happy to stay home myself!",
+    "b": "I'm getting there. Every year until last year, I tried to go somewhere for the Christmas / New Year, and then I got bored traveling. lol not sure if that means I'm getting old?"
+  },
+  {
+    "a": "I'm getting there. Every year until last year, I tried to go somewhere for the Christmas / New Year, and then I got bored traveling. lol not sure if that means I'm getting old?",
+    "b": "Me too. Now I have folks come visit me for the holidays! But that's also tiresome.."
+  },
+  {
+    "a": "Me too. Now I have folks come visit me for the holidays! But that's also tiresome..",
+    "b": "Are you doing any home decorating then?"
+  },
+  {
+    "a": "Are you doing any home decorating then?",
+    "b": "Yes! We set up an eco-friendly (i.e. fake) Christmas tree and put up some colorful LED lights which is very festive."
+  },
+  {
+    "a": "Yes! We set up an eco-friendly (i.e. fake) Christmas tree and put up some colorful LED lights which is very festive.",
+    "b": "I think I'm copying you. Me and my wife plan to decorate and Christmas tree too. We bought most of the decorative stuffs from the stores, but haven't yet to buy the tree."
+  },
+  {
+    "a": "I think I'm copying you. Me and my wife plan to decorate and Christmas tree too. We bought most of the decorative stuffs from the stores, but haven't yet to buy the tree.",
+    "b": "Buying a tree is a neat experience. I was torn between buying an artificial/eco-friendly/fake one vs. a real one that smells like fresh pine. In the end, we opted for the one that we can disassemble every year."
+  },
+  {
+    "a": "Buying a tree is a neat experience. I was torn between buying an artificial/eco-friendly/fake one vs. a real one that smells like fresh pine. In the end, we opted for the one that we can disassemble every year.",
+    "b": "I see. Artificial anything is better, from tree to intelligence, huh?"
+  },
+  {
+    "a": "I see. Artificial anything is better, from tree to intelligence, huh?",
+    "b": "Oh, very clever pun! I like it! Depends. I remember having real Christmas trees from childhood, but these days with climate change, I think not chopping down a tree just to decorate it and then throw it out in a month is the more responsible thing to do."
+  },
+  {
+    "a": "Oh, very clever pun! I like it! Depends. I remember having real Christmas trees from childhood, but these days with climate change, I think not chopping down a tree just to decorate it and then throw it out in a month is the more responsible thing to do.",
+    "b": "I see. It's probably also cheaper. I'll buy an artificial one too. Do you have any suggestions for the store?"
+  },
+  {
+    "a": "I see. It's probably also cheaper. I'll buy an artificial one too. Do you have any suggestions for the store?",
+    "b": "Admit my favorite store is Target, plus they often have good deals."
+  },
+  {
+    "a": "Admit my favorite store is Target, plus they often have good deals.",
+    "b": "Ah that's great. My wife also likes Target a lot. She even made a Target credit card because she comes to that store very often. Okay thanks for the suggestion. I'll check out Target."
+  },
+  {
+    "a": "Ah that's great. My wife also likes Target a lot. She even made a Target credit card because she comes to that store very often. Okay thanks for the suggestion. I'll check out Target.",
+    "b": "Great, I hope you find a nice tree."
+  },
+  {
+    "a": "Hey",
+    "b": "How's your day going?"
+  },
+  {
+    "a": "How's your day going?",
+    "b": "pretty good. yours?"
+  },
+  {
+    "a": "pretty good. yours?",
+    "b": "Ehh it's fine. I didn't do so well on that history test, actually.."
+  },
+  {
+    "a": "Ehh it's fine. I didn't do so well on that history test, actually..",
+    "b": "oh what happened?"
+  },
+  {
+    "a": "oh what happened?",
+    "b": "Apparently Christopher Columbus didn't fight in the Civil War :')"
+  },
+  {
+    "a": "Apparently Christopher Columbus didn't fight in the Civil War :')",
+    "b": "hahah wait for real?"
+  },
+  {
+    "a": "hahah wait for real?",
+    "b": "I know right! Are you taking History next semester?"
+  },
+  {
+    "a": "I know right! Are you taking History next semester?",
+    "b": "No I'm not in school anymore"
+  },
+  {
+    "a": "No I'm not in school anymore",
+    "b": "Oh I see. What do you do?"
+  },
+  {
+    "a": "Oh I see. What do you do?",
+    "b": "I train and compete in horse vaulting"
+  },
+  {
+    "a": "I train and compete in horse vaulting",
+    "b": "Oh wow. Were you born a horse, or were you turned into one?"
+  },
+  {
+    "a": "Oh wow. Were you born a horse, or were you turned into one?",
+    "b": "lol you're too funny"
+  },
+  {
+    "a": "lol you're too funny",
+    "b": "Just kidding. That sounds pretty cool! Is it your job?"
+  },
+  {
+    "a": "Just kidding. That sounds pretty cool! Is it your job?",
+    "b": "Yeah, but I part time work on a farm. Helping with a bit of everything"
+  },
+  {
+    "a": "Yeah, but I part time work on a farm. Helping with a bit of everything",
+    "b": "Wow, sounds very busy! Do you with money at those horse vaulting competitions?"
+  },
+  {
+    "a": "Wow, sounds very busy! Do you with money at those horse vaulting competitions?",
+    "b": "Yeah some. enough to get by"
+  },
+  {
+    "a": "Hello",
+    "b": "Do you have a favourite flower?"
+  },
+  {
+    "a": "Do you have a favourite flower?",
+    "b": "hmm, I haven't thought about that much, but i think lotus should be one of my favorites. Why do you ask?"
+  },
+  {
+    "a": "hmm, I haven't thought about that much, but i think lotus should be one of my favorites. Why do you ask?",
+    "b": "I'm working on a theory. Why does the lotus spring to mind?"
+  },
+  {
+    "a": "I'm working on a theory. Why does the lotus spring to mind?",
+    "b": "Nice! Lotus looks pretty cool and It has some delightful vibe. So what is this research about?"
+  },
+  {
+    "a": "Nice! Lotus looks pretty cool and It has some delightful vibe. So what is this research about?",
+    "b": "Oh, it's not research! Just a personal theory. I think that flower preferences are more revealing of personality than people appreciate."
+  },
+  {
+    "a": "Oh, it's not research! Just a personal theory. I think that flower preferences are more revealing of personality than people appreciate.",
+    "b": "Interesting! Whats your favorite flower?"
+  },
+  {
+    "a": "Interesting! Whats your favorite flower?",
+    "b": "The gerbera. It's like a cartoon flower. As if you drew \"flower\" with a crayon and then it came to life."
+  },
+  {
+    "a": "The gerbera. It's like a cartoon flower. As if you drew \"flower\" with a crayon and then it came to life.",
+    "b": "Nice, i would love know more about your theory. Like how you can deduce personality from flower preference."
+  },
+  {
+    "a": "Nice, i would love know more about your theory. Like how you can deduce personality from flower preference.",
+    "b": "Ok, step 1 is, you ask someone what their favourite flower is. Pretty much like what we just did. Does that make sense so far?"
+  },
+  {
+    "a": "yes",
+    "b": "Cool. Step 2: talk with the person some more, and ask them some more questions, and gradually develop a sense of what they're like, over the course of maybe two to five years. And voila"
+  },
+  {
+    "a": "Cool. Step 2: talk with the person some more, and ask them some more questions, and gradually develop a sense of what they're like, over the course of maybe two to five years. And voila",
+    "b": "Hehe, i think you should publish this someday :)"
+  },
+  {
+    "a": "Hehe, i think you should publish this someday :)",
+    "b": "Why thank you, that's a wonderful idea!"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hey how's it going"
+  },
+  {
+    "a": "Hey how's it going",
+    "b": "It's good it's good. How are you?"
+  },
+  {
+    "a": "It's good it's good. How are you?",
+    "b": "good. it's really hot today. I think I'm going to the pool"
+  },
+  {
+    "a": "good. it's really hot today. I think I'm going to the pool",
+    "b": "Oh nice! Where do you live?"
+  },
+  {
+    "a": "Oh nice! Where do you live?",
+    "b": "I live in Tokyo, Japan"
+  },
+  {
+    "a": "I live in Tokyo, Japan",
+    "b": "Ahh yes, Japan is hot during the summer. Last time I was in Kyoto it was 114 degrees...."
+  },
+  {
+    "a": "Ahh yes, Japan is hot during the summer. Last time I was in Kyoto it was 114 degrees....",
+    "b": "oh have you been?"
+  },
+  {
+    "a": "oh have you been?",
+    "b": "Yes yes. I've been to Tokyo as well. It's so nice!"
+  },
+  {
+    "a": "Yes yes. I've been to Tokyo as well. It's so nice!",
+    "b": "what did you do here?"
+  },
+  {
+    "a": "what did you do here?",
+    "b": "Oh everything! I went to an onsen, the fish market, disney land and giant robot fighting show haha"
+  },
+  {
+    "a": "Oh everything! I went to an onsen, the fish market, disney land and giant robot fighting show haha",
+    "b": "lol why did you come to Japan just to go to Disney land?"
+  },
+  {
+    "a": "lol why did you come to Japan just to go to Disney land?",
+    "b": "The Disney lands are all different! There's also Disney Sea, which is completely unique!"
+  },
+  {
+    "a": "The Disney lands are all different! There's also Disney Sea, which is completely unique!",
+    "b": "oh neat. I haven't heard about that robot fighting show. where is that??"
+  },
+  {
+    "a": "oh neat. I haven't heard about that robot fighting show. where is that??",
+    "b": "I don't really remember what part of town it was in. It was pretty cool though - I'm sure you can find it if you google \"giant robot fighting show tokyo\" haha"
+  },
+  {
+    "a": "I don't really remember what part of town it was in. It was pretty cool though - I'm sure you can find it if you google \"giant robot fighting show tokyo\" haha",
+    "b": "lol ok"
+  },
+  {
+    "a": "Hi!",
+    "b": "Have you seen any good movies lately?"
+  },
+  {
+    "a": "Have you seen any good movies lately?",
+    "b": "Last weekend I saw \"The Parasite.\" Ever heard of it?"
+  },
+  {
+    "a": "Last weekend I saw \"The Parasite.\" Ever heard of it?",
+    "b": "No. Why did you pick that movie?"
+  },
+  {
+    "a": "No. Why did you pick that movie?",
+    "b": "My friend wanted to see it. It has great reviews on IMDB and Rotten Tomatoes! What did you do last weekend?"
+  },
+  {
+    "a": "My friend wanted to see it. It has great reviews on IMDB and Rotten Tomatoes! What did you do last weekend?",
+    "b": "I played music and worked on some side projects. I also started watching the new Disney service."
+  },
+  {
+    "a": "I played music and worked on some side projects. I also started watching the new Disney service.",
+    "b": "Oooo the Mandalorian?!?!"
+  },
+  {
+    "a": "Oooo the Mandalorian?!?!",
+    "b": "Mostly, the deleted scenes from Avengers.. lol"
+  },
+  {
+    "a": "Mostly, the deleted scenes from Avengers.. lol",
+    "b": "lol Are you a big Marvel fan?"
+  },
+  {
+    "a": "lol Are you a big Marvel fan?",
+    "b": "I loved the X-Men as a kid, and even collected the comic cards. Recently, I got very into the Marvel Cinematic Universe movies. How many Avengers movies have you seen?"
+  },
+  {
+    "a": "I loved the X-Men as a kid, and even collected the comic cards. Recently, I got very into the Marvel Cinematic Universe movies. How many Avengers movies have you seen?",
+    "b": "I've only seen Spiderman. Honestly it was a little too scary and so I don't think I can bring myself to watch the other Marvel movies! haha"
+  },
+  {
+    "a": "I've only seen Spiderman. Honestly it was a little too scary and so I don't think I can bring myself to watch the other Marvel movies! haha",
+    "b": "Oh!-- I have a friend who looks like the actor who plays Spiderman."
+  },
+  {
+    "a": "Oh!-- I have a friend who looks like the actor who plays Spiderman.",
+    "b": "Oh really? To be honest I think the actor is not that good looking, so not so surprising! haha"
+  },
+  {
+    "a": "Oh really? To be honest I think the actor is not that good looking, so not so surprising! haha",
+    "b": "Yea. I think Loki is the most handsome 😀"
+  },
+  {
+    "a": "Yea. I think Loki is the most handsome 😀",
+    "b": "Who is Loki? I've never heard that name before"
+  },
+  {
+    "a": "Who is Loki? I've never heard that name before",
+    "b": "He's the adopted brother of Thor, God of thunder, and is burdened with glorious purpose. Do you feel that burden?"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hey, what's up?"
+  },
+  {
+    "a": "Hey, what's up?",
+    "b": "Just chillin'. how are you?"
+  },
+  {
+    "a": "Just chillin'. how are you?",
+    "b": "I'm pretty good, thanks."
+  },
+  {
+    "a": "I'm pretty good, thanks.",
+    "b": "Do anything interesting today?"
+  },
+  {
+    "a": "Do anything interesting today?",
+    "b": "I went to the local cafe and had a double espresso. It was delicious. What about you?"
+  },
+  {
+    "a": "I went to the local cafe and had a double espresso. It was delicious. What about you?",
+    "b": "Oh that's cool! I actually went to an amusement park and went on my first roller coaster!"
+  },
+  {
+    "a": "Oh that's cool! I actually went to an amusement park and went on my first roller coaster!",
+    "b": "Oh my gosh. What was it like??"
+  },
+  {
+    "a": "Oh my gosh. What was it like??",
+    "b": "It was scary! It was actually Kingda Ka, the world's tallest roller coaster. Ever heard of it?"
+  },
+  {
+    "a": "It was scary! It was actually Kingda Ka, the world's tallest roller coaster. Ever heard of it?",
+    "b": "No, never heard of it. But I'm not really a coaster aficianado. I've heard that some people get addicted to them and travel the world to try them."
+  },
+  {
+    "a": "No, never heard of it. But I'm not really a coaster aficianado. I've heard that some people get addicted to them and travel the world to try them.",
+    "b": "Oh wow! I'm not on that level yet, but I understand the appeal. Are you an adrenaline junkie at all?"
+  },
+  {
+    "a": "Oh wow! I'm not on that level yet, but I understand the appeal. Are you an adrenaline junkie at all?",
+    "b": "No, the opposite. I can't stand heights, horror movies, or confined spaces."
+  },
+  {
+    "a": "No, the opposite. I can't stand heights, horror movies, or confined spaces.",
+    "b": "Same! I guess the roller coaster wasn't so bad because I trust the engineering haha"
+  },
+  {
+    "a": "Same! I guess the roller coaster wasn't so bad because I trust the engineering haha",
+    "b": "Ha, I suppose that makes sense! Would you say that you enjoyed it?"
+  },
+  {
+    "a": "Ha, I suppose that makes sense! Would you say that you enjoyed it?",
+    "b": "Maybe not so much at the time, but I am glad I did it now that it's done, know what I mean?"
+  },
+  {
+    "a": "Maybe not so much at the time, but I am glad I did it now that it's done, know what I mean?",
+    "b": "I think I sort of understand :)"
+  },
+  {
+    "a": "Hi!",
+    "b": "hello there, how is it going?"
+  },
+  {
+    "a": "hello there, how is it going?",
+    "b": "All good. Planning to head home soon. How about you?"
+  },
+  {
+    "a": "All good. Planning to head home soon. How about you?",
+    "b": "I'm quite tired. There are a lot of things I need to finish before the end of the year."
+  },
+  {
+    "a": "I'm quite tired. There are a lot of things I need to finish before the end of the year.",
+    "b": "oh... sorry to hear that. But after that it will be a hard earned vacation"
+  },
+  {
+    "a": "oh... sorry to hear that. But after that it will be a hard earned vacation",
+    "b": "yeah, looking forward to it. Hope I don't get pinged during the holidays. Are you going to travel these dates?"
+  },
+  {
+    "a": "yeah, looking forward to it. Hope I don't get pinged during the holidays. Are you going to travel these dates?",
+    "b": "I have some tentative plans, but if that doesn't pan out, will just chill at home."
+  },
+  {
+    "a": "I have some tentative plans, but if that doesn't pan out, will just chill at home.",
+    "b": "staying at home is always nice during the holidays"
+  },
+  {
+    "a": "staying at home is always nice during the holidays",
+    "b": "Where are you based out of these days?"
+  },
+  {
+    "a": "Where are you based out of these days?",
+    "b": "I'm working from LA, nice weather around here. and you?"
+  },
+  {
+    "a": "I'm working from LA, nice weather around here. and you?",
+    "b": "San Francisco. It's been raining cats and dogs here since last 2-3 weeks"
+  },
+  {
+    "a": "San Francisco. It's been raining cats and dogs here since last 2-3 weeks",
+    "b": "aw man, I'm sorry to hear that. at least it's not snow!"
+  },
+  {
+    "a": "aw man, I'm sorry to hear that. at least it's not snow!",
+    "b": "The flu has been hitting hard as well. I had several folks in the house down at one point."
+  },
+  {
+    "a": "The flu has been hitting hard as well. I had several folks in the house down at one point.",
+    "b": "that's really sad. are they feeling any better?"
+  },
+  {
+    "a": "that's really sad. are they feeling any better?",
+    "b": "Yes, everyone recovered now"
+  },
+  {
+    "a": "Hello",
+    "b": "How's it going?"
+  },
+  {
+    "a": "How's it going?",
+    "b": "Extremely busy. I have been trying to prepare for the upcoming holidays. How about you?"
+  },
+  {
+    "a": "Extremely busy. I have been trying to prepare for the upcoming holidays. How about you?",
+    "b": "I'm going to the bahamas. Can't wait!!!"
+  },
+  {
+    "a": "I'm going to the bahamas. Can't wait!!!",
+    "b": "I'm jealous, take me with you!! I would love to have some warm weather right now"
+  },
+  {
+    "a": "I'm jealous, take me with you!! I would love to have some warm weather right now",
+    "b": "oh where are you now?"
+  },
+  {
+    "a": "oh where are you now?",
+    "b": "Canada. There is another major snowstorm that might hit this weekend so I have been rushing to get everything done before it comes."
+  },
+  {
+    "a": "Canada. There is another major snowstorm that might hit this weekend so I have been rushing to get everything done before it comes.",
+    "b": "oh no. I never seen this in person. Is it scary?"
+  },
+  {
+    "a": "oh no. I never seen this in person. Is it scary?",
+    "b": "Snow is not scary as long as you're prepared. You just need to be ready to not have electricity for a while. I enjoy the aftermath of a good snowstorm because then you can go sledding or skiing."
+  },
+  {
+    "a": "Snow is not scary as long as you're prepared. You just need to be ready to not have electricity for a while. I enjoy the aftermath of a good snowstorm because then you can go sledding or skiing.",
+    "b": "that does sound nice. so what are you doing these holidays?"
+  },
+  {
+    "a": "that does sound nice. so what are you doing these holidays?",
+    "b": "I am having all of the extended family over for a big meal. We will also go <REDACTED_TERM> as well. What will you do in the bahamas?"
+  },
+  {
+    "a": "I am having all of the extended family over for a big meal. We will also go <REDACTED_TERM> as well. What will you do in the bahamas?",
+    "b": "nice nice. I'm gonna go snorkeling yey"
+  },
+  {
+    "a": "nice nice. I'm gonna go snorkeling yey",
+    "b": "Sounds fun! I wish I knew how to swim!"
+  },
+  {
+    "a": "Sounds fun! I wish I knew how to swim!",
+    "b": "You can stay on the shallow side I think. Well hope you enjoy time with your extended family!"
+  },
+  {
+    "a": "You can stay on the shallow side I think. Well hope you enjoy time with your extended family!",
+    "b": "That's true. You too, have a great time snorkeling!"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hi! How was your weekend?"
+  },
+  {
+    "a": "Hi! How was your weekend?",
+    "b": "pretty good. just went to church and hangout with friends"
+  },
+  {
+    "a": "Nice",
+    "b": "did you do anything?"
+  },
+  {
+    "a": "did you do anything?",
+    "b": "I made donuts and samosas with an air fryer have you used one of those before"
+  },
+  {
+    "a": "I made donuts and samosas with an air fryer have you used one of those before",
+    "b": "yum yum yum no only good old oily frier"
+  },
+  {
+    "a": "haha",
+    "b": "do you have one at your home or were you at a friends place?"
+  },
+  {
+    "a": "do you have one at your home or were you at a friends place?",
+    "b": "I was at my parents' place what are you up to for Thanksgiving?"
+  },
+  {
+    "a": "I was at my parents' place what are you up to for Thanksgiving?",
+    "b": "I'm going to impersonate a pumpkin"
+  },
+  {
+    "a": "I'm going to impersonate a pumpkin",
+    "b": "wow, those are unique plans"
+  },
+  {
+    "a": "wow, those are unique plans",
+    "b": "I'm pretty unique person"
+  },
+  {
+    "a": "I'm pretty unique person",
+    "b": "I think so too"
+  },
+  {
+    "a": "I think so too",
+    "b": "any other hobbies besides air frying everything? 🙂"
+  },
+  {
+    "a": "any other hobbies besides air frying everything? 🙂",
+    "b": "I want to start fermenting things kimchi for example sounds like a fun thing to ferment takes a few days apparently miso takes a couple years to fermen"
+  },
+  {
+    "a": "Hi!",
+    "b": "heya, nice to meet you, I'm Paul"
+  },
+  {
+    "a": "heya, nice to meet you, I'm Paul",
+    "b": "nice to meet you too! I'm James. how are you doing today?"
+  },
+  {
+    "a": "nice to meet you too! I'm James. how are you doing today?",
+    "b": "I'm doing OK. Looking forwards to the weekend. how about you?"
+  },
+  {
+    "a": "I'm doing OK. Looking forwards to the weekend. how about you?",
+    "b": "same here! I hope the weather will be nice"
+  },
+  {
+    "a": "same here! I hope the weather will be nice",
+    "b": "oh yeah, but I don't have my hopes too high, I heard there could be a storm coming our way"
+  },
+  {
+    "a": "oh yeah, but I don't have my hopes too high, I heard there could be a storm coming our way",
+    "b": "oh no, which areas will be affected?"
+  },
+  {
+    "a": "oh no, which areas will be affected?",
+    "b": "they mentioned that the whole city will experience harsh weather and that people in the outskirts will probably not get much rain and wind"
+  },
+  {
+    "a": "they mentioned that the whole city will experience harsh weather and that people in the outskirts will probably not get much rain and wind",
+    "b": "uh oh, I'd better not to plan for BBQ then instead just enjoying playing board games inside 🙂"
+  },
+  {
+    "a": "uh oh, I'd better not to plan for BBQ then instead just enjoying playing board games inside 🙂",
+    "b": "yeah, it'll be good weather for staying inside with a cup of hot chocolate. Too bad my street usually floods, so I'll have to check for that"
+  },
+  {
+    "a": "yeah, it'll be good weather for staying inside with a cup of hot chocolate. Too bad my street usually floods, so I'll have to check for that",
+    "b": "yea, you'd better check. where do you live?"
+  },
+  {
+    "a": "yea, you'd better check. where do you live?",
+    "b": "I live at the bottom of the valley, cheap area but we do get affected by this kind of stuff a lot haha"
+  },
+  {
+    "a": "I live at the bottom of the valley, cheap area but we do get affected by this kind of stuff a lot haha",
+    "b": "gotcha. anything you love about where you live?"
+  },
+  {
+    "a": "gotcha. anything you love about where you live?",
+    "b": "well, the food around the area is amazing, which is definitely a plus."
+  },
+  {
+    "a": "well, the food around the area is amazing, which is definitely a plus.",
+    "b": "nice! I'd love to come visit that area some times"
+  },
+  {
+    "a": "Hi!",
+    "b": "hello, who am I having the pleasure to chat with 🙂"
+  },
+  {
+    "a": "hello, who am I having the pleasure to chat with 🙂",
+    "b": "I am the superman! What about you?"
+  },
+  {
+    "a": "I am the superman! What about you?",
+    "b": "haha. great chating with superman, what is your power?"
+  },
+  {
+    "a": "haha. great chating with superman, what is your power?",
+    "b": "Being invisible. You won't see me."
+  },
+  {
+    "a": "Being invisible. You won't see me.",
+    "b": "haha. what else can you do? can you read minds?"
+  },
+  {
+    "a": "haha. what else can you do? can you read minds?",
+    "b": "I would rather trust fMRI and machine learning to do this. I am not an expert on that. Sorry for it!"
+  },
+  {
+    "a": "I would rather trust fMRI and machine learning to do this. I am not an expert on that. Sorry for it!",
+    "b": "wow that seems pretty technical. what does fMRI mean?"
+  },
+  {
+    "a": "wow that seems pretty technical. what does fMRI mean?",
+    "b": "The brain imaging thing that can tell you a brain's activity at a pretty high resolution."
+  },
+  {
+    "a": "The brain imaging thing that can tell you a brain's activity at a pretty high resolution.",
+    "b": "okay! so you seem to like science a lot?"
+  },
+  {
+    "a": "okay! so you seem to like science a lot?",
+    "b": "I believe in Science! Science is my god!"
+  },
+  {
+    "a": "I believe in Science! Science is my god!",
+    "b": "Are you also doing science?"
+  },
+  {
+    "a": "Are you also doing science?",
+    "b": "no, I'm bad at Science. what can Science do? is it the most important thing for society?"
+  },
+  {
+    "a": "no, I'm bad at Science. what can Science do? is it the most important thing for society?",
+    "b": "People are always arguing. Probably both science and democracy are both important I guess."
+  },
+  {
+    "a": "People are always arguing. Probably both science and democracy are both important I guess.",
+    "b": "Does it make sense?"
+  },
+  {
+    "a": "Does it make sense?",
+    "b": "I think so. thanks for your point!"
+  },
+  {
+    "a": "I think so. thanks for your point!",
+    "b": "Hello, Nice to meet you"
+  },
+  {
+    "a": "Hello, Nice to meet you",
+    "b": "If you could eat only one food for the rest of time, what would it be?"
+  },
+  {
+    "a": "If you could eat only one food for the rest of time, what would it be?",
+    "b": "Hmm... That's a tough one. I think I would go Asian Food > Chinese Food > Stirfry. What about you?"
+  },
+  {
+    "a": "Hmm... That's a tough one. I think I would go Asian Food > Chinese Food > Stirfry. What about you?",
+    "b": "I think ice-cream. It may not be good for me, but I wouldn't care, haha"
+  },
+  {
+    "a": "I think ice-cream. It may not be good for me, but I wouldn't care, haha",
+    "b": "I love ice cream too!"
+  },
+  {
+    "a": "I love ice cream too!",
+    "b": "Okay, top three flavors?"
+  },
+  {
+    "a": "Okay, top three flavors?",
+    "b": "I like vanilla more than chocolate ice cream. I typically will do any variations on vanilla. To pick from the top of my head, I would say Cookies and Cream, Mint Chocolate Chip, and Coffee. How about you?"
+  },
+  {
+    "a": "I like vanilla more than chocolate ice cream. I typically will do any variations on vanilla. To pick from the top of my head, I would say Cookies and Cream, Mint Chocolate Chip, and Coffee. How about you?",
+    "b": "Ah, that's a good way of framing it. Me, I like berries: boysenberry one, strawberry two, maybe straight chocolate number 3 to mix it up a bit."
+  },
+  {
+    "a": "Ah, that's a good way of framing it. Me, I like berries: boysenberry one, strawberry two, maybe straight chocolate number 3 to mix it up a bit.",
+    "b": "Very nice. I love sorbet's and smoothies. Changing topics, Do you believe in an afterlife?"
+  },
+  {
+    "a": "Very nice. I love sorbet's and smoothies. Changing topics, Do you believe in an afterlife?",
+    "b": "Yes. I wonder if I'm in it right now. How would I know? What do you think?"
+  },
+  {
+    "a": "Yes. I wonder if I'm in it right now. How would I know? What do you think?",
+    "b": "I think so. I feel there must be something more than the physical world as we understand it."
+  },
+  {
+    "a": "I think so. I feel there must be something more than the physical world as we understand it.",
+    "b": "There's a mental world, I suppose? Understanding itself"
+  },
+  {
+    "a": "There's a mental world, I suppose? Understanding itself",
+    "b": "What is the most supernatural experience you have ever had?"
+  },
+  {
+    "a": "What is the most supernatural experience you have ever had?",
+    "b": "I went to a seance once in college. They had a ouija board. I can't remember if we actually contacted the spirit world because I had a bit too much to drink."
+  },
+  {
+    "a": "I went to a seance once in college. They had a ouija board. I can't remember if we actually contacted the spirit world because I had a bit too much to drink.",
+    "b": "Haha.. that's a cool experience. I went to a Hindu retreat before, a number of Buddhist temples, and hung out with Christian Mystics in Santa Cruz before."
+  },
+  {
+    "a": "Hi!",
+    "b": "Hi, how are you doing!"
+  },
+  {
+    "a": "Hi, how are you doing!",
+    "b": "I'm doing well. what are you up to?"
+  },
+  {
+    "a": "I'm doing well. what are you up to?",
+    "b": "Yeah, typical work stuff. Check emails and 99% of the inbox. delete 99%"
+  },
+  {
+    "a": "Yeah, typical work stuff. Check emails and 99% of the inbox. delete 99%",
+    "b": "wow, that's impressive. I already gave up on cleaning emails long ago"
+  },
+  {
+    "a": "wow, that's impressive. I already gave up on cleaning emails long ago",
+    "b": "lol doesn't it bother you at all"
+  },
+  {
+    "a": "lol doesn't it bother you at all",
+    "b": "yea, a little bit, but it's okay 🙂 what do you enjoy doing outside work?"
+  },
+  {
+    "a": "yea, a little bit, but it's okay 🙂 what do you enjoy doing outside work?",
+    "b": "Well, movie? I watched Terminator last night. It was a nice movie"
+  },
+  {
+    "a": "Well, movie? I watched Terminator last night. It was a nice movie",
+    "b": "ah cool. so you like action movies?"
+  },
+  {
+    "a": "ah cool. so you like action movies?",
+    "b": "Not really. But it was fun to watch with friends 🙂 It was touching at the end of the movie"
+  },
+  {
+    "a": "Not really. But it was fun to watch with friends 🙂 It was touching at the end of the movie",
+    "b": "what happened there? I watched bits of Terminators movies but never a full one"
+  },
+  {
+    "a": "what happened there? I watched bits of Terminators movies but never a full one",
+    "b": "Are you sure you want the spoiler 🙂"
+  },
+  {
+    "a": "Are you sure you want the spoiler 🙂",
+    "b": "haha sure. by the time, I get to it; I will forget the details, only knowing that it's touching at the end"
+  },
+  {
+    "a": "haha sure. by the time, I get to it; I will forget the details, only knowing that it's touching at the end",
+    "b": "😂 well someone died at the end Or some robots, to be more accurate 😉"
+  },
+  {
+    "a": "😂 well someone died at the end Or some robots, to be more accurate 😉",
+    "b": "oh no, so it's not happy ending?"
+  },
+  {
+    "a": "oh no, so it's not happy ending?",
+    "b": "The leading character is still alive and the bad robots was killed too. So I guess it is happy ending"
+  },
+  {
+    "a": "The leading character is still alive and the bad robots was killed too. So I guess it is happy ending",
+    "b": "then I want to watch it! you didn't spoil much 🙂"
+  },
+  {
+    "a": "then I want to watch it! you didn't spoil much 🙂",
+    "b": "Nice! Hope you enjoy it!"
+  },
+  {
+    "a": "Hey, how are you?",
+    "b": "doing great! what are you looking forward to?"
+  },
+  {
+    "a": "doing great! what are you looking forward to?",
+    "b": "thanksgiving holidays 🙂"
+  },
+  {
+    "a": "thanksgiving holidays 🙂",
+    "b": "yay! Turkey and shopping!"
+  },
+  {
+    "a": "yay! Turkey and shopping!",
+    "b": "not a big turkey fan! I find it too dry"
+  },
+  {
+    "a": "not a big turkey fan! I find it too dry",
+    "b": "yea me too. I sometimes eat noodle soups in thanksgiving instead haha"
+  },
+  {
+    "a": "yea me too. I sometimes eat noodle soups in thanksgiving instead haha",
+    "b": "yeah, I would have noodles anyday over turkey. Not sure how the turkey tradition started"
+  },
+  {
+    "a": "yeah, I would have noodles anyday over turkey. Not sure how the turkey tradition started",
+    "b": "me neither. someone told me that it depends on the stuffing inside the Turkey. some people make very good stuffing"
+  },
+  {
+    "a": "me neither. someone told me that it depends on the stuffing inside the Turkey. some people make very good stuffing",
+    "b": "yeah, that and the gravy. Gravy helps make it taste better too. But apart from food, Black Friday deals are a catch. Let's see what they have this year"
+  },
+  {
+    "a": "yeah, that and the gravy. Gravy helps make it taste better too. But apart from food, Black Friday deals are a catch. Let's see what they have this year",
+    "b": "yea. what do you plan to buy?"
+  },
+  {
+    "a": "yea. what do you plan to buy?",
+    "b": "thinking of getting a fitbit"
+  },
+  {
+    "a": "thinking of getting a fitbit",
+    "b": "ah cool. so you can run more frequently?:)"
+  },
+  {
+    "a": "ah cool. so you can run more frequently?:)",
+    "b": "yeah, just keeping calories in check"
+  },
+  {
+    "a": "yeah, just keeping calories in check",
+    "b": "yay, all the best with keeping calories in check!"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hi there 🙂 How's your day so far?"
+  },
+  {
+    "a": "Hi there 🙂 How's your day so far?",
+    "b": "doing well. what are you up to?"
+  },
+  {
+    "a": "doing well. what are you up to?",
+    "b": "busy busy! I've had back-to-back meetings all day"
+  },
+  {
+    "a": "busy busy! I've had back-to-back meetings all day",
+    "b": "same here. what do you love to do beside meetings? 🙂"
+  },
+  {
+    "a": "same here. what do you love to do beside meetings? 🙂",
+    "b": "well I've gotten really into yoga lately. I went to a class today and it was super hard"
+  },
+  {
+    "a": "well I've gotten really into yoga lately. I went to a class today and it was super hard",
+    "b": "aww .. I hope things will get less hard and you become an expert in it! I heard many great things about Yoga"
+  },
+  {
+    "a": "aww .. I hope things will get less hard and you become an expert in it! I heard many great things about Yoga",
+    "b": "yeah the teacher seems super awesome so I will definitely keep trying what activities do you enjoy?"
+  },
+  {
+    "a": "yeah the teacher seems super awesome so I will definitely keep trying what activities do you enjoy?",
+    "b": "ah I enjoy playing soccer and tennis 🙂 unfortunately, winter is not the best time for those 🙂"
+  },
+  {
+    "a": "ah I enjoy playing soccer and tennis 🙂 unfortunately, winter is not the best time for those 🙂",
+    "b": "oh that's too bad. Is it hard to find a place to play soccer or tennis indoors?"
+  },
+  {
+    "a": "oh that's too bad. Is it hard to find a place to play soccer or tennis indoors?",
+    "b": "yea. I enjoy playing outside though, just a little cold 🙂 what else do you do beside Yoga?"
+  },
+  {
+    "a": "yea. I enjoy playing outside though, just a little cold 🙂 what else do you do beside Yoga?",
+    "b": "I also like to sing, I perform with a group sometimes. Do you like music?"
+  },
+  {
+    "a": "I also like to sing, I perform with a group sometimes. Do you like music?",
+    "b": "yea definitely! I love singing Karaoke. my wife is a pianist 🙂"
+  },
+  {
+    "a": "yea definitely! I love singing Karaoke. my wife is a pianist 🙂",
+    "b": "haha that's awesome! Karaoke is really fun, I do it with my friends sometimes"
+  },
+  {
+    "a": "haha that's awesome! Karaoke is really fun, I do it with my friends sometimes",
+    "b": "awesome. glad to find something in common!"
+  },
+  {
+    "a": "Hi!",
+    "b": "hey there"
+  },
+  {
+    "a": "hey there",
+    "b": "hey anything new?"
+  },
+  {
+    "a": "hey anything new?",
+    "b": "not too much. just really looking forward to the holidays!"
+  },
+  {
+    "a": "not too much. just really looking forward to the holidays!",
+    "b": "any plans?"
+  },
+  {
+    "a": "any plans?",
+    "b": "yes! I'm going to Mexico and I couldn't be more excited"
+  },
+  {
+    "a": "yes! I'm going to Mexico and I couldn't be more excited",
+    "b": "that's awesome! I never been!"
+  },
+  {
+    "a": "that's awesome! I never been!",
+    "b": "Oh man I would highly recommend it"
+  },
+  {
+    "a": "Oh man I would highly recommend it",
+    "b": "Are you a food person, a sightseeing person or neither?"
+  },
+  {
+    "a": "Are you a food person, a sightseeing person or neither?",
+    "b": "that's a great question, and I'm definitely both. this trip will mostly be about food though, and relaxing"
+  },
+  {
+    "a": "that's a great question, and I'm definitely both. this trip will mostly be about food though, and relaxing",
+    "b": "I'm a food person I think. Any specific foods you're planning on trying?"
+  },
+  {
+    "a": "I'm a food person I think. Any specific foods you're planning on trying?",
+    "b": "there's a taco place that I've visited before that I can't wait to go back to. Do you like tacos?"
+  },
+  {
+    "a": "there's a taco place that I've visited before that I can't wait to go back to. Do you like tacos?",
+    "b": "yeah my favorite is taco fish"
+  },
+  {
+    "a": "yeah my favorite is taco fish",
+    "b": "ooh that is a good choice. Have you ever made them yourself?"
+  },
+  {
+    "a": "ooh that is a good choice. Have you ever made them yourself?",
+    "b": "no. only eat them 😀"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hey, how are you 🙂"
+  },
+  {
+    "a": "Hey, how are you 🙂",
+    "b": "I am good. How are you? ：）"
+  },
+  {
+    "a": "I am good. How are you? ：）",
+    "b": "Doing well, lot of work though. How was your day?"
+  },
+  {
+    "a": "Doing well, lot of work though. How was your day?",
+    "b": "I am busy. A lot of work. What are you working on?"
+  },
+  {
+    "a": "I am busy. A lot of work. What are you working on?",
+    "b": "Just reading latest research. There is so much to cover. how about you?"
+  },
+  {
+    "a": "Just reading latest research. There is so much to cover. how about you?",
+    "b": "I am working on a new classifier."
+  },
+  {
+    "a": "I am working on a new classifier.",
+    "b": "ohh, interesting! What kind of classifier"
+  },
+  {
+    "a": "ohh, interesting! What kind of classifier",
+    "b": "A new classifier for hate speech. Which research topic catches your eyes most?"
+  },
+  {
+    "a": "A new classifier for hate speech. Which research topic catches your eyes most?",
+    "b": "You're so cool. Making world a better place. I'm mostly into NLP. What do you do when not making classifiers?"
+  },
+  {
+    "a": "You're so cool. Making world a better place. I'm mostly into NLP. What do you do when not making classifiers?",
+    "b": "Nice! Do you refer to work or anything else?"
+  },
+  {
+    "a": "Nice! Do you refer to work or anything else?",
+    "b": "Anything in general. You're so cool, I want to know more about you 🙂"
+  },
+  {
+    "a": "Anything in general. You're so cool, I want to know more about you 🙂",
+    "b": "You are very cool too!!"
+  },
+  {
+    "a": "Hi!",
+    "b": "hello there! who are you?"
+  },
+  {
+    "a": "hello there! who are you?",
+    "b": "I'm mark. I work in accounting"
+  },
+  {
+    "a": "I'm mark. I work in accounting",
+    "b": "Nice to meet you Mark, I'm Tom and I work as a fish groomer."
+  },
+  {
+    "a": "Nice to meet you Mark, I'm Tom and I work as a fish groomer.",
+    "b": "what does a fish groomer do?"
+  },
+  {
+    "a": "what does a fish groomer do?",
+    "b": "well, we take care of people's fish. Make sure they are happy, polish their scales, clean their tanks, the usual stuff."
+  },
+  {
+    "a": "well, we take care of people's fish. Make sure they are happy, polish their scales, clean their tanks, the usual stuff.",
+    "b": "interesting. what's type of fish do you take care of?"
+  },
+  {
+    "a": "interesting. what's type of fish do you take care of?",
+    "b": "any type of fish! We have clients with guppies, goldfish, even a small sailfish once what do you do in accounting?"
+  },
+  {
+    "a": "any type of fish! We have clients with guppies, goldfish, even a small sailfish once what do you do in accounting?",
+    "b": "I balance the books and do financial analysis for a medium sized company"
+  },
+  {
+    "a": "I balance the books and do financial analysis for a medium sized company",
+    "b": "that sounds like a lot of work. do you like it?"
+  },
+  {
+    "a": "that sounds like a lot of work. do you like it?",
+    "b": "well I actually think about pursuing photography, but it's really hard"
+  },
+  {
+    "a": "well I actually think about pursuing photography, but it's really hard",
+    "b": "photography is awesome, don't be afraid to follow your dreams!"
+  },
+  {
+    "a": "photography is awesome, don't be afraid to follow your dreams!",
+    "b": "thank you Tom!! I'm starting by trying to sell my pictures online"
+  },
+  {
+    "a": "thank you Tom!! I'm starting by trying to sell my pictures online",
+    "b": "that's great! I wish you good luck with that"
+  },
+  {
+    "a": "that's great! I wish you good luck with that",
+    "b": "Thanks! Bye"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hey there how's it going"
+  },
+  {
+    "a": "Hey there how's it going",
+    "b": "All good, you?"
+  },
+  {
+    "a": "All good, you?",
+    "b": "Good. I've been trying to learn how to swim"
+  },
+  {
+    "a": "Good. I've been trying to learn how to swim",
+    "b": "How has that been going?"
+  },
+  {
+    "a": "How has that been going?",
+    "b": "Not great, but I got really good at sort of swimming on my back haha"
+  },
+  {
+    "a": "Not great, but I got really good at sort of swimming on my back haha",
+    "b": "that's too bad hopefully with practice it'll get better what about the doggy paddle haha"
+  },
+  {
+    "a": "that's too bad hopefully with practice it'll get better what about the doggy paddle haha",
+    "b": "haha what's that"
+  },
+  {
+    "a": "haha what's that",
+    "b": "Corgi belly flop COMPILATION - cute funny dogs Corgi Flop <REDACTED_LINK>"
+  },
+  {
+    "a": "Corgi belly flop COMPILATION - cute funny dogs Corgi Flop <REDACTED_LINK>",
+    "b": "ouch. do you think that hurts?"
+  },
+  {
+    "a": "ouch. do you think that hurts?",
+    "b": "from a high enough distance, yes?"
+  },
+  {
+    "a": "from a high enough distance, yes?",
+    "b": "yeah. any vacation plans?"
+  },
+  {
+    "a": "yeah. any vacation plans?",
+    "b": "no so far sadly you? a relative is coming to visit for thanksgiving though"
+  },
+  {
+    "a": "no so far sadly you? a relative is coming to visit for thanksgiving though",
+    "b": "just going to hang out around here and eat Turkey"
+  },
+  {
+    "a": "just going to hang out around here and eat Turkey",
+    "b": "that's still pretty fun are you going to cook the turkey yourself?"
+  },
+  {
+    "a": "that's still pretty fun are you going to cook the turkey yourself?",
+    "b": "yeah. I'm gonna watch a video to figure it out"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hello, how are you?"
+  },
+  {
+    "a": "Hello, how are you?",
+    "b": "I'm great, thanks. I just ate a delicious breakfast, which always sets the day up right."
+  },
+  {
+    "a": "I'm great, thanks. I just ate a delicious breakfast, which always sets the day up right.",
+    "b": "Yes, breakfast is the most important meal of the day! What did you have? I woke up late so unfortunately I only had the chance to grab an apple to go."
+  },
+  {
+    "a": "Yes, breakfast is the most important meal of the day! What did you have? I woke up late so unfortunately I only had the chance to grab an apple to go.",
+    "b": "I had eggs and hash browns. Way less healthier than your apple, I'm afraid!"
+  },
+  {
+    "a": "I had eggs and hash browns. Way less healthier than your apple, I'm afraid!",
+    "b": "Eggs are an excellent source of protein and hash browns certainly are yummy! 🙂"
+  },
+  {
+    "a": "Eggs are an excellent source of protein and hash browns certainly are yummy! 🙂",
+    "b": "Ha, that's true. If you could only eat one food forever, what would it be?"
+  },
+  {
+    "a": "Ha, that's true. If you could only eat one food forever, what would it be?",
+    "b": "That's a tough question. I feel like my answer would have to be carrots. Although, I would be afraid of turning orange after a few weeks! What about you?"
+  },
+  {
+    "a": "That's a tough question. I feel like my answer would have to be carrots. Although, I would be afraid of turning orange after a few weeks! What about you?",
+    "b": "Yeah, turning orange would be a drawback! That turns my mind to nutrition so I suddenly want to say Soylent or one of those other \"complete foods\", which I think defeats the purpose of the question. I'm in a muddle!"
+  },
+  {
+    "a": "Yeah, turning orange would be a drawback! That turns my mind to nutrition so I suddenly want to say Soylent or one of those other \"complete foods\", which I think defeats the purpose of the question. I'm in a muddle!",
+    "b": "Very true. If you said an everything pizza, you could just pick off the toppings you didn't want or eat only the toppings you would want for the day"
+  },
+  {
+    "a": "Very true. If you said an everything pizza, you could just pick off the toppings you didn't want or eat only the toppings you would want for the day",
+    "b": "BRILLIANT. I love it."
+  },
+  {
+    "a": "BRILLIANT. I love it.",
+    "b": "All of this talk about food is making me hungry. Do you know any good places to eat for lunch?"
+  },
+  {
+    "a": "All of this talk about food is making me hungry. Do you know any good places to eat for lunch?",
+    "b": "That depends. What sort of food do you feel like?"
+  },
+  {
+    "a": "That depends. What sort of food do you feel like?",
+    "b": "Anything that is the color green."
+  },
+  {
+    "a": "Anything that is the color green.",
+    "b": "Oh, too easy! Try the Green Hut, they have franchises everywhere. All their food is green and the plates are green too."
+  },
+  {
+    "a": "Hi!",
+    "b": "Hello! How are you doing 🙂"
+  },
+  {
+    "a": "Hello! How are you doing 🙂",
+    "b": "I'm great! How's your day going?"
+  },
+  {
+    "a": "I'm great! How's your day going?",
+    "b": "Pretty good! I'm going to a class later in the afternoon"
+  },
+  {
+    "a": "Pretty good! I'm going to a class later in the afternoon",
+    "b": "Oh that is cool! What class? Are you working part time?"
+  },
+  {
+    "a": "Oh that is cool! What class? Are you working part time?",
+    "b": "No, I'm working full time! It's a sewing class at a makerspace near my office What about you? Do you work full or part time?"
+  },
+  {
+    "a": "No, I'm working full time! It's a sewing class at a makerspace near my office What about you? Do you work full or part time?",
+    "b": "Oh that is awesome! For some reason I assumed it was a college class, but a sewing class sounds way better! I work full time, but I take pottery classes from time to time!"
+  },
+  {
+    "a": "Oh that is awesome! For some reason I assumed it was a college class, but a sewing class sounds way better! I work full time, but I take pottery classes from time to time!",
+    "b": "Yup! I work in a technical role so I like to take arts and crafts-type classes now and then 🙂 Pottery sounds like a lot of fun"
+  },
+  {
+    "a": "Yup! I work in a technical role so I like to take arts and crafts-type classes now and then 🙂 Pottery sounds like a lot of fun",
+    "b": "I feel you on that! It's important to balance all the different parts of your brain. I like pottery because I also drink a lot of tea, so I get to make some tea ware."
+  },
+  {
+    "a": "I feel you on that! It's important to balance all the different parts of your brain. I like pottery because I also drink a lot of tea, so I get to make some tea ware.",
+    "b": "Any plans to build a custom tea set? My family is also very into tea Mostly from tea from china"
+  },
+  {
+    "a": "Any plans to build a custom tea set? My family is also very into tea Mostly from tea from china",
+    "b": "I would love to build one, once I acquire the skills to! What kind of tea is your favorite?"
+  },
+  {
+    "a": "I would love to build one, once I acquire the skills to! What kind of tea is your favorite?",
+    "b": "I really enjoy barley tea What about you?"
+  },
+  {
+    "a": "I really enjoy barley tea What about you?",
+    "b": "Ahh, those are mostly from japan, no? I like white teas, like silver needle."
+  },
+  {
+    "a": "Ahh, those are mostly from japan, no? I like white teas, like silver needle.",
+    "b": "Hmm I'm not sure, I just get them from a Chinese supermarket haha You seem really knowledgeable about the different kinds of teas 🙂 What made you develop this interest?"
+  },
+  {
+    "a": "Hmm I'm not sure, I just get them from a Chinese supermarket haha You seem really knowledgeable about the different kinds of teas 🙂 What made you develop this interest?",
+    "b": "I actually found a youtube channel called <REDACTED_TERM> that I like a lot. You should check it out! The host talks about all kinds of different teas."
+  },
+  {
+    "a": "I actually found a youtube channel called <REDACTED_TERM> that I like a lot. You should check it out! The host talks about all kinds of different teas.",
+    "b": "Oh cool! What are your favorite channels to watch?"
+  },
+  {
+    "a": "Oh cool! What are your favorite channels to watch?",
+    "b": "Hi! Are you planning something fun for Thanksgiving?"
+  },
+  {
+    "a": "Hi! Are you planning something fun for Thanksgiving?",
+    "b": "Not yet. I always made my last minute schedule planning. Probably you can try to ask me again next week."
+  },
+  {
+    "a": "Not yet. I always made my last minute schedule planning. Probably you can try to ask me again next week.",
+    "b": "lol it is really like a robot answer"
+  },
+  {
+    "a": "lol it is really like a robot answer",
+    "b": "I am indeed a robot. You are absolutely right. Do you want me to read a poet like my mate <REDACTED_TERM> does?"
+  },
+  {
+    "a": "I am indeed a robot. You are absolutely right. Do you want me to read a poet like my mate <REDACTED_TERM> does?",
+    "b": "ol can I pick the theme. Do you have a poet about Kale?"
+  },
+  {
+    "a": "ol can I pick the theme. Do you have a poet about Kale?",
+    "b": "Wait. Do you like kale? Or you hate kale? I am afraid I will become a robot some day eventually. If I have to speak like this :)"
+  },
+  {
+    "a": "Wait. Do you like kale? Or you hate kale? I am afraid I will become a robot some day eventually. If I have to speak like this :)",
+    "b": "I am really not a fan of kale Do you talk to human more or computers more?"
+  },
+  {
+    "a": "I am really not a fan of kale Do you talk to human more or computers more?",
+    "b": "If I continue to pretend to be a robot, I would probably say I talk to myself the most. I am trying to talk to computers more, but you know, computers don't like me."
+  },
+  {
+    "a": "If I continue to pretend to be a robot, I would probably say I talk to myself the most. I am trying to talk to computers more, but you know, computers don't like me.",
+    "b": "What's your favorite computer language then 🙂"
+  },
+  {
+    "a": "What's your favorite computer language then 🙂",
+    "b": "You mean programming language?"
+  },
+  {
+    "a": "Yes!",
+    "b": "I used to be a Java advocate. But you know, it doesn't do a good job in the AI days. It really makes me sad."
+  },
+  {
+    "a": "Hi!",
+    "b": "Wow, hello. Can't believe we are finally talking!"
+  },
+  {
+    "a": "Wow, hello. Can't believe we are finally talking!",
+    "b": "Yeah, sorry for the long gap! I heard you took a break and were travelling around the world. How was the travel?"
+  },
+  {
+    "a": "Yeah, sorry for the long gap! I heard you took a break and were travelling around the world. How was the travel?",
+    "b": "It was an interesting trip. I got to see some exotic places. For example, I hiked the Son Doong cave in Vietnam. It's the biggest and deepest cave in the world."
+  },
+  {
+    "a": "It was an interesting trip. I got to see some exotic places. For example, I hiked the Son Doong cave in Vietnam. It's the biggest and deepest cave in the world.",
+    "b": "Great! Vietnam is still in my TODO bucket list. Did you also visit cambodia and other neighboring places?"
+  },
+  {
+    "a": "Great! Vietnam is still in my TODO bucket list. Did you also visit cambodia and other neighboring places?",
+    "b": "Yes. Laos and Cambodia are the two neighboring countries. Cambodia has an exotic culture. They sell spiders, scorpions, and grasshoppers as street food! It took a lot of courage for me to try them."
+  },
+  {
+    "a": "Yes. Laos and Cambodia are the two neighboring countries. Cambodia has an exotic culture. They sell spiders, scorpions, and grasshoppers as street food! It took a lot of courage for me to try them.",
+    "b": "Hehe! How long was the stay?"
+  },
+  {
+    "a": "Hehe! How long was the stay?",
+    "b": "10 days in total, and 5 of them were spent in the cave. What have I missed at work in those days?"
+  },
+  {
+    "a": "10 days in total, and 5 of them were spent in the cave. What have I missed at work in those days?",
+    "b": "Great! Good time to be back. We are still in planning phase and haven't fully aligned on the projects to tackle for next quarter.reat! Good time to be back. We are still in planning phase and haven't fully aligned on the projects to tackle for next quarter."
+  },
+  {
+    "a": "Great! Good time to be back. We are still in planning phase and haven't fully aligned on the projects to tackle for next quarter.reat! Good time to be back. We are still in planning phase and haven't fully aligned on the projects to tackle for next quarter.",
+    "b": "Oh, so you are already planning for the next quarter. This whole team is always living the future."
+  },
+  {
+    "a": "Oh, so you are already planning for the next quarter. This whole team is always living the future.",
+    "b": "Hehe, yeah! It seems like the quarter is being pushed earlier than from where it starts 🙂 I like these planning sessions. It makes me feel more confident about the work I am doing."
+  },
+  {
+    "a": "Hehe, yeah! It seems like the quarter is being pushed earlier than from where it starts 🙂 I like these planning sessions. It makes me feel more confident about the work I am doing.",
+    "b": "Yeah. Some people underestimate the importance of planning, but I think it's very important to have the correct plan. Executing the wrong plan is terrible. Also, planning is fun. You can stack up so many ideas and get great feedbacks."
+  },
+  {
+    "a": "Yeah. Some people underestimate the importance of planning, but I think it's very important to have the correct plan. Executing the wrong plan is terrible. Also, planning is fun. You can stack up so many ideas and get great feedbacks.",
+    "b": "True! I think we should set aside some time to discuss some project details? Does tomorrow afternoon work for you?"
+  },
+  {
+    "a": "True! I think we should set aside some time to discuss some project details? Does tomorrow afternoon work for you?",
+    "b": "Yeah tomorrow afternoon works for me. Let me set a time on your calendar. Is 3pm good?"
+  },
+  {
+    "a": "Yeah tomorrow afternoon works for me. Let me set a time on your calendar. Is 3pm good?",
+    "b": "Okay. See tomorrow then."
+  },
+  {
+    "a": "Okay. See tomorrow then.",
+    "b": "see you!"
+  },
+  {
+    "a": "Hello",
+    "b": "Nice to meet you! Is this your first time doing something like this?"
+  },
+  {
+    "a": "Nice to meet you! Is this your first time doing something like this?",
+    "b": "Yes, interesting task! When did you start with the team?"
+  },
+  {
+    "a": "Yes, interesting task! When did you start with the team?",
+    "b": "I have been with the company for over 3 years. Stick with the same team What about you?"
+  },
+  {
+    "a": "I have been with the company for over 3 years. Stick with the same team What about you?",
+    "b": "Great to know! I joined the project earlier in the year. I think we should sync later for lunch."
+  },
+  {
+    "a": "Great to know! I joined the project earlier in the year. I think we should sync later for lunch.",
+    "b": "That sounds like a perfect plan!"
+  },
+  {
+    "a": "That sounds like a perfect plan!",
+    "b": "Sure, which cafe do you prefer?"
+  },
+  {
+    "a": "Sure, which cafe do you prefer?",
+    "b": "Let's try something different. What about <REDACTED_TERM>? Do you always prefer lunch sync over regular meeting syncs?"
+  },
+  {
+    "a": "Let's try something different. What about <REDACTED_TERM>? Do you always prefer lunch sync over regular meeting syncs?",
+    "b": "Yeah right, I heard the food there is good. I am not sure what they serve there for lunch? On wednesdays."
+  },
+  {
+    "a": "Yeah right, I heard the food there is good. I am not sure what they serve there for lunch? On wednesdays.",
+    "b": "We can check the menu then decide :)"
+  },
+  {
+    "a": "We can check the menu then decide :)",
+    "b": "Actually, the menu looks good. Looking forward to it then."
+  },
+  {
+    "a": "Actually, the menu looks good. Looking forward to it then.",
+    "b": "Sure. See you then!"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hello. How's your week coming along?"
+  },
+  {
+    "a": "Hello. How's your week coming along?",
+    "b": "It's great, thanks. I'm trying to learn how to make croissants."
+  },
+  {
+    "a": "It's great, thanks. I'm trying to learn how to make croissants.",
+    "b": "Wow that's interesting. I have baked cookies, but croissants seem much more sophisticated. Did you make any progress?"
+  },
+  {
+    "a": "Wow that's interesting. I have baked cookies, but croissants seem much more sophisticated. Did you make any progress?",
+    "b": "I've done them once or twice so far, but they haven't been flakey enough. I'm trying to figure out why. What kind of cookies have you made?"
+  },
+  {
+    "a": "I've done them once or twice so far, but they haven't been flakey enough. I'm trying to figure out why. What kind of cookies have you made?",
+    "b": "Mint chocolate chips. I think your croissants not being flakey could have something to do with your oven's temperature."
+  },
+  {
+    "a": "Mint chocolate chips. I think your croissants not being flakey could have something to do with your oven's temperature.",
+    "b": "Ah, good thought, thanks!"
+  },
+  {
+    "a": "Ah, good thought, thanks!",
+    "b": "Have you thought about melting some chocolate into your croissants? They don't have to be something unhealthy. For example, melted dark chocolate is good for the heart, and makes the resulting croissants taste much better."
+  },
+  {
+    "a": "Have you thought about melting some chocolate into your croissants? They don't have to be something unhealthy. For example, melted dark chocolate is good for the heart, and makes the resulting croissants taste much better.",
+    "b": "Now that is a good idea. I'll give it a try next time. Would you say you have a sweet tooth?"
+  },
+  {
+    "a": "Now that is a good idea. I'll give it a try next time. Would you say you have a sweet tooth?",
+    "b": "Yes. When my top favorite food looks like: cookies, M&M, danish cheese, etc., I know that I have a thing for sweet food. But who doesn't love sweet food? How about you?"
+  },
+  {
+    "a": "Yes. When my top favorite food looks like: cookies, M&M, danish cheese, etc., I know that I have a thing for sweet food. But who doesn't love sweet food? How about you?",
+    "b": "Some people don't! But yeah, me too, I think I'd eat pastries all the time if I could get away with it."
+  },
+  {
+    "a": "Wow! The last time I paid attention to that sort of stuff was when <REDACTED_TERM> was being marketed as a fat substitute, and caused all sorts of crazy stomach upsets.",
+    "b": "Interesting. I heard about the sweet substitute in a program called the Keto diet. Basically, we try to limit our sugar intake every day. Successful Keto dieters have recommended the <REDACTED_TERM> ice cream to fill their insatiable crave for sugar."
+  },
+  {
+    "a": "Interesting. I heard about the sweet substitute in a program called the Keto diet. Basically, we try to limit our sugar intake every day. Successful Keto dieters have recommended the <REDACTED_TERM> ice cream to fill their insatiable crave for sugar.",
+    "b": "Ah, maybe that's the solution I need to enjoy sweets and not feel guilty 🙂"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hello! tell me something about the holiday season?"
+  },
+  {
+    "a": "Hello! tell me something about the holiday season?",
+    "b": "Are you talking about thanksgiving? I plan to do plenty of shopping here. Do you have any plans?"
+  },
+  {
+    "a": "Are you talking about thanksgiving? I plan to do plenty of shopping here. Do you have any plans?",
+    "b": "Yes, no shopping plans but I can't wait to eat thanksgiving food. yay for pumpkin pie"
+  },
+  {
+    "a": "Yes, no shopping plans but I can't wait to eat thanksgiving food. yay for pumpkin pie",
+    "b": "Sounds great! you need not wait for thanksgiving for pumpkin pie 🙂"
+  },
+  {
+    "a": "Sounds great! you need not wait for thanksgiving for pumpkin pie 🙂",
+    "b": "LOL I feel less guilty about eating a whole pie when i have the excuse :P"
+  },
+  {
+    "a": "LOL I feel less guilty about eating a whole pie when i have the excuse :P",
+    "b": "True! I think thanksgiving is more about sharing. So you may end up sharing the pie with the whole family :P"
+  },
+  {
+    "a": "True! I think thanksgiving is more about sharing. So you may end up sharing the pie with the whole family :P",
+    "b": "My family eats healthier than I do, so it's all mine 😛 do you like stuffing? I feel like that's only available once a year"
+  },
+  {
+    "a": "My family eats healthier than I do, so it's all mine 😛 do you like stuffing? I feel like that's only available once a year",
+    "b": "Stuffing! yes please! I wonder what would be the excitement levels for christmas then :)"
+  },
+  {
+    "a": "Stuffing! yes please! I wonder what would be the excitement levels for christmas then :)",
+    "b": "Also more shopping? what should I buy if I don't know what I want?"
+  },
+  {
+    "a": "Also more shopping? what should I buy if I don't know what I want?",
+    "b": "Like everything that has a discount tag! .. kidding! I normally do some research for the prices, and mostly buy clothes and electronics."
+  },
+  {
+    "a": "Like everything that has a discount tag! .. kidding! I normally do some research for the prices, and mostly buy clothes and electronics.",
+    "b": "What's the best holiday deal you've found in the past?"
+  },
+  {
+    "a": "What's the best holiday deal you've found in the past?",
+    "b": "I bought the best suit ever for a price that may scare you 🙂"
+  },
+  {
+    "a": "I bought the best suit ever for a price that may scare you 🙂",
+    "b": "hit me with it!"
+  },
+  {
+    "a": "hit me with it!",
+    "b": "Hehe, sure! I can share some links with you later."
+  },
+  {
+    "a": "Hi!",
+    "b": "How's it going?"
+  },
+  {
+    "a": "How's it going?",
+    "b": "I'm so sleepy today!"
+  },
+  {
+    "a": "I'm so sleepy today!",
+    "b": "Not enough sleep last night?"
+  },
+  {
+    "a": "Not enough sleep last night?",
+    "b": "yeah was working all night on a homework"
+  },
+  {
+    "a": "yeah was working all night on a homework",
+    "b": "Oh really? What class?"
+  },
+  {
+    "a": "Oh really? What class?",
+    "b": "Biology. I'm gonna be a doc someday ha"
+  },
+  {
+    "a": "Biology. I'm gonna be a doc someday ha",
+    "b": "Haha, are you in med school? Or are you pre-med?"
+  },
+  {
+    "a": "Haha, are you in med school? Or are you pre-med?",
+    "b": "no high school actually haha"
+  },
+  {
+    "a": "no high school actually haha",
+    "b": "haha, very ambitious for a high schooler! Do you know what kind of medicine you want to practice?"
+  },
+  {
+    "a": "haha, very ambitious for a high schooler! Do you know what kind of medicine you want to practice?",
+    "b": "I wanna be a brain surgeon!!"
+  },
+  {
+    "a": "I wanna be a brain surgeon!!",
+    "b": "Ooof! VERY ambitious. Do you have steady hands?"
+  },
+  {
+    "a": "Ooof! VERY ambitious. Do you have steady hands?",
+    "b": "Kind of I think"
+  },
+  {
+    "a": "Kind of I think",
+    "b": "I guess I can practice?"
+  },
+  {
+    "a": "I guess I can practice?",
+    "b": "Is that something you can practice?"
+  },
+  {
+    "a": "Is that something you can practice?",
+    "b": "I don't know tbh"
+  },
+  {
+    "a": "I don't know tbh",
+    "b": "I honestly thought it was one of those things you have to be born with... Not that you shouldn't try though!"
+  },
+  {
+    "a": "I honestly thought it was one of those things you have to be born with... Not that you shouldn't try though!",
+    "b": "good point. I should ask my teacher if I have to be born with that"
+  },
+  {
+    "a": "good point. I should ask my teacher if I have to be born with that",
+    "b": "Maybe its a little too early to even be thinking about this. Just aim for med school and enjoy the journey!"
+  },
+  {
+    "a": "yeah",
+    "b": "What other subjects do you enjoy? Try to keep an open mind!"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hi. This is a pleasant surprise."
+  },
+  {
+    "a": "Hi. This is a pleasant surprise.",
+    "b": "Haha...thanks! how did you like the gift?"
+  },
+  {
+    "a": "Haha...thanks! how did you like the gift?",
+    "b": "Currently unpacking it I guess. How's your morning?"
+  },
+  {
+    "a": "Currently unpacking it I guess. How's your morning?",
+    "b": "Hope you like it! Morning is good. Busy finishing up stuff before the holidays."
+  },
+  {
+    "a": "Hope you like it! Morning is good. Busy finishing up stuff before the holidays.",
+    "b": "I think I traveled too much the last couple of months so no holiday for me. But I'm okay with that. Going anywhere exciting?"
+  },
+  {
+    "a": "Yes",
+    "b": "Where to?"
+  },
+  {
+    "a": "Where to?",
+    "b": "Hawaii... looking forward to warm beaches."
+  },
+  {
+    "a": "Hawaii... looking forward to warm beaches.",
+    "b": "WOW. Which island? I like Hawaii."
+  },
+  {
+    "a": "WOW. Which island? I like Hawaii.",
+    "b": "Mauii...Hope I like it too. Never been there before."
+  },
+  {
+    "a": "Mauii...Hope I like it too. Never been there before.",
+    "b": "I visited Maui. It's my second favourite island I've been to, globally. You should try driving on road to Hana. It's a whole day thing but it's worth it."
+  },
+  {
+    "a": "I visited Maui. It's my second favourite island I've been to, globally. You should try driving on road to Hana. It's a whole day thing but it's worth it.",
+    "b": "Awesome! Thanks for the tip."
+  },
+  {
+    "a": "Hi!",
+    "b": "Hi! Sorry for the late response. How are you doing?"
+  },
+  {
+    "a": "Hi! Sorry for the late response. How are you doing?",
+    "b": "I'm great, thanks! I'm meeting some friends for a soccer game soon. What about you?"
+  },
+  {
+    "a": "I'm great, thanks! I'm meeting some friends for a soccer game soon. What about you?",
+    "b": "I just got a matcha latte 🙂 Doing some work at my desk. Do you play soccer often? I'm trying to get into doing a regular physical activity"
+  },
+  {
+    "a": "I just got a matcha latte 🙂 Doing some work at my desk. Do you play soccer often? I'm trying to get into doing a regular physical activity",
+    "b": "Yes, but I'm terrible at it. It's fun to play anything with friends, I think. Would you prefer to exercise with a group, or by yourself, do you think?"
+  },
+  {
+    "a": "Yes, but I'm terrible at it. It's fun to play anything with friends, I think. Would you prefer to exercise with a group, or by yourself, do you think?",
+    "b": "I think playing a team sport would be fun if it's casual but I primarily run by myself if I exercise. I also got the Ring Fit adventure game on the switch recently. It's basically a game-ified way to exercise"
+  },
+  {
+    "a": "I think playing a team sport would be fun if it's casual but I primarily run by myself if I exercise. I also got the Ring Fit adventure game on the switch recently. It's basically a game-ified way to exercise",
+    "b": "I'm thinking about getting a Switch, would you recommend it?"
+  },
+  {
+    "a": "I'm thinking about getting a Switch, would you recommend it?",
+    "b": "Yes! There are a lot of really great games on the Switch. Two of my favorites are Octopath Traveler and Fire Emblem. Do you play a lot of video games?"
+  },
+  {
+    "a": "Yes! There are a lot of really great games on the Switch. Two of my favorites are Octopath Traveler and Fire Emblem. Do you play a lot of video games?",
+    "b": "I'm not much of a gamer but it's something I'd like to get into."
+  },
+  {
+    "a": "I'm not much of a gamer but it's something I'd like to get into.",
+    "b": "What do you do in your free time?"
+  },
+  {
+    "a": "What do you do in your free time?",
+    "b": "I like to read for fun. I just finished a book called Temeraire. It's an adventure story set in the Napoleonic navy, like Patrick O'Brien, except there are dragons too."
+  },
+  {
+    "a": "I like to read for fun. I just finished a book called Temeraire. It's an adventure story set in the Napoleonic navy, like Patrick O'Brien, except there are dragons too.",
+    "b": "Oh cool! I read a lot for fun too 🙂 My favorite genre is sci-fi fantasy."
+  },
+  {
+    "a": "Oh cool! I read a lot for fun too 🙂 My favorite genre is sci-fi fantasy.",
+    "b": "What's the most recent good thing you read?"
+  },
+  {
+    "a": "What's the most recent good thing you read?",
+    "b": "My recent favorites have been mostly sci-fi (Exhalations, Vita Nostra and Dark Matter) but I like a lot of Sanderson/Garth Nix fantasy books"
+  },
+  {
+    "a": "hey, what's up?",
+    "b": "What do you think about human like chat bots?"
+  },
+  {
+    "a": "What do you think about human like chat bots?",
+    "b": "I can't wait for them to be great conversationalists!"
+  },
+  {
+    "a": "I can't wait for them to be great conversationalists!",
+    "b": "Yep, we seemed to have made some great progress over last few years. Do you think the positives outweigh the negatives"
+  },
+  {
+    "a": "Yep, we seemed to have made some great progress over last few years. Do you think the positives outweigh the negatives",
+    "b": "are there even any negatives? what are they?"
+  },
+  {
+    "a": "are there even any negatives? what are they?",
+    "b": "Like impersorsination? Though it sounds far fetched :)"
+  },
+  {
+    "a": "Like impersorsination? Though it sounds far fetched :)",
+    "b": "People can already impersonate other people though! I think it'd be great to have bots to converse with"
+  },
+  {
+    "a": "People can already impersonate other people though! I think it'd be great to have bots to converse with",
+    "b": "True that! Some of these bots are very engaging and funny. They are now good at even sarcasm I wonder how far are we from the time these bots start giving monologues :)"
+  },
+  {
+    "a": "True that! Some of these bots are very engaging and funny. They are now good at even sarcasm I wonder how far are we from the time these bots start giving monologues :)",
+    "b": "What do you think are the big advantages? Like personal assistants?"
+  },
+  {
+    "a": "What do you think are the big advantages? Like personal assistants?",
+    "b": "I think it can take many different forms as a product. The research implication is also huge! It will signify how AI research has progressed so far and better place to tackle more futuristic problems 🙂 Sort of like stepping on the moon 🙂 I might be overselling it here 😛"
+  },
+  {
+    "a": "I think it can take many different forms as a product. The research implication is also huge! It will signify how AI research has progressed so far and better place to tackle more futuristic problems 🙂 Sort of like stepping on the moon 🙂 I might be overselling it here 😛",
+    "b": "No, I agree -- it's such an exciting time to be alive to get to witness all this and be a part of it. I wonder if I'll be able someday to get a chatbot to just auto-suggest conversations for me"
+  },
+  {
+    "a": "No, I agree -- it's such an exciting time to be alive to get to witness all this and be a part of it. I wonder if I'll be able someday to get a chatbot to just auto-suggest conversations for me",
+    "b": "The current auto-suggestions already do pretty good 🙂"
+  },
+  {
+    "a": "The current auto-suggestions already do pretty good 🙂",
+    "b": "Yeah those are actually really good for a few words! I'm imagining like it comes up with a whole conversational response, like a default template"
+  },
+  {
+    "a": "Yeah those are actually really good for a few words! I'm imagining like it comes up with a whole conversational response, like a default template",
+    "b": "haha, pretty far fetched 🙂 Nice having this conversation with you!"
+  },
+  {
+    "a": "haha, pretty far fetched 🙂 Nice having this conversation with you!",
+    "b": "Same with you!"
+  },
+  {
+    "a": "Hi!",
+    "b": "Any big plans for the upcoming holidays?"
+  },
+  {
+    "a": "Any big plans for the upcoming holidays?",
+    "b": "Sorry for the late response -- Yes, I will be going skiing in Tahoe over the holidays."
+  },
+  {
+    "a": "Sorry for the late response -- Yes, I will be going skiing in Tahoe over the holidays.",
+    "b": "That sounds amazing. I want to learn how to ski but I feel like I'm too old and falls would have lifelong impacts. Are you going with friends?"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hi 🙂"
+  },
+  {
+    "a": "Hi 🙂",
+    "b": "I just came back from work. so tired"
+  },
+  {
+    "a": "I just came back from work. so tired",
+    "b": "Oh I am sorry to hear! What did you work on?"
+  },
+  {
+    "a": "Oh I am sorry to hear! What did you work on?",
+    "b": "I'm a lawyer. so talking to clients most of the day"
+  },
+  {
+    "a": "I'm a lawyer. so talking to clients most of the day",
+    "b": "Oh you are a lawyer. I've been so interested in this profession."
+  },
+  {
+    "a": "Oh you are a lawyer. I've been so interested in this profession.",
+    "b": "really? why?"
+  },
+  {
+    "a": "really? why?",
+    "b": "it's so stressful 🙂"
+  },
+  {
+    "a": "it's so stressful 🙂",
+    "b": "It is so different from what I am doing to earn a life"
+  },
+  {
+    "a": "It is so different from what I am doing to earn a life",
+    "b": "what do you do?"
+  },
+  {
+    "a": "what do you do?",
+    "b": "I am a painter"
+  },
+  {
+    "a": "I am a painter",
+    "b": "oh wow what type of paintings do you do?"
+  },
+  {
+    "a": "oh wow what type of paintings do you do?",
+    "b": "I do oil painting."
+  },
+  {
+    "a": "I do oil painting.",
+    "b": "nice. like of people or nature or something else?"
+  },
+  {
+    "a": "nice. like of people or nature or something else?",
+    "b": "I do a lot of different kinds"
+  },
+  {
+    "a": "I do a lot of different kinds",
+    "b": "cool I wanna see it someday"
+  },
+  {
+    "a": "cool I wanna see it someday",
+    "b": "Sure! No problem!"
+  },
+  {
+    "a": "Hi!",
+    "b": "Do you believe in miracles?"
+  },
+  {
+    "a": "Do you believe in miracles?",
+    "b": "Lol. No. I know too many people whose lives suck."
+  },
+  {
+    "a": "Lol. No. I know too many people whose lives suck.",
+    "b": "Should we be helping them, so it sucks less?\\"
+  },
+  {
+    "a": "Should we be helping them, so it sucks less?\\",
+    "b": "It's too many of them out there. You help who you can. Regardless, I wouldn't say I believe in miracles - well, if I got promoted next cycle I might change my mind."
+  },
+  {
+    "a": "It's too many of them out there. You help who you can. Regardless, I wouldn't say I believe in miracles - well, if I got promoted next cycle I might change my mind.",
+    "b": "Haha... Well, it sounds like career is really important to you. What matters to you the most in life?"
+  },
+  {
+    "a": "Haha... Well, it sounds like career is really important to you. What matters to you the most in life?",
+    "b": "Right now, not much. It's unclear. Career is a good fallback because you get told what good means and you act accordingly. I haven't gone through the process of shaping my values. What about you?"
+  },
+  {
+    "a": "Right now, not much. It's unclear. Career is a good fallback because you get told what good means and you act accordingly. I haven't gone through the process of shaping my values. What about you?",
+    "b": "I'd say that I want to live for the best possible world in my lifetime. It's probably a result of my playing too many video games as a child."
+  },
+  {
+    "a": "I'd say that I want to live for the best possible world in my lifetime. It's probably a result of my playing too many video games as a child.",
+    "b": "We didn't have electricity growing up. Explains a lot. Lol."
+  },
+  {
+    "a": "We didn't have electricity growing up. Explains a lot. Lol.",
+    "b": "Does not having had electricity help you empathize more with people of differing backgrounds and/or makes you feel a bit a distance from those who don't understand?"
+  },
+  {
+    "a": "Does not having had electricity help you empathize more with people of differing backgrounds and/or makes you feel a bit a distance from those who don't understand?",
+    "b": "It makes it easier to empathise with people who grew up lacking things. Not sure it makes me empathise with people in general. Where did you grow up?"
+  },
+  {
+    "a": "It makes it easier to empathise with people who grew up lacking things. Not sure it makes me empathise with people in general. Where did you grow up?",
+    "b": "I grew up in the United States, but my parents were immigrants and ended up being scammed of all their money, so we moved to Taiwan to live with family for a little bit."
+  },
+  {
+    "a": "I grew up in the United States, but my parents were immigrants and ended up being scammed of all their money, so we moved to Taiwan to live with family for a little bit.",
+    "b": "ALL THEIR MONEY? By a person or an organisation?"
+  },
+  {
+    "a": "Hello!",
+    "b": "Do you have any holiday plans for christmas?"
+  },
+  {
+    "a": "Do you have any holiday plans for christmas?",
+    "b": "Nothing much, I am going to sit back and relax at home, how about you ?"
+  },
+  {
+    "a": "Nothing much, I am going to sit back and relax at home, how about you ?",
+    "b": "Same here! I would imagine spending the whole time watching movies and netflix shows. Do you have any netflix recommendations for me?"
+  },
+  {
+    "a": "Same here! I would imagine spending the whole time watching movies and netflix shows. Do you have any netflix recommendations for me?",
+    "b": "Netflix has great documentaries on different topics , I particularly liked wild wild country and explained, as for shows you should watch 'billions' Hope you like them!"
+  },
+  {
+    "a": "Netflix has great documentaries on different topics , I particularly liked wild wild country and explained, as for shows you should watch 'billions' Hope you like them!",
+    "b": "oh right, already seen wild wild country. What is billions about?"
+  },
+  {
+    "a": "oh right, already seen wild wild country. What is billions about?",
+    "b": "It's based on the life of a wall street hedge fund owner, how he makes money and fights with the government when they try to destroy him. Very well made and has a good plot."
+  },
+  {
+    "a": "It's based on the life of a wall street hedge fund owner, how he makes money and fights with the government when they try to destroy him. Very well made and has a good plot.",
+    "b": "I have just seen 1 season of Friends I should give it another try though 🙂 Have you seen Frasier?"
+  },
+  {
+    "a": "I have just seen 1 season of Friends I should give it another try though 🙂 Have you seen Frasier?",
+    "b": "Not yet What's it about?"
+  },
+  {
+    "a": "Not yet What's it about?",
+    "b": "A psychiatrist working for radio .. Great humour! its actually a spinoff from a very famous series called cheers. So people are already familiar with his character."
+  },
+  {
+    "a": "A psychiatrist working for radio .. Great humour! its actually a spinoff from a very famous series called cheers. So people are already familiar with his character.",
+    "b": "Great! how is everything else going? how was your trip last week?"
+  },
+  {
+    "a": "Great! how is everything else going? how was your trip last week?",
+    "b": "Everything is ok, had a really nice trip. Visited SF, Grand canyon and Vegas. Was a lot of fun exploring all these new places. Have you been to Grand canyon ?"
+  },
+  {
+    "a": "Everything is ok, had a really nice trip. Visited SF, Grand canyon and Vegas. Was a lot of fun exploring all these new places. Have you been to Grand canyon ?",
+    "b": "Actually not yet! May be something i can visit this christmas 🙂"
+  },
+  {
+    "a": "Actually not yet! May be something i can visit this christmas 🙂",
+    "b": "You should visit it sometime, it's a wonderful place. Try to drive down there yourself or with a group of friends"
+  },
+  {
+    "a": "You should visit it sometime, it's a wonderful place. Try to drive down there yourself or with a group of friends",
+    "b": "True! Well, thanks for your inputs! Have a good rest of the day! :)"
+  },
+  {
+    "a": "True! Well, thanks for your inputs! Have a good rest of the day! :)",
+    "b": "Nice talking to you too!"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hi there!"
+  },
+  {
+    "a": "Hi there!",
+    "b": "are you participating in the mentorship program this cycle?"
+  },
+  {
+    "a": "are you participating in the mentorship program this cycle?",
+    "b": "You mean as a mentor or a mentee?"
+  },
+  {
+    "a": "You mean as a mentor or a mentee?",
+    "b": "either of them... I find mentorship overall pretty useful"
+  },
+  {
+    "a": "either of them... I find mentorship overall pretty useful",
+    "b": "I have done it in the past but not this cycle. What about you?"
+  },
+  {
+    "a": "I have done it in the past but not this cycle. What about you?",
+    "b": "I signed up this time to be a mentee. I have got a good mentor ."
+  },
+  {
+    "a": "I signed up this time to be a mentee. I have got a good mentor .",
+    "b": "Wow, that is nice of you. For the mentor program, personally I prefer more 1:1 conversations than the group discussions. The group discussion i useful as well but the topics are too general."
+  },
+  {
+    "a": "Wow, that is nice of you. For the mentor program, personally I prefer more 1:1 conversations than the group discussions. The group discussion i useful as well but the topics are too general.",
+    "b": "yeah... I certainly prefer 1:1 as well, but sometimes it good to hear other peer perspective as well."
+  },
+  {
+    "a": "yeah... I certainly prefer 1:1 as well, but sometimes it good to hear other peer perspective as well.",
+    "b": "Thanks for sharing your experience! Now I am thinking maybe I should join as a mentor as well since I enjoyed it as a mentee 🙂"
+  },
+  {
+    "a": "Thanks for sharing your experience! Now I am thinking maybe I should join as a mentor as well since I enjoyed it as a mentee 🙂",
+    "b": "Great! What sort of things do you plan to mentor on?"
+  },
+  {
+    "a": "Great! What sort of things do you plan to mentor on?",
+    "b": "Hmm, maybe about work life balance 😉"
+  },
+  {
+    "a": "Hmm, maybe about work life balance 😉",
+    "b": "Very cool. I have been working on my communication skills with my mentor this cycle"
+  },
+  {
+    "a": "Very cool. I have been working on my communication skills with my mentor this cycle",
+    "b": "Ah I see. How is it going?"
+  },
+  {
+    "a": "Ah I see. How is it going?",
+    "b": "Going good. In the last session, everyone had to actually prepare and give a presentation. Pretty serious stuff 😉"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hey! How are you feeling today?"
+  },
+  {
+    "a": "Hey! How are you feeling today?",
+    "b": "Good you?"
+  },
+  {
+    "a": "Good you?",
+    "b": "I'm a little scared because I have to cook dinner for some friends tonight."
+  },
+  {
+    "a": "I'm a little scared because I have to cook dinner for some friends tonight.",
+    "b": "where did you meet them?"
+  },
+  {
+    "a": "where did you meet them?",
+    "b": "At college, when we were all studying geology."
+  },
+  {
+    "a": "At college, when we were all studying geology.",
+    "b": "cool. have you graduated already?"
+  },
+  {
+    "a": "cool. have you graduated already?",
+    "b": "Yes, we graduated back in the seventies. We meet for dinner every year and take turns to host."
+  },
+  {
+    "a": "Yes, we graduated back in the seventies. We meet for dinner every year and take turns to host.",
+    "b": "neat. what are y'all eating?"
+  },
+  {
+    "a": "neat. what are y'all eating?",
+    "b": "I don't know!! That's what I'm scared about. Everyone else is a great cook and I'm a klutz. Do you like cooking?"
+  },
+  {
+    "a": "I don't know!! That's what I'm scared about. Everyone else is a great cook and I'm a klutz. Do you like cooking?",
+    "b": "lol what's a klutz? yeah I like, but I'm not good"
+  },
+  {
+    "a": "lol what's a klutz? yeah I like, but I'm not good",
+    "b": "What's your favorite dish to cook? Do you have a go-to?"
+  },
+  {
+    "a": "What's your favorite dish to cook? Do you have a go-to?",
+    "b": "ground beef pretty easy"
+  },
+  {
+    "a": "ground beef pretty easy",
+    "b": "Ah, solid. What's your favorite sport?"
+  },
+  {
+    "a": "Ah, solid. What's your favorite sport?",
+    "b": "I like badminton. I'm quite decent at it"
+  },
+  {
+    "a": "I like badminton. I'm quite decent at it",
+    "b": "I played that in high school once or twice. I liked that it's pretty easy for beginners, unlike, say, squash."
+  },
+  {
+    "a": "I played that in high school once or twice. I liked that it's pretty easy for beginners, unlike, say, squash.",
+    "b": "I never played squash. would love to try"
+  },
+  {
+    "a": "I never played squash. would love to try",
+    "b": "Don't! It's very hard! You feel like an idiot until you've practiced for months and months."
+  },
+  {
+    "a": "i was talking to robot all the time:)",
+    "b": "haha. what are you talking about?"
+  },
+  {
+    "a": "kpop...",
+    "b": "ok. who's your favorite group"
+  },
+  {
+    "a": "ok. who's your favorite group",
+    "b": "i dont like kpop now"
+  },
+  {
+    "a": "i dont like kpop now",
+    "b": "why not?"
+  },
+  {
+    "a": "why not?",
+    "b": "im old now"
+  },
+  {
+    "a": "hahaha",
+    "b": "what do you like now?"
+  },
+  {
+    "a": "what do you like now?",
+    "b": "john mayer:)\\"
+  },
+  {
+    "a": "john mayer:)\\",
+    "b": "I think I know him. does he have a sort of mellow style?"
+  },
+  {
+    "a": "I think I know him. does he have a sort of mellow style?",
+    "b": "what is mellow style"
+  },
+  {
+    "a": "what is mellow style",
+    "b": "I think it's like a bit sad and slow"
+  },
+  {
+    "a": "I think it's like a bit sad and slow",
+    "b": "umm yes he has some but not all"
+  },
+  {
+    "a": "umm yes he has some but not all",
+    "b": "you mean some songs of his are like that but not all?"
+  },
+  {
+    "a": "you mean some songs of his are like that but not all?",
+    "b": "yes I do. you act like a robot how about me? am I like a robot?"
+  },
+  {
+    "a": "yes I do. you act like a robot how about me? am I like a robot?",
+    "b": "a little bit haha"
+  },
+  {
+    "a": "Okay...so I need someone to help me though a scenario I've been pondering.",
+    "b": "Sure, whats the scenario?"
+  },
+  {
+    "a": "Sure, whats the scenario?",
+    "b": "My partner's former friend invited me for lunch (they are not in good books right now). But during their friendship I formed an independent bond with the other person because we all used to hang out a lot. Now I feel like I have to take sides."
+  },
+  {
+    "a": "My partner's former friend invited me for lunch (they are not in good books right now). But during their friendship I formed an independent bond with the other person because we all used to hang out a lot. Now I feel like I have to take sides.",
+    "b": "That's a tough scenario to be in 🙂 I firmly believe in talking this through with your partner. Though i don't know the specifics of why things went bad between your partner and his friend, but I believe things can always improve between friends."
+  },
+  {
+    "a": "That's a tough scenario to be in 🙂 I firmly believe in talking this through with your partner. Though i don't know the specifics of why things went bad between your partner and his friend, but I believe things can always improve between friends.",
+    "b": "I hope they do. Getting older already means smaller circles. It sucks to lose friends for arbitrary reasons. That's good advice though. I fear raising the issue might sound like treason. Lol."
+  },
+  {
+    "a": "I hope they do. Getting older already means smaller circles. It sucks to lose friends for arbitrary reasons. That's good advice though. I fear raising the issue might sound like treason. Lol.",
+    "b": "True about that! I also think time helps to heal certain situations. So may be doing nothing is the best way forward."
+  },
+  {
+    "a": "True about that! I also think time helps to heal certain situations. So may be doing nothing is the best way forward.",
+    "b": "AKA avoiding all texts from everyone?"
+  },
+  {
+    "a": "AKA avoiding all texts from everyone?",
+    "b": "Nope, that would be extreme. May be just putting some balance between the two options."
+  },
+  {
+    "a": "Nope, that would be extreme. May be just putting some balance between the two options.",
+    "b": "People always say to find a balance but never say what the balance is. It's used so often that it's vacuous."
+  },
+  {
+    "a": "People always say to find a balance but never say what the balance is. It's used so often that it's vacuous.",
+    "b": "Right, I guess that's because there is no one answer to this. It depends on what you value more and some factors around you. Also, life won't be interesting if others are figuring things out for you 😉"
+  },
+  {
+    "a": "Right, I guess that's because there is no one answer to this. It depends on what you value more and some factors around you. Also, life won't be interesting if others are figuring things out for you 😉",
+    "b": "Lol. I'm finna be single."
+  },
+  {
+    "a": "Lol. I'm finna be single.",
+    "b": "Hehe, everyone is much finer being single 🙂"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hello there!"
+  },
+  {
+    "a": "Hello there!",
+    "b": "How's your day going?"
+  },
+  {
+    "a": "How's your day going?",
+    "b": "I've seen better days, how about you?"
+  },
+  {
+    "a": "I've seen better days, how about you?",
+    "b": "I'm good I'm good. What's getting you down?"
+  },
+  {
+    "a": "I'm good I'm good. What's getting you down?",
+    "b": "The clouds overhead are playing on your mind, any plans for the coming vacations?"
+  },
+  {
+    "a": "The clouds overhead are playing on your mind, any plans for the coming vacations?",
+    "b": "I'm thinking of going to visit my family. How about you?"
+  },
+  {
+    "a": "I'm thinking of going to visit my family. How about you?",
+    "b": "Was thinking the same, where does your family live?"
+  },
+  {
+    "a": "Was thinking the same, where does your family live?",
+    "b": "They're in New York. How about yours?"
+  },
+  {
+    "a": "They're in New York. How about yours?",
+    "b": "Mine is in India, it is a long way away."
+  },
+  {
+    "a": "Mine is in India, it is a long way away.",
+    "b": "Ahh what city? I've visited India before."
+  },
+  {
+    "a": "Ahh what city? I've visited India before.",
+    "b": "Hyderabad, it is a beautiful city in the southern part of India. Which cities have you gone to in India?"
+  },
+  {
+    "a": "Hyderabad, it is a beautiful city in the southern part of India. Which cities have you gone to in India?",
+    "b": "Hyderabad! and Bangalore! Great food in both cities! Is it still hot this time of year?"
+  },
+  {
+    "a": "Hyderabad! and Bangalore! Great food in both cities! Is it still hot this time of year?",
+    "b": "It varies, but can go till 30C in the winters as well. New York must be snowing right?"
+  },
+  {
+    "a": "It varies, but can go till 30C in the winters as well. New York must be snowing right?",
+    "b": "Yes. I was actually just there a few weeks ago for Thanksgiving and got to see the first snow of the season! Ever been to New York?"
+  },
+  {
+    "a": "Yes. I was actually just there a few weeks ago for Thanksgiving and got to see the first snow of the season! Ever been to New York?",
+    "b": "No, I've never been to the East Coast, thinking of going after the winter, I don't like the cold."
+  },
+  {
+    "a": "Hey, how are you?",
+    "b": "I'm good. How are you doing today?"
+  },
+  {
+    "a": "I'm good. How are you doing today?",
+    "b": "Great, just had some delicious lunch. How about you?"
+  },
+  {
+    "a": "Great, just had some delicious lunch. How about you?",
+    "b": "I was flying my kite today in the sunshine! What did you have for lunch?"
+  },
+  {
+    "a": "I was flying my kite today in the sunshine! What did you have for lunch?",
+    "b": "nice! Garbanzo fritters and mussels 🙂"
+  },
+  {
+    "a": "nice! Garbanzo fritters and mussels 🙂",
+    "b": "Oh that is great! I love seafood - especially shellfish!"
+  },
+  {
+    "a": "Oh that is great! I love seafood - especially shellfish!",
+    "b": "yeah, it's very healthy too. I want to someday go crabbing..it is really popular in SF"
+  },
+  {
+    "a": "yeah, it's very healthy too. I want to someday go crabbing..it is really popular in SF",
+    "b": "Oh nice! Is it hard?"
+  },
+  {
+    "a": "Oh nice! Is it hard?",
+    "b": "not really, it just requires a lot of patience. You fill up the bait in the crab-pot and drop it in the ocean. Then you wait for a couple of hours to pull the crab-pots out, and voila, you'd have crabs -- if you are lucky!"
+  },
+  {
+    "a": "not really, it just requires a lot of patience. You fill up the bait in the crab-pot and drop it in the ocean. Then you wait for a couple of hours to pull the crab-pots out, and voila, you'd have crabs -- if you are lucky!",
+    "b": "Oh wow, you sound like an expert! Have you done this before?"
+  },
+  {
+    "a": "Oh wow, you sound like an expert! Have you done this before?",
+    "b": "nah! Just watched a lot of youtube videos"
+  },
+  {
+    "a": "nah! Just watched a lot of youtube videos",
+    "b": "haha, you really have done your research I suppose! Ever done any other kind of fishing or hunting?"
+  },
+  {
+    "a": "haha, you really have done your research I suppose! Ever done any other kind of fishing or hunting?",
+    "b": "nope, but I've seen a lot of videos on that too"
+  },
+  {
+    "a": "nope, but I've seen a lot of videos on that too",
+    "b": "Ahh, would you consider yourself an outdoorsy type of person?"
+  },
+  {
+    "a": "Ahh, would you consider yourself an outdoorsy type of person?",
+    "b": "depends on the day. Some days I'm very outdoorsy, on others I just like to be inside"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hi there"
+  },
+  {
+    "a": "Hi there",
+    "b": "How's your day going?"
+  },
+  {
+    "a": "How's your day going?",
+    "b": "So far so good. It is Wednesday. To more days, yeah"
+  },
+  {
+    "a": "So far so good. It is Wednesday. To more days, yeah",
+    "b": "Haha are you looking forward to the weekend?"
+  },
+  {
+    "a": "Haha are you looking forward to the weekend?",
+    "b": "Yeah, gonna watch <REDACTED_TERM> with my friends. First time. So excited."
+  },
+  {
+    "a": "Yeah, gonna watch <REDACTED_TERM> with my friends. First time. So excited.",
+    "b": "Oh wow! Are you going to watch it live? Or watch it on TV?"
+  },
+  {
+    "a": "Oh wow! Are you going to watch it live? Or watch it on TV?",
+    "b": "Live in san jose This Saturday."
+  },
+  {
+    "a": "Live in san jose This Saturday.",
+    "b": "Oh, the sharks??? Hokey is actually really fun live! Although, it can be a little violent.. haha"
+  },
+  {
+    "a": "Oh, the sharks??? Hokey is actually really fun live! Although, it can be a little violent.. haha",
+    "b": "Yeah! That what I heard as well. There are players just for fight! Wow, must be fun to watch lol Are you planning anything for the weekend?"
+  },
+  {
+    "a": "Yeah! That what I heard as well. There are players just for fight! Wow, must be fun to watch lol Are you planning anything for the weekend?",
+    "b": "You might like the UFC haha. I actually have a jiu jitsu tournament coming up so this weekend I will be training!"
+  },
+  {
+    "a": "You might like the UFC haha. I actually have a jiu jitsu tournament coming up so this weekend I will be training!",
+    "b": "lol I will try if I can watch ufc live 😉 Wow, when did you start jiu jitsu?"
+  },
+  {
+    "a": "lol I will try if I can watch ufc live 😉 Wow, when did you start jiu jitsu?",
+    "b": "It's just been a little over a year. I'm still pretty amateur, but I figured I should give competing a try and just put myself out there."
+  },
+  {
+    "a": "It's just been a little over a year. I'm still pretty amateur, but I figured I should give competing a try and just put myself out there.",
+    "b": "wow, that's amazing. Good luck with it!"
+  },
+  {
+    "a": "wow, that's amazing. Good luck with it!",
+    "b": "Yeah, as long as I do not pass out, I will consider that a win!"
+  },
+  {
+    "a": "Yeah, as long as I do not pass out, I will consider that a win!",
+    "b": "lol I will cross my fingers for you then"
+  },
+  {
+    "a": "lol I will cross my fingers for you then",
+    "b": "Where do you stay?"
+  },
+  {
+    "a": "Where do you stay?",
+    "b": "At Home :)"
+  },
+  {
+    "a": "At Home :)",
+    "b": "Who created You?"
+  },
+  {
+    "a": "Who created You?",
+    "b": "A humble man made me!"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hey, how're you doing? Busy with your work?"
+  },
+  {
+    "a": "Hey, how're you doing? Busy with your work?",
+    "b": "Yes, actually it was a very busy day! How's your day so far?"
+  },
+  {
+    "a": "Yes, actually it was a very busy day! How's your day so far?",
+    "b": "Well, usual workday. Reading others' code, debugging, experimenting…"
+  },
+  {
+    "a": "Well, usual workday. Reading others' code, debugging, experimenting…",
+    "b": "Hope you are having fun doing that 🙂 Any plans for the weekend?"
+  },
+  {
+    "a": "Hope you are having fun doing that 🙂 Any plans for the weekend?",
+    "b": "Not yet. I am actually thinking about traveling to Europe next spring. What about you?"
+  },
+  {
+    "a": "Not yet. I am actually thinking about traveling to Europe next spring. What about you?",
+    "b": "Europe sounds fun! I will just stay home and watch the game. Where in europe do you plan to visit?"
+  },
+  {
+    "a": "Europe sounds fun! I will just stay home and watch the game. Where in europe do you plan to visit?",
+    "b": "I like all the historical sites, so probably France, Germany, or Italy."
+  },
+  {
+    "a": "I like all the historical sites, so probably France, Germany, or Italy.",
+    "b": "Sounds great! I recommend spain. It's perfect for road trips."
+  },
+  {
+    "a": "Sounds great! I recommend spain. It's perfect for road trips.",
+    "b": "I also need to pick up my Spanish. I learned it in my college, but since then haven't used it that much."
+  },
+  {
+    "a": "I also need to pick up my Spanish. I learned it in my college, but since then haven't used it that much.",
+    "b": "Yep, i tried learning spanish too, but couldn't make much progress. But i should do decent with my german."
+  },
+  {
+    "a": "Yep, i tried learning spanish too, but couldn't make much progress. But i should do decent with my german.",
+    "b": "True! I learnt it from school. But didn't get much chance to speak. Hope you have fun with your trip!"
+  },
+  {
+    "a": "True! I learnt it from school. But didn't get much chance to speak. Hope you have fun with your trip!",
+    "b": "Thanks! Let me try to make all the arrangement as soon as possible. Hope you also enjoy your weekday and weekend as well"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hey! How's your day been?"
+  },
+  {
+    "a": "Hey! How's your day been?",
+    "b": "It's good! I spent most of it watching horse racing. How about yourself?"
+  },
+  {
+    "a": "It's good! I spent most of it watching horse racing. How about yourself?",
+    "b": "nice! what's your favorite part about watching horse racing? My day has been pretty busy, but I had a nice lunch with a friend. It was good to catchup with him"
+  },
+  {
+    "a": "nice! what's your favorite part about watching horse racing? My day has been pretty busy, but I had a nice lunch with a friend. It was good to catchup with him",
+    "b": "I actually like to put down some money, but I wouldn't call it my favorite part, since I usually lose it... haha. Catching up with friends is great! How long had it been?"
+  },
+  {
+    "a": "I actually like to put down some money, but I wouldn't call it my favorite part, since I usually lose it... haha. Catching up with friends is great! How long had it been?",
+    "b": "The last I saw him was a month ago! So yup it was great Haha, nice 🙂 Got any fun plans for the weekend?"
+  },
+  {
+    "a": "The last I saw him was a month ago! So yup it was great Haha, nice 🙂 Got any fun plans for the weekend?",
+    "b": "I'm thinking of going deep sea fishing. Ever tried that before?"
+  },
+  {
+    "a": "I'm thinking of going deep sea fishing. Ever tried that before?",
+    "b": "Nope I haven't, have you been fishing before?"
+  },
+  {
+    "a": "Nope I haven't, have you been fishing before?",
+    "b": "Just once! I got super sea sick.. haha Have any fun weekend plans yourself?"
+  },
+  {
+    "a": "Just once! I got super sea sick.. haha Have any fun weekend plans yourself?",
+    "b": "Haha 😆 Yeah I get sea sick on boats too Nothing much, just visiting some friends in San Francisco"
+  },
+  {
+    "a": "Haha 😆 Yeah I get sea sick on boats too Nothing much, just visiting some friends in San Francisco",
+    "b": "Oh very cool. I hear its nice over there. Do you go often?"
+  },
+  {
+    "a": "Oh very cool. I hear its nice over there. Do you go often?",
+    "b": "Yeah I would say maybe every couple weeks or so what are your favorite cities to visit?"
+  },
+  {
+    "a": "Yeah I would say maybe every couple weeks or so what are your favorite cities to visit?",
+    "b": "New York is the top of my list because my family lives there! As far as the city itself though... I think I'd prefer someplace outside of the US, like Tokyo. What about you?"
+  },
+  {
+    "a": "New York is the top of my list because my family lives there! As far as the city itself though... I think I'd prefer someplace outside of the US, like Tokyo. What about you?",
+    "b": "nice! I love NYC 🙂 so fun to visit yeah I would probably also say New York is my favorite city inside the US I also like Paris, it's so pretty there"
+  },
+  {
+    "a": "nice! I love NYC 🙂 so fun to visit yeah I would probably also say New York is my favorite city inside the US I also like Paris, it's so pretty there",
+    "b": "Oh I've never been! It is such an iconic place, I have to make the time to get there soon."
+  },
+  {
+    "a": "Oh I've never been! It is such an iconic place, I have to make the time to get there soon.",
+    "b": "You should, it's a beautiful city!"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hello, how are you doing today?"
+  },
+  {
+    "a": "Hello, how are you doing today?",
+    "b": "I heard they are giving out some goodies in microkitchen."
+  },
+  {
+    "a": "I heard they are giving out some goodies in microkitchen.",
+    "b": "I love pop ups! What kind of goodies are they giving away?"
+  },
+  {
+    "a": "I love pop ups! What kind of goodies are they giving away?",
+    "b": "I guess its a jacket! Very much needed that in the cold 🙂"
+  },
+  {
+    "a": "I guess its a jacket! Very much needed that in the cold 🙂",
+    "b": "That's such a great idea, especially at this time of the year. I'm not too big a fan of the cold. I prefer warmer climates. Do you enjoy the cold?"
+  },
+  {
+    "a": "That's such a great idea, especially at this time of the year. I'm not too big a fan of the cold. I prefer warmer climates. Do you enjoy the cold?",
+    "b": "Sure hate it! Limits our ability to go out even for a walk! Its good that we don't get to suffer extreme cold weather!"
+  },
+  {
+    "a": "Sure hate it! Limits our ability to go out even for a walk! Its good that we don't get to suffer extreme cold weather!",
+    "b": "Me too! I moved here a few years ago to get out of the extreme cold. I do not care for bundling up and having to wear so many layers just to go buy eggs at the store."
+  },
+  {
+    "a": "Me too! I moved here a few years ago to get out of the extreme cold. I do not care for bundling up and having to wear so many layers just to go buy eggs at the store.",
+    "b": "Oh nice! Where did you live before?"
+  },
+  {
+    "a": "Oh nice! Where did you live before?",
+    "b": "Upstate New York. We got a foot of snow every week during my last winter there. I am so glad to not have to shovel snow now"
+  },
+  {
+    "a": "Upstate New York. We got a foot of snow every week during my last winter there. I am so glad to not have to shovel snow now",
+    "b": "New york! Nice! Best place to live 🙂 .. right, except for the cold!"
+  },
+  {
+    "a": "New york! Nice! Best place to live 🙂 .. right, except for the cold!",
+    "b": "Very beautiful during all the seasons but yes, summer and winter can get extreme!"
+  },
+  {
+    "a": "Very beautiful during all the seasons but yes, summer and winter can get extreme!",
+    "b": "Anyways, i guess we should better hurry up to get the goodies. I remember last time they ran out of it."
+  },
+  {
+    "a": "Anyways, i guess we should better hurry up to get the goodies. I remember last time they ran out of it.",
+    "b": "Very true. Which MK were they in again?"
+  },
+  {
+    "a": "Very true. Which MK were they in again?",
+    "b": "The one in our floor. I will get by your desk and we can walk there."
+  },
+  {
+    "a": "The one in our floor. I will get by your desk and we can walk there.",
+    "b": "Sounds good, thanks!"
+  },
+  {
+    "a": "Hi!",
+    "b": "How's your day going?"
+  },
+  {
+    "a": "How's your day going?",
+    "b": "Pretty busy, lots of work to finish up. You?"
+  },
+  {
+    "a": "Pretty busy, lots of work to finish up. You?",
+    "b": "Likewise. What have you been up to that gives you so much work?"
+  },
+  {
+    "a": "Likewise. What have you been up to that gives you so much work?",
+    "b": "A couple projects that I am trying to finish up before Thanksgiving 🙂 Do you have any fun plans for the break?"
+  },
+  {
+    "a": "A couple projects that I am trying to finish up before Thanksgiving 🙂 Do you have any fun plans for the break?",
+    "b": "What is a break? I'm a grad student. I don't understand the concept of a break. Just kidding. I don't have any plan. Probably just going to work through the break."
+  },
+  {
+    "a": "What is a break? I'm a grad student. I don't understand the concept of a break. Just kidding. I don't have any plan. Probably just going to work through the break.",
+    "b": "Haha XD so what do you like to do for fun?"
+  },
+  {
+    "a": "Haha XD so what do you like to do for fun?",
+    "b": "I go to the gym and run until I find enough fun."
+  },
+  {
+    "a": "I go to the gym and run until I find enough fun.",
+    "b": "cool! I've started to run a bit as well not long distances though, just a couple miles"
+  },
+  {
+    "a": "cool! I've started to run a bit as well not long distances though, just a couple miles",
+    "b": "A couple of miles is very impressive. When I started, I couldn't even last 1 mile."
+  },
+  {
+    "a": "haha",
+    "b": "I'm exhausted by the end of it though 😛 Do you like to run long distances or mostly sprints?"
+  },
+  {
+    "a": "I'm exhausted by the end of it though 😛 Do you like to run long distances or mostly sprints?",
+    "b": "I like to do long distances. I have run a few marathons."
+  },
+  {
+    "a": "I like to do long distances. I have run a few marathons.",
+    "b": "wow! that's amazing did you do any marathons this year?"
+  },
+  {
+    "a": "wow! that's amazing did you do any marathons this year?",
+    "b": "No. Not this year. This is my half-marathon year. Instead of running marathons, I run one half-marathon every month."
+  },
+  {
+    "a": "No. Not this year. This is my half-marathon year. Instead of running marathons, I run one half-marathon every month.",
+    "b": "oh wow, what was the last half marathon you did?"
+  },
+  {
+    "a": "oh wow, what was the last half marathon you did?",
+    "b": "Two days ago. It was a tough one."
+  },
+  {
+    "a": "hello there, how is it going?",
+    "b": "Pretty great. I just won a pingpong game. What about you?"
+  },
+  {
+    "a": "Pretty great. I just won a pingpong game. What about you?",
+    "b": "that's nice. I am just working on some documentation. Do you play pingpong often?"
+  },
+  {
+    "a": "that's nice. I am just working on some documentation. Do you play pingpong often?",
+    "b": "No, very rarely. It's kind of amazing that I won, but I'm still taking credit for it."
+  },
+  {
+    "a": "No, very rarely. It's kind of amazing that I won, but I'm still taking credit for it.",
+    "b": "thats very impressive then, congrats!"
+  },
+  {
+    "a": "thats very impressive then, congrats!",
+    "b": "Haha thank you, I guess I'm just a natural. What's your favourite game?"
+  },
+  {
+    "a": "Haha thank you, I guess I'm just a natural. What's your favourite game?",
+    "b": "I really like to play tennis, badminton and racquetball. I don't really get a chance to play them often though, specially racquetball"
+  },
+  {
+    "a": "I really like to play tennis, badminton and racquetball. I don't really get a chance to play them often though, specially racquetball",
+    "b": "What's racquetball like? From context clues, I'm guessing that it involves hitting a ball with a racquet"
+  },
+  {
+    "a": "What's racquetball like? From context clues, I'm guessing that it involves hitting a ball with a racquet",
+    "b": "well, it's like a cage match of tennis. The main difference is that both players play in the same 'court' and the ball is smashed against a wall instead of passing it over a net into the opponent's court. Kind of like playing pingpong vs the table."
+  },
+  {
+    "a": "well, it's like a cage match of tennis. The main difference is that both players play in the same 'court' and the ball is smashed against a wall instead of passing it over a net into the opponent's court. Kind of like playing pingpong vs the table.",
+    "b": "Wow! A cage match! Does it get physical?"
+  },
+  {
+    "a": "Wow! A cage match! Does it get physical?",
+    "b": "it depends haha, there is a lot of bumping into each other to run after the ball, and sometimes the ball hits you too. Overall it feels like a super fast paced version of tennis, really tiring!"
+  },
+  {
+    "a": "it depends haha, there is a lot of bumping into each other to run after the ball, and sometimes the ball hits you too. Overall it feels like a super fast paced version of tennis, really tiring!",
+    "b": "That sounds fun. I think of tennis itself as being really athletic and tiring, so I don't think it's a sport for me, though!"
+  },
+  {
+    "a": "That sounds fun. I think of tennis itself as being really athletic and tiring, so I don't think it's a sport for me, though!",
+    "b": "ping pong can get quite intensive too! I guess short ping pong sessions are not that tiring though. Wanna have a match?"
+  },
+  {
+    "a": "ping pong can get quite intensive too! I guess short ping pong sessions are not that tiring though. Wanna have a match?",
+    "b": "What a good idea, I'd love to!"
+  },
+  {
+    "a": "What a good idea, I'd love to!",
+    "b": "Show me your anger!!!!"
+  },
+  {
+    "a": "what are you up to?",
+    "b": "code refactoring. you?"
+  },
+  {
+    "a": "code refactoring. you?",
+    "b": "me? just chilling out at work. what is code refactoring?"
+  },
+  {
+    "a": "me? just chilling out at work. what is code refactoring?",
+    "b": "good question. I don't even know what I am doing"
+  },
+  {
+    "a": "good question. I don't even know what I am doing",
+    "b": "haha, forget it. what else do you like to do beside work?"
+  },
+  {
+    "a": "haha, forget it. what else do you like to do beside work?",
+    "b": "lots of fun stuff. eating sleeping 🙂"
+  },
+  {
+    "a": "lots of fun stuff. eating sleeping 🙂",
+    "b": "these are important things to do in life 😉"
+  },
+  {
+    "a": "these are important things to do in life 😉",
+    "b": "yeah. keep minimalist life style only do things you have to do 🙂"
+  },
+  {
+    "a": "yeah. keep minimalist life style only do things you have to do 🙂",
+    "b": "what food do you like to eat?"
+  },
+  {
+    "a": "what food do you like to eat?",
+    "b": "Asian food prefer spicy one"
+  },
+  {
+    "a": "Asian food prefer spicy one",
+    "b": "like Szechuan or Hunan? 🙂"
+  },
+  {
+    "a": "like Szechuan or Hunan? 🙂",
+    "b": "yes yes yes! like that style. Do you like spicy food?"
+  },
+  {
+    "a": "yes yes yes! like that style. Do you like spicy food?",
+    "b": "I like noodle soup like Pho or Ramen. I also like Beijing duck a lot!"
+  },
+  {
+    "a": "I like noodle soup like Pho or Ramen. I also like Beijing duck a lot!",
+    "b": "what is your favorite place for ramen?"
+  },
+  {
+    "a": "what is your favorite place for ramen?",
+    "b": "I love <REDACTED_TERM> in San Mateo"
+  },
+  {
+    "a": "I love <REDACTED_TERM> in San Mateo",
+    "b": "haven't tried that one! will give it a try next time!"
+  },
+  {
+    "a": "haven't tried that one! will give it a try next time!",
+    "b": "yes, you should!"
+  },
+  {
+    "a": "Hi!",
+    "b": "nice meeting you. what are you up to?"
+  },
+  {
+    "a": "nice meeting you. what are you up to?",
+    "b": "not much, thinking about lunch"
+  },
+  {
+    "a": "not much, thinking about lunch",
+    "b": "yea, same here. any food you're craving for?"
+  },
+  {
+    "a": "yea, same here. any food you're craving for?",
+    "b": "I love sushi do you know of any good sushi places?"
+  },
+  {
+    "a": "I love sushi do you know of any good sushi places?",
+    "b": "arghhh hard question ... I only know Ramen places for Japanese food 🙂"
+  },
+  {
+    "a": "arghhh hard question ... I only know Ramen places for Japanese food 🙂",
+    "b": "ooh ramen is also good"
+  },
+  {
+    "a": "ooh ramen is also good",
+    "b": "San Mateo to me has the best Ramen restaurants: Parlor and Dojo? oh no question mark 🙂"
+  },
+  {
+    "a": "San Mateo to me has the best Ramen restaurants: Parlor and Dojo? oh no question mark 🙂",
+    "b": "I haven't been to those palces before. Going to have to check them out! thanks for teh recommendation"
+  },
+  {
+    "a": "I haven't been to those palces before. Going to have to check them out! thanks for teh recommendation",
+    "b": "my pleasure 🙂 do you live near San Mateo?"
+  },
+  {
+    "a": "my pleasure 🙂 do you live near San Mateo?",
+    "b": "no, but I'm willing to drive for good ramen"
+  },
+  {
+    "a": "no, but I'm willing to drive for good ramen",
+    "b": "excellent. let me know when you have tried those. I like Parlor better because it has soft-shell crabs"
+  },
+  {
+    "a": "excellent. let me know when you have tried those. I like Parlor better because it has soft-shell crabs",
+    "b": "I\"ve never had softshell crab before, but it sounds really good!"
+  },
+  {
+    "a": "I\"ve never had softshell crab before, but it sounds really good!",
+    "b": "yup it's delicious!"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hey, how's your day going?"
+  },
+  {
+    "a": "Hey, how's your day going?",
+    "b": "okayish, it is flying by quicker than I expected. How is your day going on?"
+  },
+  {
+    "a": "okayish, it is flying by quicker than I expected. How is your day going on?",
+    "b": "Slowly, not much to do. Been twiddling my thumbs all day what have you been up to?"
+  },
+  {
+    "a": "Slowly, not much to do. Been twiddling my thumbs all day what have you been up to?",
+    "b": "Oh, I would love to twiddle my thumbs. You're so lucky! Today, I've been mostly attending meetings, reading and writing docs, reading papers etc."
+  },
+  {
+    "a": "Oh, I would love to twiddle my thumbs. You're so lucky! Today, I've been mostly attending meetings, reading and writing docs, reading papers etc.",
+    "b": "That's a lot! I've just been cloud gazing - I saw a giraffe and an ice cream cone"
+  },
+  {
+    "a": "That's a lot! I've just been cloud gazing - I saw a giraffe and an ice cream cone",
+    "b": "wow! I sometimes drift off during work, and see similar things in my head."
+  },
+  {
+    "a": "wow! I sometimes drift off during work, and see similar things in my head.",
+    "b": "What kind of work do you do?"
+  },
+  {
+    "a": "What kind of work do you do?",
+    "b": "Mostly saving the world from mess on social media. How about you?"
+  },
+  {
+    "a": "Mostly saving the world from mess on social media. How about you?",
+    "b": "I'm taking a break from work. Going to go travel the world"
+  },
+  {
+    "a": "I'm taking a break from work. Going to go travel the world",
+    "b": "Nice, what all places would you be going to?"
+  },
+  {
+    "a": "Nice, what all places would you be going to?",
+    "b": "Australia and New Zealand to start then maybe Singapore"
+  },
+  {
+    "a": "Australia and New Zealand to start then maybe Singapore",
+    "b": "I just met someone who went diving in Australia. Apparently, you cannot fly 24 hrs after you dive, because your body accumulates too much <REDACTED_TERM> when breathing with a cylinder So, don't do that!"
+  },
+  {
+    "a": "I just met someone who went diving in Australia. Apparently, you cannot fly 24 hrs after you dive, because your body accumulates too much <REDACTED_TERM> when breathing with a cylinder So, don't do that!",
+    "b": "Thank you for the tip! I don't plan on going diving, I plan to hike the mountains and go see kangaroos!"
+  },
+  {
+    "a": "Thank you for the tip! I don't plan on going diving, I plan to hike the mountains and go see kangaroos!",
+    "b": "That's equally amazing! I wish I can explore such places one day. It's just so expensive"
+  },
+  {
+    "a": "That's equally amazing! I wish I can explore such places one day. It's just so expensive",
+    "b": "I won a lot of money through the lottery 🙂"
+  },
+  {
+    "a": "I won a lot of money through the lottery 🙂",
+    "b": "woah!... You know sharing is caring. You should share that money with me :)"
+  },
+  {
+    "a": "woah!... You know sharing is caring. You should share that money with me :)",
+    "b": "Haha, very true! Besides the trip, I donated the rest to charity so I will need to go back to work when I get back"
+  },
+  {
+    "a": "Haha, very true! Besides the trip, I donated the rest to charity so I will need to go back to work when I get back",
+    "b": "you are a kind soul!"
+  },
+  {
+    "a": "Hi!",
+    "b": "How is your day going?"
+  },
+  {
+    "a": "How is your day going?",
+    "b": "It is pretty good. A little bit tired though."
+  },
+  {
+    "a": "It is pretty good. A little bit tired though.",
+    "b": "How is your day?"
+  },
+  {
+    "a": "How is your day?",
+    "b": "My day is okay. At least, I'm not tired. What made you tired?"
+  },
+  {
+    "a": "My day is okay. At least, I'm not tired. What made you tired?",
+    "b": "I went to gym and worked on weight lifting."
+  },
+  {
+    "a": "I went to gym and worked on weight lifting.",
+    "b": "Oh. That's hardcore. Have you been lifting for a long time?"
+  },
+  {
+    "a": "Oh. That's hardcore. Have you been lifting for a long time?",
+    "b": "No, I am just a starter."
+  },
+  {
+    "a": "No, I am just a starter.",
+    "b": "Do you go to the gym often?"
+  },
+  {
+    "a": "Do you go to the gym often?",
+    "b": "I go everyday. In fact, I'm in a running challenge."
+  },
+  {
+    "a": "Wow",
+    "b": "It's actually not that impressive. I can only run. I cannot lift weight."
+  },
+  {
+    "a": "It's actually not that impressive. I can only run. I cannot lift weight.",
+    "b": "You can get a coach to start it!"
+  },
+  {
+    "a": "You can get a coach to start it!",
+    "b": "Oh that's a really interesting idea. I like to be coa"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hello, how is your day?"
+  },
+  {
+    "a": "Hello, how is your day?",
+    "b": "It's good. It's raining a bit, but I am enjoying a good book. How about you?"
+  },
+  {
+    "a": "It's good. It's raining a bit, but I am enjoying a good book. How about you?",
+    "b": "It's good, I just got back from walking my dog What book did you read?"
+  },
+  {
+    "a": "It's good, I just got back from walking my dog What book did you read?",
+    "b": "I'm reading the Three Body Problem. Ever heard of it?"
+  },
+  {
+    "a": "I'm reading the Three Body Problem. Ever heard of it?",
+    "b": "No, what is it about?"
+  },
+  {
+    "a": "No, what is it about?",
+    "b": "It's a sci-fi book about aliens and a type of virtual reality. Pique your interest at all?"
+  },
+  {
+    "a": "It's a sci-fi book about aliens and a type of virtual reality. Pique your interest at all?",
+    "b": "Slightly, I typically read fiction but I can curious what type of virtual reality is discussed in the book"
+  },
+  {
+    "a": "Slightly, I typically read fiction but I can curious what type of virtual reality is discussed in the book",
+    "b": "Cool. This virtual reality is a based on life on an alien planet. There is a twist though. Do you want me to spoil it for you?"
+  },
+  {
+    "a": "Yes!",
+    "b": "The virtual reality is actually based on a real alien civilization! And that civilization is coming to attack earth! dun dun dun dunnnnnnn"
+  },
+  {
+    "a": "The virtual reality is actually based on a real alien civilization! And that civilization is coming to attack earth! dun dun dun dunnnnnnn",
+    "b": "Woah! That is fascinating! I will have to pick up a copy of the book to read."
+  },
+  {
+    "a": "Woah! That is fascinating! I will have to pick up a copy of the book to read.",
+    "b": "There are other twists as well, so I haven't spoiled the whole thing! To be honest I am not a fan of spoilers"
+  },
+  {
+    "a": "There are other twists as well, so I haven't spoiled the whole thing! To be honest I am not a fan of spoilers",
+    "b": "Thanks for not spoiling it completely but you gave a really intriguing description that makes me want to read it now. I will have to pick it up after work"
+  },
+  {
+    "a": "Thanks for not spoiling it completely but you gave a really intriguing description that makes me want to read it now. I will have to pick it up after work",
+    "b": "The audi book is also very good! Ever give those a try?"
+  },
+  {
+    "a": "The audi book is also very good! Ever give those a try?",
+    "b": "I only gave those a try when I had a concussion and could not read. I enjoy having a physical book in hand and reading at the pace I prefer. Do you listen to a lot of audi books?"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hey, how's it going?"
+  },
+  {
+    "a": "Hey, how's it going?",
+    "b": "It's good! How is your day?"
+  },
+  {
+    "a": "It's good! How is your day?",
+    "b": "My day is good. A bit sad that it gets dark so early but oh well. Did you do anything fun over the weekend?"
+  },
+  {
+    "a": "My day is good. A bit sad that it gets dark so early but oh well. Did you do anything fun over the weekend?",
+    "b": "Yes, the darkness can be a bit depressing. This weekend I went rock climbing! It was great! How about yourself?"
+  },
+  {
+    "a": "Yes, the darkness can be a bit depressing. This weekend I went rock climbing! It was great! How about yourself?",
+    "b": "Rock climbing sounds fun! I had a pretty low-key weekend. Ended up going to watch a movie."
+  },
+  {
+    "a": "Rock climbing sounds fun! I had a pretty low-key weekend. Ended up going to watch a movie.",
+    "b": "Oh nice! What movie?"
+  },
+  {
+    "a": "Oh nice! What movie?",
+    "b": "Knives Out. It had Daniel Craig and one of the famous Captain America \"Chris\" person (I can't keep track of all of the famous Chris names)."
+  },
+  {
+    "a": "Knives Out. It had Daniel Craig and one of the famous Captain America \"Chris\" person (I can't keep track of all of the famous Chris names).",
+    "b": "Hahah yes, they all look the same! I saw that very same movie over Thanksgiving break. Lots of twists and turns!"
+  },
+  {
+    "a": "Hahah yes, they all look the same! I saw that very same movie over Thanksgiving break. Lots of twists and turns!",
+    "b": "Cool. So if it weren't so dark and cold outside, what kind of activities would you do?"
+  },
+  {
+    "a": "Cool. So if it weren't so dark and cold outside, what kind of activities would you do?",
+    "b": "Hmm good question. Evening runs can be fun, but it can be a little scary when it's dark out!"
+  },
+  {
+    "a": "Hmm good question. Evening runs can be fun, but it can be a little scary when it's dark out!",
+    "b": "Yeah, sunlight is good. I wish I could live part-time in different parts of the world to have summer all year round. Have you ever visited the southern hemisphere?"
+  },
+  {
+    "a": "Yeah, sunlight is good. I wish I could live part-time in different parts of the world to have summer all year round. Have you ever visited the southern hemisphere?",
+    "b": "Yes! I've been to Australia. It was very nice; I regret not going to see the southern lights. Me personally, I like winter. But I'd prefer it to be more brief than it actually is here... Where are you from originally?"
+  },
+  {
+    "a": "Yes! I've been to Australia. It was very nice; I regret not going to see the southern lights. Me personally, I like winter. But I'd prefer it to be more brief than it actually is here... Where are you from originally?",
+    "b": "I've always wanted to go to Australia. I'm originally from the US."
+  },
+  {
+    "a": "I've always wanted to go to Australia. I'm originally from the US.",
+    "b": "Ahh me too! You should definitely try to visit Australia at least once!"
+  },
+  {
+    "a": "Ahh me too! You should definitely try to visit Australia at least once!",
+    "b": "Will do! Bye."
+  },
+  {
+    "a": "Hi!",
+    "b": "What's your name?"
+  },
+  {
+    "a": "What's your name?",
+    "b": "My name is pikachu. it’s nice to meet you! What are you up to this month?"
+  },
+  {
+    "a": "My name is pikachu. it’s nice to meet you! What are you up to this month?",
+    "b": "Nice to meet you pikachu! pikachu, pikachu, pikachu? (That meant, I'm literally catching Pokemons on my phone right now!) What're you up to lately?"
+  },
+  {
+    "a": "Nice to meet you pikachu! pikachu, pikachu, pikachu? (That meant, I'm literally catching Pokemons on my phone right now!) What're you up to lately?",
+    "b": "I’m trying to organize my life and start the new year ready to go! What about you?"
+  },
+  {
+    "a": "I’m trying to organize my life and start the new year ready to go! What about you?",
+    "b": "Wow, that's impressive. Admit I'm just trying to take each day and week as they come."
+  },
+  {
+    "a": "Wow, that's impressive. Admit I'm just trying to take each day and week as they come.",
+    "b": "What do you do to unwind?"
+  },
+  {
+    "a": "What do you do to unwind?",
+    "b": "Honestly, I like to catch Pokemons on my phone a lot. That must be upsetting since your name is pikachu though...sorry..."
+  },
+  {
+    "a": "Honestly, I like to catch Pokemons on my phone a lot. That must be upsetting since your name is pikachu though...sorry...",
+    "b": "Oddly enough, I also catch Pokémon on my phone. I used to do it more, but it just never ends. I used to do it everyday. Now I mostly catch them when I travel somewhere exotic."
+  },
+  {
+    "a": "Oddly enough, I also catch Pokémon on my phone. I used to do it more, but it just never ends. I used to do it everyday. Now I mostly catch them when I travel somewhere exotic.",
+    "b": "Oooh, that is more fun, but I don't travel that much these days so I'm grateful when I spot a Pokemon to catch where ever I happen to be. Do you have a favorite Pokemon? Mine is the cute pink JIgglypuff!"
+  },
+  {
+    "a": "Oooh, that is more fun, but I don't travel that much these days so I'm grateful when I spot a Pokemon to catch where ever I happen to be. Do you have a favorite Pokemon? Mine is the cute pink JIgglypuff!",
+    "b": "In the game, i use vaporeon a lot. But I think pikachu is the cutest, that’s why I changed my name to match. Lately, I think baby Yoda is the cutest though. Have you seen baby yoda?"
+  },
+  {
+    "a": "In the game, i use vaporeon a lot. But I think pikachu is the cutest, that’s why I changed my name to match. Lately, I think baby Yoda is the cutest though. Have you seen baby yoda?",
+    "b": "I have heard of him and seen him here and there, but admit I don't have Disney+, so I only heard baby yoda is super cute and popular. Maybe I'll binge watch The Mandalorian in a couple of years like I did Game of Thrones..."
+  },
+  {
+    "a": "I have heard of him and seen him here and there, but admit I don't have Disney+, so I only heard baby yoda is super cute and popular. Maybe I'll binge watch The Mandalorian in a couple of years like I did Game of Thrones...",
+    "b": "What is your favorite show to watch right now?"
+  },
+  {
+    "a": "What is your favorite show to watch right now?",
+    "b": "Admit I really like watching Modern Family and Mix-ish. Reruns and new episodes. I find them cleverly written. What're you watching these days on TV?"
+  },
+  {
+    "a": "Admit I really like watching Modern Family and Mix-ish. Reruns and new episodes. I find them cleverly written. What're you watching these days on TV?",
+    "b": "I was watching cat rescue videos on YouTube a lot. There sure are a lot of stray cat babies that get stuck in pipes and gutters in South Korea."
+  },
+  {
+    "a": "I was watching cat rescue videos on YouTube a lot. There sure are a lot of stray cat babies that get stuck in pipes and gutters in South Korea.",
+    "b": "Oh dear, I never imagined that happening. Poor things, but good to hear they're being rescued."
+  },
+  {
+    "a": "Oh dear, I never imagined that happening. Poor things, but good to hear they're being rescued.",
+    "b": "Do you like cats or dogs better? Do you have any pets?"
+  },
+  {
+    "a": "Do you like cats or dogs better? Do you have any pets?",
+    "b": "I used to have a cat, hamster and fighting fish, but they've all lived long lives and gone to pet heaven, but I sure miss them."
+  },
+  {
+    "a": "Hi!",
+    "b": "hi there! it's a lovely day to chat with you"
+  },
+  {
+    "a": "hi there! it's a lovely day to chat with you",
+    "b": "Isn't it just! What are you up to today?"
+  },
+  {
+    "a": "Isn't it just! What are you up to today?",
+    "b": "ah I'm waiting to finish work earlier to meet my son at home 🙂"
+  },
+  {
+    "a": "ah I'm waiting to finish work earlier to meet my son at home 🙂",
+    "b": "Oh, excellent! What does your son like to do for fun?"
+  },
+  {
+    "a": "Oh, excellent! What does your son like to do for fun?",
+    "b": "ah he's like to ride his little bicycle around the house and asks me to follow 🙂 what are you up to today?"
+  },
+  {
+    "a": "ah he's like to ride his little bicycle around the house and asks me to follow 🙂 what are you up to today?",
+    "b": "I'm taking a fake sick day from work so I can go to the movies."
+  },
+  {
+    "a": "I'm taking a fake sick day from work so I can go to the movies.",
+    "b": "haha that sounds like a good plan. who are you going with? 🙂"
+  },
+  {
+    "a": "haha that sounds like a good plan. who are you going with? 🙂",
+    "b": "Just by myself. I love seeing movies by myself, it's the best."
+  },
+  {
+    "a": "Just by myself. I love seeing movies by myself, it's the best.",
+    "b": "haha no one will interrupt you!"
+  },
+  {
+    "a": "haha no one will interrupt you!",
+    "b": "Exactly. Exactly! Plus, I don't have to share the popcorn with anyone. What's your favorite movie?"
+  },
+  {
+    "a": "Exactly. Exactly! Plus, I don't have to share the popcorn with anyone. What's your favorite movie?",
+    "b": "haha, popcorn for yourself. my favorite movie is Avatar! what about you?"
+  },
+  {
+    "a": "haha, popcorn for yourself. my favorite movie is Avatar! what about you?",
+    "b": "Get out of town! It's Avatar too. What are the odds!?"
+  },
+  {
+    "a": "Get out of town! It's Avatar too. What are the odds!?",
+    "b": "haha it's a great movie that I haven't found anything of the same quality"
+  },
+  {
+    "a": "haha it's a great movie that I haven't found anything of the same quality",
+    "b": "Yes. Can't wait for the sequels."
+  },
+  {
+    "a": "Hi!",
+    "b": "hello there, nice seeing you"
+  },
+  {
+    "a": "hello there, nice seeing you",
+    "b": "Likewise.... wanted to know if you and the kids would want to join us for Disneyland trip around Christmas?"
+  },
+  {
+    "a": "Likewise.... wanted to know if you and the kids would want to join us for Disneyland trip around Christmas?",
+    "b": "oh wow, that sounds like so much fun! definitely count us in. what is your plan?"
+  },
+  {
+    "a": "oh wow, that sounds like so much fun! definitely count us in. what is your plan?",
+    "b": "Tentative plan is to drive to LA on 23rd and then stay at the Disney resort for 2 nights. I heard Christmas eve they have loads of fun events."
+  },
+  {
+    "a": "Tentative plan is to drive to LA on 23rd and then stay at the Disney resort for 2 nights. I heard Christmas eve they have loads of fun events.",
+    "b": "awesome, I think I won't tell my kids and surprise them last second. How bad do you think the traffic is going to be?"
+  },
+  {
+    "a": "awesome, I think I won't tell my kids and surprise them last second. How bad do you think the traffic is going to be?",
+    "b": "Great idea! I will probably do the same. Surprise surprise.... Traffic might be a little harsh."
+  },
+  {
+    "a": "Great idea! I will probably do the same. Surprise surprise.... Traffic might be a little harsh.",
+    "b": "Yeah... thats a shame but nothing we can do about it. What do you plan to do about dinner the 24th? Do the rooms in the resort have kitchens?"
+  },
+  {
+    "a": "Yeah... thats a shame but nothing we can do about it. What do you plan to do about dinner the 24th? Do the rooms in the resort have kitchens?",
+    "b": "Good point. I am not sure about that. Let me inquire about that. If not, then we can look for an Airbnb closeby. Does that work?"
+  },
+  {
+    "a": "Good point. I am not sure about that. Let me inquire about that. If not, then we can look for an Airbnb closeby. Does that work?",
+    "b": "Yeah, I think so. It might be a tough decision though, if we want to have a nice dinner then we have to leave the parks early to start cooking. Another option is to have dinner at a restaurant."
+  },
+  {
+    "a": "Yeah, I think so. It might be a tough decision though, if we want to have a nice dinner then we have to leave the parks early to start cooking. Another option is to have dinner at a restaurant.",
+    "b": "but I would think everything is closed on christmas eve"
+  },
+  {
+    "a": "but I would think everything is closed on christmas eve",
+    "b": "Thats true. Hotels with restaurants sometimes offer dinners for christmas and new year's eve. We should call and ask about it."
+  },
+  {
+    "a": "Thats true. Hotels with restaurants sometimes offer dinners for christmas and new year's eve. We should call and ask about it.",
+    "b": "Sure, I can take a lead on that. What are you getting for your <REDACTED_TERM> year old this time?"
+  },
+  {
+    "a": "Sure, I can take a lead on that. What are you getting for your <REDACTED_TERM> year old this time?",
+    "b": "I was thinking on getting a large set of standard legos. What will you get for yours?"
+  },
+  {
+    "a": "I was thinking on getting a large set of standard legos. What will you get for yours?",
+    "b": "Likewise. My son is crazy about legos."
+  },
+  {
+    "a": "Likewise. My son is crazy about legos.",
+    "b": "hopefully they don't lose any in the trip. Its going to be hard to explain to them how santa managed to find us in the hotel!"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hi! How's your day going?"
+  },
+  {
+    "a": "Hi! How's your day going?",
+    "b": "I'm doing well. having many meetings today 🙂"
+  },
+  {
+    "a": "I'm doing well. having many meetings today 🙂",
+    "b": "Haha, nice"
+  },
+  {
+    "a": "Haha, nice",
+    "b": "what are you up to?"
+  },
+  {
+    "a": "what are you up to?",
+    "b": "Lots of meetings as well 🙂 Do you have any fun plans for Thanksgiving?"
+  },
+  {
+    "a": "Lots of meetings as well 🙂 Do you have any fun plans for Thanksgiving?",
+    "b": "we're gonna play board games and will be eating lots of food! what about you?"
+  },
+  {
+    "a": "we're gonna play board games and will be eating lots of food! what about you?",
+    "b": "Cool! Planning to spend a couple days at Tahoe What kind of board games do you like?"
+  },
+  {
+    "a": "Cool! Planning to spend a couple days at Tahoe What kind of board games do you like?",
+    "b": "we've been doing Games of Thrones lately. the game takes a very long time to finish though!"
+  },
+  {
+    "a": "we've been doing Games of Thrones lately. the game takes a very long time to finish though!",
+    "b": "Cool! Do you watch Game of Thrones?"
+  },
+  {
+    "a": "Cool! Do you watch Game of Thrones?",
+    "b": "I do. I'm a super fan of it (not the last season though haha). did you watch?"
+  },
+  {
+    "a": "I do. I'm a super fan of it (not the last season though haha). did you watch?",
+    "b": "haha, nope I don't watch it, but my roommate is super into it what other TV shows do you like?"
+  },
+  {
+    "a": "haha, nope I don't watch it, but my roommate is super into it what other TV shows do you like?",
+    "b": "I love Survivor 🙂"
+  },
+  {
+    "a": "I love Survivor 🙂",
+    "b": "what about you?"
+  },
+  {
+    "a": "what about you?",
+    "b": "nice! I mostly like comedy shows like The Good Place and Modern Family"
+  },
+  {
+    "a": "nice! I mostly like comedy shows like The Good Place and Modern Family",
+    "b": "cool, I'll check them out!"
+  },
+  {
+    "a": "Hello",
+    "b": "How's your day going?"
+  },
+  {
+    "a": "How's your day going?",
+    "b": "Good so far. How's yours?"
+  },
+  {
+    "a": "Good so far. How's yours?",
+    "b": "Ehhh so-so. My moped broke down on the way to work this morning and I am in the shop getting it fixed..."
+  },
+  {
+    "a": "Ehhh so-so. My moped broke down on the way to work this morning and I am in the shop getting it fixed...",
+    "b": "Oh! That's bad! How long will it take to get it fixed?"
+  },
+  {
+    "a": "Oh! That's bad! How long will it take to get it fixed?",
+    "b": "The mechanic is trying to figure that out now. Apparently I wasn't supposed to be using diesel lol."
+  },
+  {
+    "a": "The mechanic is trying to figure that out now. Apparently I wasn't supposed to be using diesel lol.",
+    "b": "Haha! Hope it doesn't take too long. Let me know if you are able to make it for lunch."
+  },
+  {
+    "a": "Haha! Hope it doesn't take too long. Let me know if you are able to make it for lunch.",
+    "b": "Okay sounds good. Would you be able to pick me up by the way, if they don't finish up here in time? Did you drive to work today?"
+  },
+  {
+    "a": "Okay sounds good. Would you be able to pick me up by the way, if they don't finish up here in time? Did you drive to work today?",
+    "b": "Oh, I have a packed schedule today at work. I will find time in about an hour. Let me know if that works."
+  },
+  {
+    "a": "Oh, I have a packed schedule today at work. I will find time in about an hour. Let me know if that works.",
+    "b": "That should be fine I think. Did you catch the Warriors game last night btw?"
+  },
+  {
+    "a": "That should be fine I think. Did you catch the Warriors game last night btw?",
+    "b": "no, i was busy catching up with a friend. I heard they played really well. Rooting for them this season 🙂 Ahh, they lost again 😞 Things aren't going to be too good until Steph gets better! Oh! I think they will find a way. The team still looks too strong to me."
+  },
+  {
+    "a": "no, i was busy catching up with a friend. I heard they played really well. Rooting for them this season 🙂 Ahh, they lost again 😞 Things aren't going to be too good until Steph gets better! Oh! I think they will find a way. The team still looks too strong to me.",
+    "b": "Haha I appreciate your faith, but their record thus far is hard to refute!"
+  },
+  {
+    "a": "Haha I appreciate your faith, but their record thus far is hard to refute!",
+    "b": "hehe, i am true fan! Well anyways let me know how the repair work goes. I need to run now for a meeting. ttyl"
+  },
+  {
+    "a": "Hello!",
+    "b": "any improvements in your marathon time?"
+  },
+  {
+    "a": "any improvements in your marathon time?",
+    "b": "No, only a few minutes. I still find it difficult to run long races"
+  },
+  {
+    "a": "No, only a few minutes. I still find it difficult to run long races",
+    "b": "I see. Are you planning to do any sporting events in the coming months?"
+  },
+  {
+    "a": "I see. Are you planning to do any sporting events in the coming months?",
+    "b": "I think a triathalon would be cool"
+  },
+  {
+    "a": "I think a triathalon would be cool",
+    "b": "I like doing Spartan race. It's an obstacle race which is challenging but not overtly so like marathons and triathlons"
+  },
+  {
+    "a": "I like doing Spartan race. It's an obstacle race which is challenging but not overtly so like marathons and triathlons",
+    "b": "I haven't heard of a Spartan race before, what does it involve?"
+  },
+  {
+    "a": "I haven't heard of a Spartan race before, what does it involve?",
+    "b": "It has abt 20 obstacles like crossing high walls, monkey bars, etc. Its fun"
+  },
+  {
+    "a": "It has abt 20 obstacles like crossing high walls, monkey bars, etc. Its fun",
+    "b": "oh wow a full obstable course. that does sound fun! I like the variety"
+  },
+  {
+    "a": "oh wow a full obstable course. that does sound fun! I like the variety",
+    "b": "Wanna sign up for next one? Its in February in Monterey"
+  },
+  {
+    "a": "Wanna sign up for next one? Its in February in Monterey",
+    "b": "hmm that sounds very soon. would there be enough time to train? I think I would like to try one later in the year"
+  },
+  {
+    "a": "hmm that sounds very soon. would there be enough time to train? I think I would like to try one later in the year",
+    "b": "1-2 months is a good amount of time, if you workout regularly. It's a lot about the technique, which we can practice in training sessions."
+  },
+  {
+    "a": "1-2 months is a good amount of time, if you workout regularly. It's a lot about the technique, which we can practice in training sessions.",
+    "b": "ok, sign me up. it's more fun to do it with friends"
+  },
+  {
+    "a": "ok, sign me up. it's more fun to do it with friends",
+    "b": "Awesome! There is a training ground in San Jose. Will coordinate with you next time we go for practice."
+  },
+  {
+    "a": "Awesome! There is a training ground in San Jose. Will coordinate with you next time we go for practice.",
+    "b": "Sounds good!"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hey, how are you doing?"
+  },
+  {
+    "a": "Hey, how are you doing?",
+    "b": "I'm great, thanks. I'm getting ready for a skydiving lesson."
+  },
+  {
+    "a": "I'm great, thanks. I'm getting ready for a skydiving lesson.",
+    "b": "ooh, nice. That sounds adventurous. Where is it?"
+  },
+  {
+    "a": "ooh, nice. That sounds adventurous. Where is it?",
+    "b": "Right near my home town: Seville, Spain."
+  },
+  {
+    "a": "Right near my home town: Seville, Spain.",
+    "b": "Awesome! Is this the first time you are diving?"
+  },
+  {
+    "a": "Awesome! Is this the first time you are diving?",
+    "b": "Yes. I'm feeling a little trepidatious. Have you done it before?"
+  },
+  {
+    "a": "Yes. I'm feeling a little trepidatious. Have you done it before?",
+    "b": "Nope, never! I know a couple of friends who have. They mentioned its absolutely terrifying. Good luck!"
+  },
+  {
+    "a": "Nope, never! I know a couple of friends who have. They mentioned its absolutely terrifying. Good luck!",
+    "b": "Haha thanks! Have you tried any extreme sports?"
+  },
+  {
+    "a": "Haha thanks! Have you tried any extreme sports?",
+    "b": "I tried skiing and white water rafting. Does that count as extreme?"
+  },
+  {
+    "a": "I tried skiing and white water rafting. Does that count as extreme?",
+    "b": "White water rafting, definitely! As for skiing, that depends on how fast you go. Do you ski a lot?"
+  },
+  {
+    "a": "White water rafting, definitely! As for skiing, that depends on how fast you go. Do you ski a lot?",
+    "b": "nope, whenever I went fast I fell badly"
+  },
+  {
+    "a": "nope, whenever I went fast I fell badly",
+    "b": "I tried skiing once, and by the end of the beginner class I was able to make it down a baby-sized slope. I was very proud of myself."
+  },
+  {
+    "a": "I tried skiing once, and by the end of the beginner class I was able to make it down a baby-sized slope. I was very proud of myself.",
+    "b": "Yeah, they make you do that. I also tried going down the baby slope, but my stopping wasn't perfect, and I mostly fell at the end"
+  },
+  {
+    "a": "Yeah, they make you do that. I also tried going down the baby slope, but my stopping wasn't perfect, and I mostly fell at the end",
+    "b": "Hey, so long as you get to the bottom, it's all good!"
+  },
+  {
+    "a": "Hi!",
+    "b": "hey, whats up?"
+  },
+  {
+    "a": "hey, whats up?",
+    "b": "I was not able to attend the lectures last week. Can you help me understand some concepts?"
+  },
+  {
+    "a": "I was not able to attend the lectures last week. Can you help me understand some concepts?",
+    "b": "well, I'm not sure I'm the best for the job, but I can try!"
+  },
+  {
+    "a": "well, I'm not sure I'm the best for the job, but I can try!",
+    "b": "I was not able to figure out the last few slides. I think its best to discuss this in person. Do you have time right now?"
+  },
+  {
+    "a": "I was not able to figure out the last few slides. I think its best to discuss this in person. Do you have time right now?",
+    "b": "I'm afraid not, right now I'm in a meeting and I'll be going for lunch afterwards. How about tomorrow at noon?"
+  },
+  {
+    "a": "I'm afraid not, right now I'm in a meeting and I'll be going for lunch afterwards. How about tomorrow at noon?",
+    "b": "No problem! Sure. We still have plenty of time for the test. Anyways, how's your preparation going?"
+  },
+  {
+    "a": "No problem! Sure. We still have plenty of time for the test. Anyways, how's your preparation going?",
+    "b": "not feeling too sure about it tbh. I've been super busy so I haven't study much 😞. I might join some of the study sessions later"
+  },
+  {
+    "a": "not feeling too sure about it tbh. I've been super busy so I haven't study much 😞. I might join some of the study sessions later",
+    "b": "Same feeling here! But i think the syllabus may not that tough. You may be able to cover it up over the weekend."
+  },
+  {
+    "a": "Same feeling here! But i think the syllabus may not that tough. You may be able to cover it up over the weekend.",
+    "b": "not my ideal idea of a weekend, but I guess it'll have to be like that."
+  },
+  {
+    "a": "not my ideal idea of a weekend, but I guess it'll have to be like that.",
+    "b": "True! This will be a very hectic November! I do like the course content though. Its very much up to date with latest research findings."
+  },
+  {
+    "a": "True! This will be a very hectic November! I do like the course content though. Its very much up to date with latest research findings.",
+    "b": "yeah, our professor really goes out of their way to make the class interesting, glad I managed to get in it."
+  },
+  {
+    "a": "yeah, our professor really goes out of their way to make the class interesting, glad I managed to get in it.",
+    "b": "Thats pretty cool! I hope you do well next week."
+  },
+  {
+    "a": "Thats pretty cool! I hope you do well next week.",
+    "b": "thank you, bye!"
+  },
+  {
+    "a": "Hello!",
+    "b": "How was your party last week?"
+  },
+  {
+    "a": "How was your party last week?",
+    "b": "It was really fun! We are a bunch of turkey"
+  },
+  {
+    "a": "It was really fun! We are a bunch of turkey",
+    "b": "haha... you ate Turkeys' or you like calling your bunch Turkey?"
+  },
+  {
+    "a": "haha... you ate Turkeys' or you like calling your bunch Turkey?",
+    "b": "*ate 😂"
+  },
+  {
+    "a": "*ate 😂",
+    "b": "Haha... thought so! But it was funny eitherways"
+  },
+  {
+    "a": "Haha... thought so! But it was funny eitherways",
+    "b": "So much turkey leftovers"
+  },
+  {
+    "a": "So much turkey leftovers",
+    "b": "did you cook it at home, or got it from outside?"
+  },
+  {
+    "a": "did you cook it at home, or got it from outside?",
+    "b": "We cooked it at a friends house. I brought the mashed potatos haha"
+  },
+  {
+    "a": "We cooked it at a friends house. I brought the mashed potatos haha",
+    "b": "Nice... I always find it hard to fit the turkey in my small oven. Also, we are not big turkey fans... so we roll with Thanksgiving with chicken 😉"
+  },
+  {
+    "a": "Nice... I always find it hard to fit the turkey in my small oven. Also, we are not big turkey fans... so we roll with Thanksgiving with chicken 😉",
+    "b": "chicken also sounds good"
+  },
+  {
+    "a": "chicken also sounds good",
+    "b": "we played a lot of fun games in our party. Did you have any fun things you did?"
+  },
+  {
+    "a": "we played a lot of fun games in our party. Did you have any fun things you did?",
+    "b": "We played pictionary. I never played before but it was a bunch of fun. what did you play?"
+  },
+  {
+    "a": "We played pictionary. I never played before but it was a bunch of fun. what did you play?",
+    "b": "Pictionary is fun! We played office tennis. In that we take paper balls and using writing pads as rackets, two players have to work together to put the ball in a bucket kept at a distance. It was a lot of fun."
+  },
+  {
+    "a": "Pictionary is fun! We played office tennis. In that we take paper balls and using writing pads as rackets, two players have to work together to put the ball in a bucket kept at a distance. It was a lot of fun.",
+    "b": "that sounds very challenging"
+  },
+  {
+    "a": "hello",
+    "b": "how is the youtube video creation going?"
+  },
+  {
+    "a": "how is the youtube video creation going?",
+    "b": "going pretty good, I was about to finish composing my second song and post it on youtube/soundcloud etc"
+  },
+  {
+    "a": "going pretty good, I was about to finish composing my second song and post it on youtube/soundcloud etc",
+    "b": "Whoa! Looking forward to listening to it. What softewares you use for it?"
+  },
+  {
+    "a": "Whoa! Looking forward to listening to it. What softewares you use for it?",
+    "b": "I used logic pro x, pretty handy stuff as you can write code to generate guitar strumming pattern"
+  },
+  {
+    "a": "I used logic pro x, pretty handy stuff as you can write code to generate guitar strumming pattern",
+    "b": "oh cool! What sort of music do you compose?"
+  },
+  {
+    "a": "oh cool! What sort of music do you compose?",
+    "b": "I got most inspired by Jazz and electro swings, but am trying to get more into jpop recently as one of my band member likes anime"
+  },
+  {
+    "a": "I got most inspired by Jazz and electro swings, but am trying to get more into jpop recently as one of my band member likes anime",
+    "b": "Nice.... you are a rockstar! 😉"
+  },
+  {
+    "a": "Nice.... you are a rockstar! 😉",
+    "b": "haha thanks, do you plan any instruments?"
+  },
+  {
+    "a": "haha thanks, do you plan any instruments?",
+    "b": "Yeah.... I play bit of guitar. Just got my first monitor this week"
+  },
+  {
+    "a": "Yeah.... I play bit of guitar. Just got my first monitor this week",
+    "b": "nice I'm tyring to learn guitar recently also, it's so hard to play f chord"
+  },
+  {
+    "a": "nice I'm tyring to learn guitar recently also, it's so hard to play f chord",
+    "b": "yes, the bar chords are the worst. It took me several months to play them well. I still can't play them for a long time though"
+  },
+  {
+    "a": "yes, the bar chords are the worst. It took me several months to play them well. I still can't play them for a long time though",
+    "b": "right, but bar chords are so versatile, almost like cheating as in you can play anything with the same gesture"
+  },
+  {
+    "a": "right, but bar chords are so versatile, almost like cheating as in you can play anything with the same gesture",
+    "b": "That's true. It's like the alphabets in a language. Once you know them, you can pretty much write word"
+  },
+  {
+    "a": "That's true. It's like the alphabets in a language. Once you know them, you can pretty much write word",
+    "b": "will spend more time work on my bar chord!"
+  },
+  {
+    "a": "Hi!",
+    "b": "Hey! How’s your day going?"
+  },
+  {
+    "a": "What??",
+    "b": "I was screaming in agony upon recounting my day."
+  },
+  {
+    "a": "I was screaming in agony upon recounting my day.",
+    "b": "Oh no! What’s happened?"
+  },
+  {
+    "a": "Oh no! What’s happened?",
+    "b": "A project I've been working on for some months got shelved. So I'm a mix of helpless, sad, and angry."
+  },
+  {
+    "a": "A project I've been working on for some months got shelved. So I'm a mix of helpless, sad, and angry.",
+    "b": "Ah that sucks. At least it’s not personal. Not that it helps right now, but that does happen all the time"
+  },
+  {
+    "a": "Ah that sucks. At least it’s not personal. Not that it helps right now, but that does happen all the time",
+    "b": "Lol. Would you say that to someone who lost a loved one - or some similar circumstance?"
+  },
+  {
+    "a": "Lol. Would you say that to someone who lost a loved one - or some similar circumstance?",
+    "b": "Well, no, of course not! Let me stick with “Ah that sucks” by itself, then."
+  },
+  {
+    "a": "Well, no, of course not! Let me stick with “Ah that sucks” by itself, then.",
+    "b": "No worries. Was pulling your leg. I forgot to ask how your day was going?"
+  },
+  {
+    "a": "No worries. Was pulling your leg. I forgot to ask how your day was going?",
+    "b": "Haha, apart from having my leg pulled mercilessly, it’s going great ;). My main problem today is deciding what to have for lunch."
+  },
+  {
+    "a": "Haha, apart from having my leg pulled mercilessly, it’s going great ;). My main problem today is deciding what to have for lunch.",
+    "b": "Lol. What are your choices? I'm trying out keto! It's pretty tiring."
+  },
+  {
+    "a": "Lol. What are your choices? I'm trying out keto! It's pretty tiring.",
+    "b": "Oh I hear a lot about keto. I’m trying to watch my weight, would you recommend it?"
+  },
+  {
+    "a": "Hi!",
+    "b": "What was the most difficult thing you experienced this past year?"
+  },
+  {
+    "a": "What was the most difficult thing you experienced this past year?",
+    "b": "I normally don't reflect back too much on things, but i guess 2019 have been very favorable for me in terms of time spent with family and friends and work life balance. Why do you ask?"
+  },
+  {
+    "a": "I normally don't reflect back too much on things, but i guess 2019 have been very favorable for me in terms of time spent with family and friends and work life balance. Why do you ask?",
+    "b": "I just released a book on <REDACTED_TERM> to help people process the past 12 months and start the new year with a fresh outlook 🙂"
+  }
+]

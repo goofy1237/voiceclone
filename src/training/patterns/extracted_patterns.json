@@ -1,0 +1,142 @@
+{
+  "avg_response_words": 8,
+  "filler_phrases": [
+    "like",
+    "you know",
+    "right",
+    "actually",
+    "look",
+    "yeah",
+    "anyway",
+    "honestly",
+    "sort of",
+    "kind of"
+  ],
+  "informal_patterns": [
+    "gonna",
+    "wanna",
+    "gotta"
+  ],
+  "example_exchanges": [
+    {
+      "a": "do we need reservations?",
+      "b": "\"oh, no. we can walk right in.\""
+    },
+    {
+      "a": "Pretty good. I just drank this new hint water. so good",
+      "b": "ohh, what kind of \"hint\" did it have?"
+    },
+    {
+      "a": "lol I tried this tangerine walnut icecream that was super weird",
+      "b": "haha, I work close to a cafe which once prepared a paprika icecream"
+    },
+    {
+      "a": "Oh cool! What is \"NeurIPS\"?",
+      "b": "Neural Information Processing Systems"
+    },
+    {
+      "a": "i think that i might.",
+      "b": "good! i just thought i'd let you know."
+    },
+    {
+      "a": "no, they smell like a thrift shop.",
+      "b": "yes, a thrift shop has that same smell."
+    },
+    {
+      "a": "my wife left me.",
+      "b": "why did she leave you?"
+    },
+    {
+      "a": "i'm busy this friday. i'm sorry.",
+      "b": "what do you have to do?"
+    },
+    {
+      "a": "i started school recently.",
+      "b": "where are you going to school?"
+    },
+    {
+      "a": "do you take good care of it?",
+      "b": "oh, yes. i wash it once a week."
+    },
+    {
+      "a": "people talk about current events.",
+      "b": "what do they say?"
+    },
+    {
+      "a": "when are they going to fix this problem?",
+      "b": "they said they need more money."
+    },
+    {
+      "a": "i've called you a hundred times today.",
+      "b": "i was busy doing something. i apologize."
+    },
+    {
+      "a": "the weather in california is unpredictable, so you never know.",
+      "b": "that is true. the weather is constantly changing."
+    },
+    {
+      "a": "how big is \"pretty big\"?",
+      "b": "it has about 140,000 people."
+    },
+    {
+      "a": "no. i'm divorced.",
+      "b": "when did you get divorced?"
+    },
+    {
+      "a": "I really enjoyed White Collar on Netflix do you watch a lot of TV shows",
+      "b": "Not a lot! But I preparing for a good vacation season 🙂 What is white collar about?"
+    },
+    {
+      "a": "maybe you're right.",
+      "b": "maybe we should get going."
+    },
+    {
+      "a": "that would ruin things, i want to go so badly.",
+      "b": "the weather in california is unpredictable, so you never know."
+    },
+    {
+      "a": "friends will lend you money when you're broke.",
+      "b": "as long as you pay them back."
+    },
+    {
+      "a": "that's a good idea.",
+      "b": "then you can wipe your seat and window."
+    },
+    {
+      "a": "I slammed onto an ice wall, but I got better and turning after that haha",
+      "b": "a resort in Montreal"
+    },
+    {
+      "a": "yeah, let's do that.",
+      "b": "okay, until next time then."
+    },
+    {
+      "a": "a resort in Montreal",
+      "b": "Oh cool! do you know any french? I used to take french in high school but basically forgot most of it"
+    },
+    {
+      "a": "hi, how are you. is alice there?",
+      "b": "speaking. what's up?"
+    },
+    {
+      "a": "you made me wanna try it but I doubt about the health part haha",
+      "b": "haha \"You only live once\" as they say!"
+    },
+    {
+      "a": "my friend got a ticket for doing 75.",
+      "b": "your friend was unlucky."
+    },
+    {
+      "a": "do you ever pray for money?",
+      "b": "not yet. i won't need to do that until i graduate from high school."
+    },
+    {
+      "a": "it has wonderful restaurants.",
+      "b": "it has great schools."
+    },
+    {
+      "a": "not at all, but I want to practice more alright. I gotta go!",
+      "b": "Okay! It was nice talking to you"
+    }
+  ]
+}
