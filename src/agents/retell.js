@@ -74,15 +74,17 @@ async function createRetellAgent(clientId) {
   }
 
   // Step 2: Create Agent referencing the LLM
+  const voiceId = client.elevenlabs_voice_id || '11labs-Willa';
+  const language = 'en-AU';
   const agentPayload = {
     agent_name: client.agent_name,
     response_engine: {
       type: 'retell-llm',
       llm_id: llmId,
     },
-    voice_id: '11labs-Willa',
+    voice_id: voiceId,
     voice_model: 'eleven_v3',
-    language: 'en-US',
+    language,
     voice_speed: 1.0,
     voice_temperature: 1.0,
     responsiveness: 1.0,
@@ -103,7 +105,10 @@ async function createRetellAgent(clientId) {
     // Save both IDs
     await supabase
       .from('clients')
-      .update({ retell_agent_id: agentId })
+      .update({
+        retell_agent_id: agentId,
+        retell_llm_id: llmId,
+      })
       .eq('id', clientId);
 
     return { agent_id: agentId, llm_id: llmId, ...agentRes.data };
@@ -117,13 +122,16 @@ async function createRetellAgent(clientId) {
 /**
  * Update the Retell LLM prompt with fresh prospect memory.
  * Called before every call so memory is always current.
+ *
+ * Uses the retell_llm_id stored on the client at creation time — does not
+ * call /get-agent (which is unreliable due to a known Retell-side versioning bug).
  */
 async function updateAgentForProspect(clientId, prospectId) {
   console.log(`[retell] Updating agent for prospect ${prospectId}...`);
 
   const { data: client } = await supabase
     .from('clients')
-    .select('retell_agent_id')
+    .select('retell_agent_id, retell_llm_id')
     .eq('id', clientId)
     .single();
 
@@ -131,22 +139,12 @@ async function updateAgentForProspect(clientId, prospectId) {
     throw new Error('No Retell agent ID found for client');
   }
 
-  // Get the LLM ID from the agent
-  let llmId;
-  try {
-    const agentRes = await axios.get(`${RETELL_API_BASE}/get-agent/${client.retell_agent_id}`, {
-      headers: retellHeaders,
-    });
-    llmId = agentRes.data.response_engine?.llm_id;
-  } catch (err) {
-    console.error('[retell] Failed to fetch agent:', err.response?.data || err.message);
-    throw new Error('Failed to fetch Retell agent');
+  if (!client.retell_llm_id) {
+    console.warn(`[retell] No retell_llm_id stored for client ${clientId} — skipping memory update for this call. The next agent (re)creation will populate it.`);
+    return { llm_id: null, prompt_length: 0, skipped: true };
   }
 
-  if (!llmId) {
-    throw new Error('No LLM ID found on Retell agent');
-  }
-
+  const llmId = client.retell_llm_id;
   const systemPrompt = await buildSystemPrompt(clientId, prospectId);
 
   try {
@@ -161,6 +159,50 @@ async function updateAgentForProspect(clientId, prospectId) {
   } catch (err) {
     console.error('[retell] Failed to update LLM:', err.response?.data || err.message);
     throw new Error('Failed to update Retell LLM prompt');
+  }
+}
+
+/**
+ * Verify the Retell agent for a client still exists; recreate if Retell has purged it.
+ * Returns the (possibly new) agent_id.
+ */
+async function ensureRetellAgentExists(clientId) {
+  const { data: client, error } = await supabase
+    .from('clients')
+    .select('retell_agent_id')
+    .eq('id', clientId)
+    .single();
+
+  if (error) throw new Error(`Client not found: ${clientId}`);
+
+  if (!client?.retell_agent_id) {
+    console.log(`[retell] No agent on file for client ${clientId} — creating one`);
+    const created = await createRetellAgent(clientId);
+    return created.agent_id;
+  }
+
+  try {
+    await axios.get(`${RETELL_API_BASE}/get-agent/${client.retell_agent_id}`, {
+      headers: retellHeaders,
+    });
+    return client.retell_agent_id;
+  } catch (err) {
+    const status = err.response?.status;
+    const body = JSON.stringify(err.response?.data || '');
+    const notFound = status === 404 || /not.?found/i.test(body);
+    if (!notFound) {
+      console.warn(`[retell] Could not verify agent ${client.retell_agent_id} (status ${status}): ${body || err.message} — proceeding with stored ID`);
+      return client.retell_agent_id;
+    }
+
+    console.warn(`[retell] Agent ${client.retell_agent_id} no longer exists on Retell — recreating`);
+    // Clear the stale ID so createRetellAgent's duplicate guard doesn't try to verify it again
+    await supabase
+      .from('clients')
+      .update({ retell_agent_id: null, retell_llm_id: null })
+      .eq('id', clientId);
+    const created = await createRetellAgent(clientId);
+    return created.agent_id;
   }
 }
 
@@ -186,11 +228,15 @@ async function initiateOutboundCall(prospectId, clientId, phoneNumber) {
     .single();
 
   if (cErr || !client) throw new Error(`Client not found: ${clientId}`);
-  if (!client.retell_agent_id) throw new Error('No Retell agent configured for this client');
 
-  const retellPhone = env.RETELL_PHONE_NUMBER || process.env.RETELL_PHONE_NUMBER;
-  if (!retellPhone) {
-    throw new Error('RETELL_PHONE_NUMBER not configured. Go to app.retellai.com → Phone Numbers → Buy a number → then set RETELL_PHONE_NUMBER in your environment variables.');
+  // Make sure the Retell agent still exists; recreate transparently if Retell purged it.
+  const agentId = await ensureRetellAgentExists(clientId);
+
+  const fromNumber = client.retell_phone_number
+    || env.RETELL_PHONE_NUMBER
+    || process.env.RETELL_PHONE_NUMBER;
+  if (!fromNumber) {
+    throw new Error('No phone number configured for this client. Set RETELL_PHONE_NUMBER env var or provision a per-client number.');
   }
 
   // Update agent with fresh prospect memory
@@ -200,9 +246,9 @@ async function initiateOutboundCall(prospectId, clientId, phoneNumber) {
   let retellCall;
   try {
     const callRes = await axios.post(`${RETELL_API_BASE}/v2/create-phone-call`, {
-      from_number: retellPhone,
+      from_number: fromNumber,
       to_number: phoneNumber,
-      agent_id: client.retell_agent_id,
+      agent_id: agentId,
       metadata: {
         prospect_id: prospectId,
         client_id: clientId,
@@ -258,4 +304,4 @@ async function getRetellCallStatus(retellCallId) {
   }
 }
 
-module.exports = { createRetellAgent, updateAgentForProspect, initiateOutboundCall, getRetellCallStatus };
+module.exports = { createRetellAgent, ensureRetellAgentExists, updateAgentForProspect, initiateOutboundCall, getRetellCallStatus };

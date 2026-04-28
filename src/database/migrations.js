@@ -91,6 +91,9 @@ CREATE TABLE IF NOT EXISTS clients (
   agent_personality text DEFAULT 'warm, direct, curious',
   elevenlabs_voice_id text,
   retell_agent_id text,
+  retell_llm_id text,
+  retell_phone_number text,
+  phone_number_provisioned_at timestamptz,
   vapi_agent_id text,
   soul_document text,
   system_prompt text,
@@ -151,7 +154,12 @@ CREATE TABLE IF NOT EXISTS calls (
 }
 
 function getAlterSQL() {
-  return '';
+  return `
+ALTER TABLE clients ADD COLUMN IF NOT EXISTS retell_llm_id text;
+ALTER TABLE clients ADD COLUMN IF NOT EXISTS elevenlabs_voice_id text;
+ALTER TABLE clients ADD COLUMN IF NOT EXISTS retell_phone_number text;
+ALTER TABLE clients ADD COLUMN IF NOT EXISTS phone_number_provisioned_at timestamptz;
+  `;
 }
 
 module.exports = { runMigrations, runDDLviaManagementAPI, getFullMigrationSQL, getAlterSQL };
