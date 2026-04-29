@@ -12,7 +12,8 @@ const supabase = require('./src/database/client');
 const { verifyConnection } = require('./src/database/client');
 const webhooks = require('./src/webhooks/index');
 const { generateAndSaveSoul } = require('./src/soul/generator');
-const { createRetellAgent, updateAgentForProspect, initiateOutboundCall, getRetellCallStatus, registerVoiceWithRetell } = require('./src/agents/retell');
+const { createRetellAgent, updateAgentForProspect, updateAgentBasePrompt, initiateOutboundCall, getRetellCallStatus, registerVoiceWithRetell } = require('./src/agents/retell');
+const { refineSoul } = require('./src/soul/refiner');
 const { buildSystemPrompt } = require('./src/prompts/builder');
 const { RETELL_API_BASE } = require('./config/constants');
 const { apiKeyAuth, enforceClientIsolation, requireUser, requireClientOwnership, supabaseAuth } = require('./src/middleware/auth');
@@ -807,6 +808,82 @@ app.get('/api/clients/:clientId/info', requireUser, requireClientOwnership, asyn
     if (error || !client) return res.status(404).json({ error: 'Client not found' });
     res.json(client);
   } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/clients/:clientId/soul — current soul JSON for the editor
+app.get('/api/clients/:clientId/soul', requireUser, requireClientOwnership, async (req, res) => {
+  try {
+    const { data: client, error } = await supabase
+      .from('clients')
+      .select('soul_document, soul_updated_at')
+      .eq('id', req.params.clientId)
+      .single();
+    if (error || !client?.soul_document) {
+      return res.status(404).json({ error: 'Client soul not found' });
+    }
+    const soul = typeof client.soul_document === 'string'
+      ? JSON.parse(client.soul_document)
+      : client.soul_document;
+    res.json({ soul, updated_at: client.soul_updated_at });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /api/clients/:clientId/soul/preview — refine soul without saving
+app.post('/api/clients/:clientId/soul/preview', requireUser, requireClientOwnership, async (req, res) => {
+  try {
+    const { instruction } = req.body || {};
+    if (!instruction || !instruction.trim()) {
+      return res.status(400).json({ error: 'instruction required' });
+    }
+
+    const { data: client, error } = await supabase
+      .from('clients')
+      .select('soul_document')
+      .eq('id', req.params.clientId)
+      .single();
+    if (error || !client?.soul_document) {
+      return res.status(404).json({ error: 'Client soul not found' });
+    }
+
+    const currentSoul = typeof client.soul_document === 'string'
+      ? JSON.parse(client.soul_document)
+      : client.soul_document;
+
+    const refined = await refineSoul({ currentSoul, instruction });
+
+    res.json({ refined_soul: refined });
+  } catch (err) {
+    console.error('[soul/preview] failed:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /api/clients/:clientId/soul/apply — save refined soul + push to Retell
+app.post('/api/clients/:clientId/soul/apply', requireUser, requireClientOwnership, async (req, res) => {
+  try {
+    const { soul } = req.body || {};
+    if (!soul || !soul.identity) {
+      return res.status(400).json({ error: 'Valid soul object required' });
+    }
+
+    const { error } = await supabase
+      .from('clients')
+      .update({
+        soul_document: soul,
+        soul_updated_at: new Date().toISOString(),
+      })
+      .eq('id', req.params.clientId);
+    if (error) throw new Error(`Failed to save soul: ${error.message}`);
+
+    await updateAgentBasePrompt(req.params.clientId);
+
+    res.json({ ok: true, soul });
+  } catch (err) {
+    console.error('[soul/apply] failed:', err.message);
     res.status(500).json({ error: err.message });
   }
 });

@@ -97,6 +97,7 @@ CREATE TABLE IF NOT EXISTS clients (
   phone_number_provisioned_at timestamptz,
   vapi_agent_id text,
   soul_document text,
+  soul_updated_at timestamptz,
   system_prompt text,
   closing_enabled boolean DEFAULT false,
   booking_enabled boolean DEFAULT true,
@@ -163,6 +164,7 @@ ALTER TABLE clients ADD COLUMN IF NOT EXISTS retell_phone_number text;
 ALTER TABLE clients ADD COLUMN IF NOT EXISTS phone_number_provisioned_at timestamptz;
 ALTER TABLE clients ADD COLUMN IF NOT EXISTS owner_id uuid REFERENCES auth.users(id) ON DELETE CASCADE;
 ALTER TABLE clients ADD COLUMN IF NOT EXISTS personality_traits text;
+ALTER TABLE clients ADD COLUMN IF NOT EXISTS soul_updated_at timestamptz;
   `;
 }
 

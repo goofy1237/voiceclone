@@ -5,6 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard — AI Closer Platform</title>
   <link rel="stylesheet" href="/css/dashboard.css">
+  <style>
+    .soul-block { margin-bottom: 1.25rem; }
+    .soul-block h5 { margin: 0 0 0.5rem 0; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 600; }
+    .soul-field { padding: 0.25rem 0; }
+    .soul-changed { border-left: 3px solid var(--amber, #f59e0b); padding-left: 0.75rem; background: rgba(245, 158, 11, 0.06); border-radius: 4px; }
+    .soul-row { display: grid; grid-template-columns: 180px 1fr; gap: 0.75rem; padding: 0.4rem 0; border-bottom: 1px dashed var(--border); font-size: 0.9rem; }
+    .soul-row:last-child { border-bottom: 0; }
+    .soul-key { color: var(--text-muted); font-size: 0.85rem; }
+    .soul-val { color: var(--text); white-space: pre-wrap; word-break: break-word; }
+    .soul-list { margin: 0; padding-left: 1.1rem; }
+    .soul-list li { padding: 0.15rem 0; }
+    .soul-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    @media (max-width: 720px) {
+      .soul-row { grid-template-columns: 1fr; }
+      .soul-key { font-weight: 600; }
+    }
+  </style>
 </head>
 <body>
 
@@ -69,6 +86,74 @@
           <div class="stat-card">
             <div class="stat-label">Pipeline Value</div>
             <div class="stat-value" id="statPipeline">--</div>
+          </div>
+        </div>
+
+        <!-- Personality / Soul Editor -->
+        <div class="section">
+          <div class="section-header">
+            <h3 class="section-title">Personality</h3>
+            <span class="text-muted" style="font-size:0.85rem;" id="soulUpdatedAt"></span>
+          </div>
+
+          <div class="card" id="soulCard">
+            <div class="loading-state" id="soulLoading">
+              <div class="spinner"></div>
+              <span>Loading personality...</span>
+            </div>
+
+            <div id="soulView" class="hidden">
+              <div id="soulCurrent"></div>
+
+              <div style="margin-top:1.5rem;border-top:1px solid var(--border);padding-top:1.25rem;">
+                <label class="form-label" for="refineInstruction" style="font-weight:600;">What would you like to change?</label>
+                <textarea id="refineInstruction" class="form-input" rows="3" maxlength="500"
+                  placeholder="e.g. 'Make her more confident' or 'Less American — more Melbourne vibe'"
+                  style="resize:vertical;font-family:inherit;"></textarea>
+                <div class="form-hint" style="display:flex;justify-content:space-between;">
+                  <span>Describe the change in plain English. Takes ~10–15s to generate.</span>
+                  <span><span id="refineCharCount">0</span>/500</span>
+                </div>
+                <div style="margin-top:0.75rem;">
+                  <button class="btn btn-primary" id="refineBtn" onclick="generateSoulPreview()">Generate Preview</button>
+                </div>
+                <div id="refineError" class="hidden" style="margin-top:0.75rem;padding:0.75rem;background:var(--red-bg);border:1px solid var(--red);border-radius:var(--radius);color:var(--red);font-size:0.9rem;"></div>
+              </div>
+            </div>
+
+            <div id="soulPreviewPane" class="hidden" style="margin-top:1.5rem;border-top:1px solid var(--border);padding-top:1.25rem;">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem;">
+                <h4 style="margin:0;">Proposed changes</h4>
+                <div style="display:flex;gap:0.5rem;">
+                  <button class="btn btn-secondary btn-sm" onclick="discardSoulPreview()">Discard</button>
+                  <button class="btn btn-primary btn-sm" onclick="confirmApplySoul()">Apply Changes</button>
+                </div>
+              </div>
+              <div class="grid-2">
+                <div>
+                  <div class="text-muted" style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;">Current</div>
+                  <div id="soulPreviewLeft"></div>
+                </div>
+                <div>
+                  <div class="text-muted" style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;">Proposed</div>
+                  <div id="soulPreviewRight"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Apply Confirm Modal -->
+        <div class="modal-overlay" id="applySoulModal">
+          <div class="modal">
+            <h3 class="modal-title">Apply personality changes?</h3>
+            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;">
+              This will update your agent's personality for all future calls. Active calls aren't affected.
+            </p>
+            <div class="modal-actions">
+              <button class="btn btn-secondary" onclick="closeApplySoulModal()">Cancel</button>
+              <button class="btn btn-primary" id="applySoulBtn" onclick="applySoul()">Apply</button>
+            </div>
           </div>
         </div>
 
@@ -634,8 +719,278 @@
       }
     }
 
+    // --- Soul / Personality ---
+    let currentSoul = null;
+    let proposedSoul = null;
+
+    async function loadSoul() {
+      try {
+        const res = await fetch('/api/clients/' + clientId + '/soul');
+        if (!res.ok) {
+          document.getElementById('soulLoading').innerHTML =
+            '<span class="text-muted">No personality on file yet.</span>';
+          return;
+        }
+        const data = await res.json();
+        currentSoul = data.soul;
+        if (data.updated_at) {
+          document.getElementById('soulUpdatedAt').textContent =
+            'Last updated ' + new Date(data.updated_at).toLocaleString();
+        }
+        renderSoul('soulCurrent', currentSoul);
+        document.getElementById('soulLoading').classList.add('hidden');
+        document.getElementById('soulView').classList.remove('hidden');
+      } catch (err) {
+        console.error('[soul] load failed:', err);
+        document.getElementById('soulLoading').innerHTML =
+          '<span class="text-red">Failed to load personality.</span>';
+      }
+    }
+
+    function renderSoul(targetId, soul, changedPaths) {
+      const el = document.getElementById(targetId);
+      if (!soul) { el.innerHTML = '<span class="text-muted">No soul.</span>'; return; }
+      const id = soul.identity || {};
+      const v = soul.voice || {};
+      const op = soul.opinions || {};
+      const st = soul.stories || {};
+      const cs = soul.conversation_style || {};
+
+      const changed = (path) => changedPaths && changedPaths.has(path);
+      const wrap = (path, html) =>
+        '<div class="soul-field' + (changed(path) ? ' soul-changed' : '') + '">' + html + '</div>';
+
+      const blocks = [];
+
+      // Identity
+      const identityHtml = [
+        '<div class="soul-row"><span class="soul-key">Name</span><span class="soul-val">' + esc(id.full_name) + '</span></div>',
+        '<div class="soul-row"><span class="soul-key">Age</span><span class="soul-val">' + esc(id.age) + '</span></div>',
+        '<div class="soul-row"><span class="soul-key">Location</span><span class="soul-val">' + esc(id.location) + '</span></div>',
+        id.education ? '<div class="soul-row"><span class="soul-key">Education</span><span class="soul-val">' + esc(id.education) + '</span></div>' : '',
+        id.years_in_industry ? '<div class="soul-row"><span class="soul-key">Years in industry</span><span class="soul-val">' + esc(id.years_in_industry) + '</span></div>' : '',
+        id.background ? '<div class="soul-row"><span class="soul-key">Background</span><span class="soul-val">' + esc(id.background) + '</span></div>' : '',
+        id.origin_story ? '<div class="soul-row"><span class="soul-key">Origin story</span><span class="soul-val">' + esc(id.origin_story) + '</span></div>' : '',
+        Array.isArray(id.personal_life_details) && id.personal_life_details.length
+          ? '<div class="soul-row"><span class="soul-key">Personal details</span><span class="soul-val"><ul class="soul-list">' +
+            id.personal_life_details.map(d => '<li>' + esc(d) + '</li>').join('') + '</ul></span></div>'
+          : '',
+      ].join('');
+      blocks.push('<div class="soul-block"><h5>Identity</h5>' + wrap('identity', identityHtml) + '</div>');
+
+      // Personality / traits — derived from voice tone + agent_personality
+      const traits = (clientData?.agent_personality || '').split(',').map(s => s.trim()).filter(Boolean);
+      if (traits.length) {
+        const pillsHtml = '<div class="soul-pills">' + traits.map(t => '<span class="capability-tag active">' + esc(t) + '</span>').join('') + '</div>';
+        blocks.push('<div class="soul-block"><h5>Personality traits</h5>' + pillsHtml + '</div>');
+      }
+
+      // Voice & manner
+      const voiceHtml = [
+        v.tone ? '<div class="soul-row"><span class="soul-key">Tone</span><span class="soul-val">' + esc(v.tone) + '</span></div>' : '',
+        v.pace ? '<div class="soul-row"><span class="soul-key">Pace</span><span class="soul-val">' + esc(v.pace) + '</span></div>' : '',
+        v.how_they_laugh ? '<div class="soul-row"><span class="soul-key">How they laugh</span><span class="soul-val">' + esc(v.how_they_laugh) + '</span></div>' : '',
+        v.how_they_disagree ? '<div class="soul-row"><span class="soul-key">How they disagree</span><span class="soul-val">' + esc(v.how_they_disagree) + '</span></div>' : '',
+        v.how_they_show_enthusiasm ? '<div class="soul-row"><span class="soul-key">How they show enthusiasm</span><span class="soul-val">' + esc(v.how_they_show_enthusiasm) + '</span></div>' : '',
+        v.how_they_handle_silence ? '<div class="soul-row"><span class="soul-key">How they handle silence</span><span class="soul-val">' + esc(v.how_they_handle_silence) + '</span></div>' : '',
+      ].join('');
+      blocks.push('<div class="soul-block"><h5>Voice &amp; manner</h5>' + wrap('voice', voiceHtml) + '</div>');
+
+      // Memorable phrases
+      if (Array.isArray(v.favourite_phrases) && v.favourite_phrases.length) {
+        const phrases = '<ul class="soul-list">' + v.favourite_phrases.map(p => '<li>' + esc(p) + '</li>').join('') + '</ul>';
+        blocks.push('<div class="soul-block"><h5>Memorable phrases</h5>' + wrap('voice.favourite_phrases', phrases) + '</div>');
+      }
+      if (Array.isArray(v.things_they_never_say) && v.things_they_never_say.length) {
+        const never = '<ul class="soul-list">' + v.things_they_never_say.map(p => '<li>' + esc(p) + '</li>').join('') + '</ul>';
+        blocks.push('<div class="soul-block"><h5>Never says</h5>' + wrap('voice.things_they_never_say', never) + '</div>');
+      }
+
+      // Conversation style
+      const csHtml = [
+        cs.how_they_open ? '<div class="soul-row"><span class="soul-key">Opens with</span><span class="soul-val">' + esc(cs.how_they_open) + '</span></div>' : '',
+        cs.how_they_show_curiosity ? '<div class="soul-row"><span class="soul-key">Shows curiosity</span><span class="soul-val">' + esc(cs.how_they_show_curiosity) + '</span></div>' : '',
+        cs.how_they_build_rapport ? '<div class="soul-row"><span class="soul-key">Builds rapport</span><span class="soul-val">' + esc(cs.how_they_build_rapport) + '</span></div>' : '',
+        cs.how_they_handle_objections ? '<div class="soul-row"><span class="soul-key">Handles objections</span><span class="soul-val">' + esc(cs.how_they_handle_objections) + '</span></div>' : '',
+        cs.how_they_close_a_topic ? '<div class="soul-row"><span class="soul-key">Closes topics</span><span class="soul-val">' + esc(cs.how_they_close_a_topic) + '</span></div>' : '',
+        Array.isArray(cs.favourite_questions_to_ask) && cs.favourite_questions_to_ask.length
+          ? '<div class="soul-row"><span class="soul-key">Favourite questions</span><span class="soul-val"><ul class="soul-list">' +
+            cs.favourite_questions_to_ask.map(q => '<li>' + esc(q) + '</li>').join('') + '</ul></span></div>'
+          : '',
+      ].join('');
+      blocks.push('<div class="soul-block"><h5>Conversation style</h5>' + wrap('conversation_style', csHtml) + '</div>');
+
+      // Opinions
+      const opSections = [];
+      if (Array.isArray(op.hot_takes) && op.hot_takes.length) {
+        opSections.push('<div class="soul-row"><span class="soul-key">Hot takes</span><span class="soul-val"><ul class="soul-list">' +
+          op.hot_takes.map(o => '<li>' + esc(o) + '</li>').join('') + '</ul></span></div>');
+      }
+      if (Array.isArray(op.things_they_believe_strongly) && op.things_they_believe_strongly.length) {
+        opSections.push('<div class="soul-row"><span class="soul-key">Convictions</span><span class="soul-val"><ul class="soul-list">' +
+          op.things_they_believe_strongly.map(o => '<li>' + esc(o) + '</li>').join('') + '</ul></span></div>');
+      }
+      if (Array.isArray(op.things_they_are_skeptical_of) && op.things_they_are_skeptical_of.length) {
+        opSections.push('<div class="soul-row"><span class="soul-key">Skeptical of</span><span class="soul-val"><ul class="soul-list">' +
+          op.things_they_are_skeptical_of.map(o => '<li>' + esc(o) + '</li>').join('') + '</ul></span></div>');
+      }
+      if (opSections.length) {
+        blocks.push('<div class="soul-block"><h5>Opinions</h5>' + wrap('opinions', opSections.join('')) + '</div>');
+      }
+
+      // Stories
+      const storiesArr = [
+        ['Personal transformation', st.personal_transformation],
+        ['Best client win', st.best_client_win],
+        ['Hardest moment', st.hardest_moment],
+        ['Funny memory', st.funny_memory],
+      ].filter(([, val]) => val);
+      if (storiesArr.length) {
+        const showAll = storiesArr.length <= 2;
+        const storiesHtml = storiesArr.map(([k, val], idx) => {
+          const cls = !showAll && idx >= 2 ? ' style="display:none;"' : '';
+          return '<div class="soul-row"' + cls + '><span class="soul-key">' + esc(k) + '</span><span class="soul-val">' + esc(val) + '</span></div>';
+        }).join('');
+        const moreBtn = showAll ? '' :
+          '<button class="btn btn-ghost btn-sm" type="button" onclick="this.previousElementSibling.querySelectorAll(\'div[style]\').forEach(d=>d.style.display=\'\');this.remove();" style="margin-top:0.5rem;">Show all stories</button>';
+        blocks.push('<div class="soul-block"><h5>Stories</h5><div>' + storiesHtml + '</div>' + moreBtn + '</div>');
+      }
+
+      el.innerHTML = blocks.join('');
+    }
+
+    function diffSoul(a, b) {
+      const changed = new Set();
+      const stringify = (v) => {
+        if (v === undefined || v === null) return '';
+        if (typeof v === 'string') return v;
+        return JSON.stringify(v);
+      };
+      const topKeys = ['identity', 'voice', 'opinions', 'stories', 'conversation_style'];
+      for (const k of topKeys) {
+        if (stringify(a?.[k]) !== stringify(b?.[k])) changed.add(k);
+      }
+      // sub-paths used in render
+      const subs = [
+        ['voice', 'favourite_phrases'],
+        ['voice', 'things_they_never_say'],
+      ];
+      for (const [parent, child] of subs) {
+        if (stringify(a?.[parent]?.[child]) !== stringify(b?.[parent]?.[child])) {
+          changed.add(parent + '.' + child);
+        }
+      }
+      return changed;
+    }
+
+    async function generateSoulPreview() {
+      const instruction = document.getElementById('refineInstruction').value.trim();
+      const errEl = document.getElementById('refineError');
+      errEl.classList.add('hidden');
+
+      if (!instruction) {
+        errEl.textContent = 'Please describe the change you want.';
+        errEl.classList.remove('hidden');
+        return;
+      }
+
+      const btn = document.getElementById('refineBtn');
+      btn.disabled = true;
+      btn.textContent = 'Generating preview...';
+
+      try {
+        const res = await fetch('/api/clients/' + clientId + '/soul/preview', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ instruction }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Preview failed');
+
+        proposedSoul = data.refined_soul;
+
+        const changed = diffSoul(currentSoul, proposedSoul);
+        renderSoul('soulPreviewLeft', currentSoul, changed);
+        renderSoul('soulPreviewRight', proposedSoul, changed);
+        document.getElementById('soulPreviewPane').classList.remove('hidden');
+        document.getElementById('soulPreviewPane').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch (err) {
+        errEl.textContent = err.message;
+        errEl.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Generate Preview';
+      }
+    }
+
+    function discardSoulPreview() {
+      proposedSoul = null;
+      document.getElementById('soulPreviewPane').classList.add('hidden');
+      document.getElementById('soulPreviewLeft').innerHTML = '';
+      document.getElementById('soulPreviewRight').innerHTML = '';
+    }
+
+    function confirmApplySoul() {
+      if (!proposedSoul) return;
+      document.getElementById('applySoulModal').classList.add('active');
+    }
+
+    function closeApplySoulModal() {
+      document.getElementById('applySoulModal').classList.remove('active');
+    }
+
+    async function applySoul() {
+      if (!proposedSoul) return;
+      const btn = document.getElementById('applySoulBtn');
+      btn.disabled = true;
+      btn.textContent = 'Applying...';
+
+      try {
+        const res = await fetch('/api/clients/' + clientId + '/soul/apply', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ soul: proposedSoul }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Apply failed');
+
+        currentSoul = proposedSoul;
+        proposedSoul = null;
+        renderSoul('soulCurrent', currentSoul);
+        document.getElementById('soulPreviewPane').classList.add('hidden');
+        document.getElementById('refineInstruction').value = '';
+        document.getElementById('refineCharCount').textContent = '0';
+        document.getElementById('soulUpdatedAt').textContent = 'Last updated just now';
+        closeApplySoulModal();
+        showToast('Personality updated.', 'success');
+      } catch (err) {
+        const errEl = document.getElementById('refineError');
+        errEl.textContent = err.message;
+        errEl.classList.remove('hidden');
+        closeApplySoulModal();
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Apply';
+      }
+    }
+
+    function esc(s) {
+      if (s === null || s === undefined) return '';
+      return String(s).replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+      }[c]));
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const ti = document.getElementById('refineInstruction');
+      if (ti) ti.addEventListener('input', () => {
+        document.getElementById('refineCharCount').textContent = ti.value.length;
+      });
+    });
+
     // --- Start ---
     init();
+    loadSoul();
   </script>
 </body>
 </html>

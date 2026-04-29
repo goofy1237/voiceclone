@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS clients (
   phone_number_provisioned_at timestamptz,
   vapi_agent_id text,
   soul_document text,
+  soul_updated_at timestamptz,
   system_prompt text,
   closing_enabled boolean DEFAULT false,
   booking_enabled boolean DEFAULT true,

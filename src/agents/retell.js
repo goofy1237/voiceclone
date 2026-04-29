@@ -369,4 +369,49 @@ async function getRetellCallStatus(retellCallId) {
   }
 }
 
-module.exports = { createRetellAgent, ensureRetellAgentExists, updateAgentForProspect, initiateOutboundCall, getRetellCallStatus, registerVoiceWithRetell };
+/**
+ * Update the Retell LLM with a fresh BASE prompt — used when the soul changes.
+ * Unlike updateAgentForProspect (which injects per-prospect memory before each
+ * call), this writes the global prompt that future calls start from.
+ */
+async function updateAgentBasePrompt(clientId) {
+  console.log(`[retell] Updating base prompt for client ${clientId}...`);
+
+  const { data: client, error } = await supabase
+    .from('clients')
+    .select('retell_llm_id')
+    .eq('id', clientId)
+    .single();
+
+  if (error || !client) throw new Error(`Client not found: ${clientId}`);
+
+  if (!client.retell_llm_id) {
+    console.warn(`[retell] No retell_llm_id for client ${clientId} — base prompt not pushed. Agent will be (re)created later with the new soul.`);
+    return { llm_id: null, prompt_length: 0, skipped: true };
+  }
+
+  const llmId = client.retell_llm_id;
+  const systemPrompt = await buildSystemPrompt(clientId, null);
+
+  // Persist the new base prompt locally too
+  await supabase
+    .from('clients')
+    .update({ system_prompt: systemPrompt })
+    .eq('id', clientId);
+
+  try {
+    await axios.patch(`${RETELL_API_BASE}/update-retell-llm/${llmId}`, {
+      general_prompt: systemPrompt,
+    }, {
+      headers: retellHeaders,
+    });
+
+    console.log(`[retell] Base prompt pushed to LLM ${llmId} (${systemPrompt.length} chars).`);
+    return { llm_id: llmId, prompt_length: systemPrompt.length };
+  } catch (err) {
+    console.error('[retell] Failed to update base prompt:', err.response?.data || err.message);
+    throw new Error('Failed to update Retell LLM base prompt');
+  }
+}
+
+module.exports = { createRetellAgent, ensureRetellAgentExists, updateAgentForProspect, updateAgentBasePrompt, initiateOutboundCall, getRetellCallStatus, registerVoiceWithRetell };
