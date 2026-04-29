@@ -102,10 +102,82 @@
             </div>
           </div>
 
-          <div class="form-group">
-            <label class="form-label" for="elevenlabs_voice_id">ElevenLabs Voice ID (optional)</label>
-            <input class="form-input" type="text" id="elevenlabs_voice_id" name="elevenlabs_voice_id" placeholder="Leave blank for default voice">
+        </div>
+
+        <!-- Voice -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <span class="card-title">Voice</span>
           </div>
+          <p class="text-muted" style="font-size:0.85rem;margin-bottom:0.85rem;">
+            Pick how your AI closer should sound. You can clone your own voice from a sample,
+            pick one we ship with, or use the system default.
+          </p>
+
+          <div style="display:flex;flex-direction:column;gap:0.85rem;">
+            <label style="display:flex;align-items:flex-start;gap:0.6rem;cursor:pointer;">
+              <input type="radio" name="voice_mode" value="clone" id="voice_mode_clone">
+              <span>
+                <strong style="display:block;font-size:0.9rem;">Clone my voice</strong>
+                <span class="text-muted" style="font-size:0.8rem;">Upload a 30s–2min sample. Fish Audio clones it. ~10–30s.</span>
+              </span>
+            </label>
+            <label style="display:flex;align-items:flex-start;gap:0.6rem;cursor:pointer;">
+              <input type="radio" name="voice_mode" value="library" id="voice_mode_library">
+              <span>
+                <strong style="display:block;font-size:0.9rem;">Pick from library</strong>
+                <span class="text-muted" style="font-size:0.8rem;">Choose from our curated voices. No upload needed.</span>
+              </span>
+            </label>
+            <label style="display:flex;align-items:flex-start;gap:0.6rem;cursor:pointer;">
+              <input type="radio" name="voice_mode" value="default" id="voice_mode_default" checked>
+              <span>
+                <strong style="display:block;font-size:0.9rem;">Use default</strong>
+                <span class="text-muted" style="font-size:0.8rem;">System default voice (11labs-Willa).</span>
+              </span>
+            </label>
+          </div>
+
+          <!-- Clone panel -->
+          <div id="clonePanel" class="hidden" style="margin-top:1rem;padding:0.85rem;background:var(--bg-subtle, #f7f7f7);border-radius:var(--radius);">
+            <div class="form-group">
+              <label class="form-label" for="clone_name">Voice Name *</label>
+              <input class="form-input" type="text" id="clone_name" placeholder="e.g. Sarah's Voice">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="clone_audio">Audio Sample * (.mp3 .wav .m4a .ogg, max 10MB)</label>
+              <input class="form-input" type="file" id="clone_audio" accept="audio/mpeg,audio/mp3,audio/wav,audio/x-wav,audio/mp4,audio/m4a,audio/x-m4a,audio/ogg,.mp3,.wav,.m4a,.ogg">
+              <div class="form-hint">30s–2min of clean audio works best.</div>
+            </div>
+            <div style="display:flex;gap:0.6rem;align-items:center;flex-wrap:wrap;">
+              <button type="button" class="btn" id="cloneBtn">Upload &amp; Clone</button>
+              <span id="cloneSpinner" class="hidden" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.85rem;color:var(--text-muted);">
+                <span class="spinner" style="width:14px;height:14px;border-width:2px;"></span>
+                Cloning… this can take 10–30s
+              </span>
+              <span id="cloneStatus" style="font-size:0.85rem;"></span>
+            </div>
+            <div id="cloneResult" class="hidden" style="margin-top:0.6rem;display:flex;gap:0.6rem;align-items:center;flex-wrap:wrap;">
+              <span style="font-size:0.85rem;">Cloned: <strong id="cloneResultName"></strong></span>
+              <button type="button" class="btn" id="cloneResultPreview">Preview</button>
+            </div>
+          </div>
+
+          <!-- Library panel -->
+          <div id="libraryPanel" class="hidden" style="margin-top:1rem;padding:0.85rem;background:var(--bg-subtle, #f7f7f7);border-radius:var(--radius);">
+            <div class="form-group">
+              <label class="form-label" for="library_voice">Library Voice</label>
+              <select class="form-select" id="library_voice">
+                <option value="">Loading…</option>
+              </select>
+            </div>
+            <div style="display:flex;gap:0.6rem;align-items:center;flex-wrap:wrap;">
+              <button type="button" class="btn" id="libraryPreviewBtn">Preview</button>
+              <span id="libraryStatus" style="font-size:0.85rem;"></span>
+            </div>
+          </div>
+
+          <audio id="voicePlayer" preload="none" style="display:none;"></audio>
         </div>
 
         <!-- Capabilities -->
@@ -158,9 +230,150 @@
     const errorMsg = document.getElementById('errorMsg');
     const submitBtn = document.getElementById('submitBtn');
 
+    // ---- Voice picker state ----
+    const clonePanel = document.getElementById('clonePanel');
+    const libraryPanel = document.getElementById('libraryPanel');
+    const cloneBtn = document.getElementById('cloneBtn');
+    const cloneSpinner = document.getElementById('cloneSpinner');
+    const cloneStatus = document.getElementById('cloneStatus');
+    const cloneResult = document.getElementById('cloneResult');
+    const cloneResultName = document.getElementById('cloneResultName');
+    const cloneResultPreview = document.getElementById('cloneResultPreview');
+    const librarySelect = document.getElementById('library_voice');
+    const libraryPreviewBtn = document.getElementById('libraryPreviewBtn');
+    const libraryStatus = document.getElementById('libraryStatus');
+    const voicePlayer = document.getElementById('voicePlayer');
+
+    let clonedVoiceId = null;
+    let libraryLoaded = false;
+
+    function setVoiceMode(mode) {
+      clonePanel.classList.toggle('hidden', mode !== 'clone');
+      libraryPanel.classList.toggle('hidden', mode !== 'library');
+      if (mode === 'library' && !libraryLoaded) loadLibrary();
+    }
+
+    document.querySelectorAll('input[name="voice_mode"]').forEach(r => {
+      r.addEventListener('change', (e) => setVoiceMode(e.target.value));
+    });
+
+    async function loadLibrary() {
+      libraryStatus.textContent = '';
+      librarySelect.innerHTML = '<option value="">Loading…</option>';
+      try {
+        const res = await fetch('/api/voices/library');
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Failed to load voices');
+        if (!Array.isArray(data) || data.length === 0) {
+          librarySelect.innerHTML = '<option value="">(no voices available)</option>';
+          libraryStatus.textContent = 'No voices available in the library.';
+          return;
+        }
+        librarySelect.innerHTML = data.map(v =>
+          `<option value="${v.voice_id}">${v.name}${v.category ? ' — ' + v.category : ''}</option>`
+        ).join('');
+        libraryLoaded = true;
+      } catch (err) {
+        librarySelect.innerHTML = '<option value="">(error)</option>';
+        libraryStatus.textContent = err.message;
+      }
+    }
+
+    async function previewVoice(voiceId, statusEl) {
+      if (!voiceId) {
+        if (statusEl) statusEl.textContent = 'No voice selected';
+        return;
+      }
+      if (statusEl) statusEl.textContent = 'Loading preview…';
+      try {
+        const res = await fetch('/api/voices/preview', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ voice_id: voiceId }),
+        });
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.error || `Preview failed (${res.status})`);
+        }
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        voicePlayer.src = url;
+        voicePlayer.style.display = 'block';
+        await voicePlayer.play();
+        if (statusEl) statusEl.textContent = '';
+      } catch (err) {
+        if (statusEl) statusEl.textContent = err.message;
+      }
+    }
+
+    cloneBtn.addEventListener('click', async () => {
+      const name = document.getElementById('clone_name').value.trim();
+      const fileInput = document.getElementById('clone_audio');
+      const file = fileInput.files[0];
+      cloneStatus.textContent = '';
+      if (!name) { cloneStatus.textContent = 'Voice name is required.'; return; }
+      if (!file) { cloneStatus.textContent = 'Audio sample is required.'; return; }
+      if (file.size > 10 * 1024 * 1024) { cloneStatus.textContent = 'File exceeds 10MB.'; return; }
+
+      const fd = new FormData();
+      fd.append('name', name);
+      fd.append('audio', file);
+
+      cloneBtn.disabled = true;
+      cloneSpinner.classList.remove('hidden');
+      cloneResult.classList.add('hidden');
+      try {
+        const res = await fetch('/api/voices/clone', { method: 'POST', body: fd });
+        const data = await res.json();
+        if (!res.ok) {
+          let msg = data.error || 'Clone failed';
+          if (data.retell_response) {
+            try { msg += ' — Retell said: ' + JSON.stringify(data.retell_response); }
+            catch (_) { /* ignore */ }
+          }
+          throw new Error(msg);
+        }
+        clonedVoiceId = data.voice_id;
+        cloneResultName.textContent = data.name + ' — ' + data.voice_id;
+        cloneResult.classList.remove('hidden');
+        cloneStatus.textContent = '';
+      } catch (err) {
+        cloneStatus.textContent = err.message;
+        cloneStatus.style.color = 'var(--red)';
+        cloneStatus.style.whiteSpace = 'pre-wrap';
+      } finally {
+        cloneBtn.disabled = false;
+        cloneSpinner.classList.add('hidden');
+      }
+    });
+
+    cloneResultPreview.addEventListener('click', () => previewVoice(clonedVoiceId, cloneStatus));
+    libraryPreviewBtn.addEventListener('click', () => previewVoice(librarySelect.value, libraryStatus));
+
+    function selectedVoiceId() {
+      const mode = document.querySelector('input[name="voice_mode"]:checked')?.value || 'default';
+      if (mode === 'clone') return clonedVoiceId || null;
+      if (mode === 'library') return librarySelect.value || null;
+      return null;
+    }
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       errorMsg.classList.add('hidden');
+
+      const mode = document.querySelector('input[name="voice_mode"]:checked')?.value || 'default';
+      const voiceId = selectedVoiceId();
+      if (mode === 'clone' && !voiceId) {
+        errorMsg.textContent = 'Click "Upload & Clone" before submitting, or pick a different voice option.';
+        errorMsg.classList.remove('hidden');
+        return;
+      }
+      if (mode === 'library' && !voiceId) {
+        errorMsg.textContent = 'Pick a library voice before submitting.';
+        errorMsg.classList.remove('hidden');
+        return;
+      }
+
       submitBtn.disabled = true;
       submitBtn.textContent = 'Creating...';
 
@@ -180,11 +393,11 @@
         top_objections: objections,
         agent_gender: document.getElementById('agent_gender').value,
         agent_personality: document.getElementById('agent_personality').value.trim() || 'warm, direct, curious',
-        elevenlabs_voice_id: document.getElementById('elevenlabs_voice_id').value.trim() || null,
         closing_enabled: document.getElementById('closing_enabled').checked,
         booking_enabled: document.getElementById('booking_enabled').checked,
         crm_enabled: document.getElementById('crm_enabled').checked,
       };
+      if (voiceId) payload.elevenlabs_voice_id = voiceId;
 
       // Show loading overlay
       loadingOverlay.classList.add('active');

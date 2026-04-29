@@ -9,6 +9,65 @@ const retellHeaders = {
   'Content-Type': 'application/json',
 };
 
+async function registerVoiceWithRetell({
+  providerVoiceId,
+  voiceName,
+  publicUserId,
+  voiceProvider = 'fish_audio',
+}) {
+  if (!providerVoiceId) throw new Error('providerVoiceId is required');
+  if (!voiceName) throw new Error('voiceName is required');
+
+  const body = {
+    provider_voice_id: providerVoiceId,
+    voice_name: voiceName,
+    voice_provider: voiceProvider,
+  };
+  if (publicUserId) {
+    body.public_user_id = publicUserId;
+  }
+
+  try {
+    const { data } = await axios.post(
+      'https://api.retellai.com/add-community-voice',
+      body,
+      {
+        headers: {
+          Authorization: `Bearer ${env.RETELL_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
+    if (!data?.voice_id) {
+      throw new Error(`Retell add-community-voice returned no voice_id. Full response: ${JSON.stringify(data)}`);
+    }
+
+    console.log(`[retell] Voice registered: ${providerVoiceId} → ${data.voice_id} (${voiceProvider})`);
+    return {
+      voice_id: data.voice_id,
+      voice_name: data.voice_name,
+      preview_audio_url: data.preview_audio_url,
+    };
+  } catch (err) {
+    const status = err.response?.status;
+    const errBody = err.response?.data;
+    console.error('[retell] add-community-voice failed.', {
+      status,
+      requestBody: body,
+      responseBody: errBody,
+      message: err.message,
+    });
+    const errMsg = typeof errBody === 'string'
+      ? errBody
+      : (Buffer.isBuffer(errBody) ? errBody.toString('utf8') : JSON.stringify(errBody || err.message));
+    const e = new Error(`Retell voice registration failed (status ${status || 'n/a'}): ${errMsg}`);
+    e.retellResponse = errBody;
+    e.retellStatus = status;
+    throw e;
+  }
+}
+
 /**
  * Create a Retell LLM + Agent for a client.
  * Retell requires: 1) create LLM with prompt/tools, 2) create agent referencing LLM.
@@ -74,6 +133,8 @@ async function createRetellAgent(clientId) {
   }
 
   // Step 2: Create Agent referencing the LLM
+  // elevenlabs_voice_id column stores the Retell-registered voice ID
+  // (NOT the raw ElevenLabs ID — registration happens at clone time)
   const voiceId = client.elevenlabs_voice_id || '11labs-Willa';
   const language = 'en-AU';
   const agentPayload = {
@@ -83,7 +144,6 @@ async function createRetellAgent(clientId) {
       llm_id: llmId,
     },
     voice_id: voiceId,
-    voice_model: 'eleven_v3',
     language,
     voice_speed: 1.0,
     voice_temperature: 1.0,
@@ -93,6 +153,11 @@ async function createRetellAgent(clientId) {
     backchannel_frequency: 0.8,
     backchannel_words: ['yeah', 'right', 'totally', 'mm', 'uh huh', 'for sure', 'exactly'],
   };
+
+  // voice_model only applies to ElevenLabs voices
+  if (voiceId.startsWith('11labs-')) {
+    agentPayload.voice_model = 'eleven_v3';
+  }
 
   try {
     const agentRes = await axios.post(`${RETELL_API_BASE}/create-agent`, agentPayload, {
@@ -304,4 +369,4 @@ async function getRetellCallStatus(retellCallId) {
   }
 }
 
-module.exports = { createRetellAgent, ensureRetellAgentExists, updateAgentForProspect, initiateOutboundCall, getRetellCallStatus };
+module.exports = { createRetellAgent, ensureRetellAgentExists, updateAgentForProspect, initiateOutboundCall, getRetellCallStatus, registerVoiceWithRetell };

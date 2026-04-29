@@ -12,10 +12,12 @@ const supabase = require('./src/database/client');
 const { verifyConnection } = require('./src/database/client');
 const webhooks = require('./src/webhooks/index');
 const { generateAndSaveSoul } = require('./src/soul/generator');
-const { createRetellAgent, updateAgentForProspect, initiateOutboundCall, getRetellCallStatus } = require('./src/agents/retell');
+const { createRetellAgent, updateAgentForProspect, initiateOutboundCall, getRetellCallStatus, registerVoiceWithRetell } = require('./src/agents/retell');
 const { buildSystemPrompt } = require('./src/prompts/builder');
 const { RETELL_API_BASE } = require('./config/constants');
 const { apiKeyAuth, enforceClientIsolation } = require('./src/middleware/auth');
+const multer = require('multer');
+const fishAudio = require('./src/lib/fish-audio');
 
 // ============================================================
 //  ENV VAR CHECK — fail fast on hard-required, warn on optional
@@ -61,7 +63,7 @@ checkHardRequiredEnvVars([
 ]);
 
 checkSoftRequiredEnvVars([
-  { keys: ['ELEVENLABS_API_KEY'], feature: 'ElevenLabs voices unavailable, using Retell built-in voices only' },
+  { keys: ['FISH_AUDIO_API_KEY'], feature: 'Fish Audio voice cloning unavailable, using Retell built-in voices only' },
 ]);
 
 // ============================================================
@@ -1167,6 +1169,139 @@ app.get('/api/secure/calls/:callId/full', apiKeyAuth, async (req, res) => {
 });
 
 // ============================================================
+//  VOICES API — Fish Audio clone / library / preview
+// ============================================================
+const voiceUpload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10 MB
+  fileFilter: (req, file, cb) => {
+    const allowed = ['audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/x-wav', 'audio/wave',
+                     'audio/mp4', 'audio/m4a', 'audio/x-m4a', 'audio/aac', 'audio/ogg'];
+    const ext = (file.originalname || '').toLowerCase().match(/\.(mp3|wav|m4a|ogg)$/);
+    if (allowed.includes(file.mimetype) || ext) return cb(null, true);
+    cb(new Error('Unsupported audio format. Use mp3, wav, m4a, or ogg.'));
+  },
+});
+
+// POST /api/voices/clone — multipart upload, returns { voice_id, name }
+// Two steps: clone on Fish Audio → register with Retell.
+app.post('/api/voices/clone', (req, res) => {
+  voiceUpload.single('audio')(req, res, async (uploadErr) => {
+    if (uploadErr) {
+      const status = uploadErr.code === 'LIMIT_FILE_SIZE' ? 413 : 400;
+      return res.status(status).json({ error: uploadErr.message });
+    }
+    try {
+      const name = (req.body?.name || '').trim();
+      if (!name) return res.status(400).json({ error: 'name is required' });
+      if (!req.file) return res.status(400).json({ error: 'audio file is required (field name: "audio")' });
+
+      console.log('[voices/clone] Step 1/2: Cloning voice on Fish Audio...');
+      const cloneResult = await fishAudio.cloneVoice({
+        name,
+        audioBuffer: req.file.buffer,
+        description: req.body?.description || `Cloned voice for ${name}`,
+        mimeType: req.file.mimetype,
+      });
+      const fishVoiceId = cloneResult.voice_id;
+      console.log(`[voices/clone] Step 1/2 done. Fish Audio voice_id: ${fishVoiceId}`);
+
+      console.log('[voices/clone] Step 2/2: Registering voice with Retell...');
+      const retellResult = await registerVoiceWithRetell({
+        providerVoiceId: fishVoiceId,
+        voiceName: name,
+        voiceProvider: 'fish_audio',
+      });
+      console.log(`[voices/clone] Step 2/2 done. Retell voice_id: ${retellResult.voice_id}`);
+
+      res.json({
+        voice_id: retellResult.voice_id,
+        provider_voice_id: fishVoiceId,
+        name,
+      });
+    } catch (err) {
+      console.error('[voices/clone] Error:', err.message);
+      const payload = { error: err.message };
+      if (err.retellResponse) payload.retell_response = err.retellResponse;
+      res.status(500).json(payload);
+    }
+  });
+});
+
+// GET /api/voices/library — list voices Retell has access to
+// (Retell's pre-registered library; raw ElevenLabs voices won't work on agents)
+let retellVoiceCache = { at: 0, voices: null };
+const VOICE_CACHE_MS = 60 * 60 * 1000;
+
+app.get('/api/voices/library', async (req, res) => {
+  try {
+    if (retellVoiceCache.voices && Date.now() - retellVoiceCache.at < VOICE_CACHE_MS) {
+      return res.json(retellVoiceCache.voices);
+    }
+
+    const r = await axios.get(`${RETELL_API_BASE}/list-voices`, {
+      headers: { 'Authorization': `Bearer ${env.RETELL_API_KEY}` },
+      timeout: 15_000,
+    });
+    const all = Array.isArray(r.data) ? r.data : (r.data?.voices || []);
+    const filtered = all
+      .filter(v => {
+        const provider = (v.provider || v.voice_type || '').toLowerCase();
+        return provider === 'elevenlabs' || provider === 'platform' || provider === '11labs';
+      })
+      .map(v => ({
+        voice_id: v.voice_id,
+        name: v.voice_name || v.name,
+        preview_url: v.preview_audio_url || v.preview_url || null,
+        labels: v.labels || {},
+      }));
+
+    retellVoiceCache = { at: Date.now(), voices: filtered };
+    res.json(filtered);
+  } catch (err) {
+    console.error('[voices/library] Error:', err.response?.data || err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /api/voices/preview
+// Body: { voice_id, text? }
+//  - If voice_id starts with "retell-": look up in Retell's /list-voices, return preview URL
+//  - Otherwise: treat as raw Fish Audio ID, stream synthesized audio back as audio/mpeg
+app.post('/api/voices/preview', async (req, res) => {
+  try {
+    const { voice_id, text } = req.body || {};
+    if (!voice_id) return res.status(400).json({ error: 'voice_id is required' });
+
+    if (typeof voice_id === 'string' && voice_id.startsWith('retell-')) {
+      const r = await axios.get(`${RETELL_API_BASE}/list-voices`, {
+        headers: { 'Authorization': `Bearer ${env.RETELL_API_KEY}` },
+        timeout: 15_000,
+      });
+      const all = Array.isArray(r.data) ? r.data : (r.data?.voices || []);
+      const match = all.find(v => v.voice_id === voice_id);
+      const previewUrl = match?.preview_audio_url || match?.preview_url || null;
+      if (previewUrl) {
+        return res.json({ preview_audio_url: previewUrl });
+      }
+      return res.json({
+        preview_audio_url: null,
+        message: 'Preview not available for this Retell voice yet',
+      });
+    }
+
+    // Raw Fish Audio voice_id — synthesize via Fish Audio and stream the audio.
+    const audioBuffer = await fishAudio.previewVoice({ voiceId: voice_id, text });
+    res.setHeader('Content-Type', 'audio/mpeg');
+    res.setHeader('Content-Length', audioBuffer.length);
+    return res.send(audioBuffer);
+  } catch (err) {
+    console.error('[voices/preview] Error:', err.response?.data || err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ============================================================
 //  GLOBAL ERROR HANDLER — must be last middleware
 // ============================================================
 app.use((err, req, res, _next) => {
@@ -1242,6 +1377,10 @@ async function start() {
     console.log(`  GET    /api/clients/:id/prompt/preview`);
     console.log(`  GET    /api/calls/:id/full`);
     console.log(`  POST   /api/calls/test`);
+    console.log(`[server] Voices:`);
+    console.log(`  POST   /api/voices/clone`);
+    console.log(`  GET    /api/voices/library`);
+    console.log(`  POST   /api/voices/preview`);
     console.log(`[server] Dashboard:`);
     console.log(`  GET    /dashboard`);
     console.log(`  GET    /dashboard/signup`);
