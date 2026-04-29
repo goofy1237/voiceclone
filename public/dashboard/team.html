@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Team Dashboard — AI Closer Platform</title>
+  <title>My Clients — AI Closer Platform</title>
   <link rel="stylesheet" href="/css/dashboard.css">
   <style>
     body { display: flex; min-height: 100vh; margin: 0; }
@@ -241,11 +241,13 @@
   <!-- Main -->
   <div class="main-content">
     <div class="main-header">
-      <h1 id="pageTitle">Team Dashboard</h1>
+      <h1 id="pageTitle">My Clients</h1>
       <div style="display:flex;align-items:center;gap:0.75rem;">
+        <a href="/dashboard/signup" class="btn btn-primary btn-sm">+ Create New Client</a>
         <select class="client-switch" id="clientSwitch" onchange="switchClient(this.value)">
           <option value="">Switch Client...</option>
         </select>
+        <button class="btn btn-sm" onclick="logout()">Log out</button>
       </div>
     </div>
 
@@ -526,7 +528,7 @@
 
     async function loadStats() {
       try {
-        const res = await fetch('/api/team/stats');
+        const res = await fetch('/api/my/stats');
         const stats = await res.json();
         document.getElementById('statAgents').textContent = stats.total_agents || 0;
         document.getElementById('statTotalCalls').textContent = stats.total_calls || 0;
@@ -543,7 +545,7 @@
 
     async function loadClients() {
       try {
-        const res = await fetch('/api/team/clients');
+        const res = await fetch('/api/my/clients');
         allClients = await res.json();
 
         renderAgentsGrid(document.getElementById('agentsGrid'), true);
@@ -701,12 +703,12 @@
 
     async function loadRecentCalls() {
       try {
-        const res = await fetch('/api/team/calls?limit=10');
+        const res = await fetch('/api/my/calls?limit=10');
         const calls = await res.json();
         renderCallsTable(document.getElementById('recentCallsBody'), calls, true);
 
         // Also load for calls page
-        const res2 = await fetch('/api/team/calls?limit=50');
+        const res2 = await fetch('/api/my/calls?limit=50');
         const calls2 = await res2.json();
         renderCallsTable(document.getElementById('allCallsBody'), calls2, true);
       } catch {}
@@ -739,7 +741,7 @@
 
     async function loadAllProspects() {
       try {
-        const res = await fetch('/api/team/prospects');
+        const res = await fetch('/api/my/prospects');
         const prospects = await res.json();
         const tbody = document.getElementById('allProspectsBody');
 
@@ -773,7 +775,7 @@
       document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
       if (link) link.classList.add('active');
 
-      const titles = { overview: 'Team Dashboard', agents: 'Agents', calls: 'All Calls', prospects: 'All Prospects' };
+      const titles = { overview: 'My Clients', agents: 'Agents', calls: 'All Calls', prospects: 'All Prospects' };
       document.getElementById('pageTitle').textContent = titles[page] || 'Dashboard';
 
       // Lazy load
@@ -982,6 +984,13 @@
       t.textContent = msg;
       t.className = 'toast visible ' + (type || '');
       setTimeout(() => { t.className = 'toast'; }, 3000);
+    }
+
+    async function logout() {
+      try {
+        await fetch('/auth/logout', { method: 'POST' });
+      } catch {}
+      window.location.href = '/login';
     }
 
     // --- Start ---

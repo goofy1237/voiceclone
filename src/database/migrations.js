@@ -89,6 +89,7 @@ CREATE TABLE IF NOT EXISTS clients (
   agent_name text NOT NULL,
   agent_gender text DEFAULT 'female',
   agent_personality text DEFAULT 'warm, direct, curious',
+  personality_traits text,
   elevenlabs_voice_id text,
   retell_agent_id text,
   retell_llm_id text,
@@ -104,6 +105,7 @@ CREATE TABLE IF NOT EXISTS clients (
   calendly_webhook_id text,
   base_url text,
   api_key text,
+  owner_id uuid REFERENCES auth.users(id) ON DELETE CASCADE,
   created_at timestamptz DEFAULT now()
 );
 
@@ -159,6 +161,8 @@ ALTER TABLE clients ADD COLUMN IF NOT EXISTS retell_llm_id text;
 ALTER TABLE clients ADD COLUMN IF NOT EXISTS elevenlabs_voice_id text;
 ALTER TABLE clients ADD COLUMN IF NOT EXISTS retell_phone_number text;
 ALTER TABLE clients ADD COLUMN IF NOT EXISTS phone_number_provisioned_at timestamptz;
+ALTER TABLE clients ADD COLUMN IF NOT EXISTS owner_id uuid REFERENCES auth.users(id) ON DELETE CASCADE;
+ALTER TABLE clients ADD COLUMN IF NOT EXISTS personality_traits text;
   `;
 }
 

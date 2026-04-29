@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS clients (
   agent_name text NOT NULL,
   agent_gender text DEFAULT 'female',
   agent_personality text DEFAULT 'warm, direct, curious',
+  personality_traits text,
   elevenlabs_voice_id text,
   retell_agent_id text,
   retell_llm_id text,
@@ -24,6 +25,7 @@ CREATE TABLE IF NOT EXISTS clients (
   closing_enabled boolean DEFAULT false,
   booking_enabled boolean DEFAULT true,
   crm_enabled boolean DEFAULT true,
+  owner_id uuid REFERENCES auth.users(id) ON DELETE CASCADE,
   created_at timestamptz DEFAULT now()
 );
 

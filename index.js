@@ -15,7 +15,8 @@ const { generateAndSaveSoul } = require('./src/soul/generator');
 const { createRetellAgent, updateAgentForProspect, initiateOutboundCall, getRetellCallStatus, registerVoiceWithRetell } = require('./src/agents/retell');
 const { buildSystemPrompt } = require('./src/prompts/builder');
 const { RETELL_API_BASE } = require('./config/constants');
-const { apiKeyAuth, enforceClientIsolation } = require('./src/middleware/auth');
+const { apiKeyAuth, enforceClientIsolation, requireUser, requireClientOwnership, supabaseAuth } = require('./src/middleware/auth');
+const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const fishAudio = require('./src/lib/fish-audio');
 
@@ -132,6 +133,7 @@ app.use(generalLimiter);
 
 // Body parsing
 app.use(express.json());
+app.use(cookieParser());
 
 // Serve static files from /public
 app.use(express.static(path.join(__dirname, 'public')));
@@ -197,36 +199,163 @@ app.get('/health', async (req, res) => {
 });
 
 // ============================================================
-//  DASHBOARD ROUTES — serve HTML pages
+//  AUTH ROUTES — Supabase Auth (signup, login, magic link, logout)
 // ============================================================
-app.get('/dashboard', (req, res) => {
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
+
+app.post('/auth/signup', async (req, res) => {
+  const { email, password } = req.body || {};
+  if (!email) return res.status(400).json({ error: 'Email required' });
+
+  try {
+    if (password) {
+      const { data, error } = await supabaseAuth.auth.signUp({
+        email,
+        password,
+        options: { emailRedirectTo: `${env.BASE_URL}/auth/callback` },
+      });
+      if (error) return res.status(400).json({ error: error.message });
+      return res.json({
+        message: data.user?.email_confirmed_at
+          ? 'Account created. You can log in now.'
+          : 'Check your email to confirm your account.',
+      });
+    } else {
+      const { error } = await supabaseAuth.auth.signInWithOtp({
+        email,
+        options: { emailRedirectTo: `${env.BASE_URL}/auth/callback` },
+      });
+      if (error) return res.status(400).json({ error: error.message });
+      return res.json({ message: 'Magic link sent. Check your email.' });
+    }
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/auth/login', async (req, res) => {
+  const { email, password } = req.body || {};
+  if (!email) return res.status(400).json({ error: 'Email required' });
+
+  try {
+    if (password) {
+      const { data, error } = await supabaseAuth.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (error) return res.status(401).json({ error: error.message });
+
+      res.cookie('sb-access-token', data.session.access_token, {
+        httpOnly: true,
+        secure: env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: data.session.expires_in * 1000,
+      });
+      res.cookie('sb-refresh-token', data.session.refresh_token, {
+        httpOnly: true,
+        secure: env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+      });
+
+      return res.json({
+        access_token: data.session.access_token,
+        user: { id: data.user.id, email: data.user.email },
+      });
+    } else {
+      const { error } = await supabaseAuth.auth.signInWithOtp({
+        email,
+        options: { emailRedirectTo: `${env.BASE_URL}/auth/callback` },
+      });
+      if (error) return res.status(400).json({ error: error.message });
+      return res.json({ message: 'Magic link sent. Check your email.' });
+    }
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+app.get('/auth/callback', (req, res) => {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(`<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Signing in…</title></head>
+<body style="background:#0d0d0f;color:#e7e7ea;font-family:system-ui,sans-serif;padding:2rem;text-align:center;">
+<p>Signing you in…</p>
+<script>
+  const params = new URLSearchParams(window.location.hash.slice(1));
+  const accessToken = params.get('access_token');
+  const refreshToken = params.get('refresh_token');
+  if (accessToken) {
+    fetch('/auth/set-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ access_token: accessToken, refresh_token: refreshToken }),
+    }).then(() => window.location.href = '/dashboard');
+  } else {
+    document.body.innerText = 'Login failed. No token received.';
+  }
+</script>
+</body>
+</html>`);
+});
+
+app.post('/auth/set-session', (req, res) => {
+  const { access_token, refresh_token } = req.body || {};
+  if (!access_token) return res.status(400).json({ error: 'access_token required' });
+
+  res.cookie('sb-access-token', access_token, {
+    httpOnly: true,
+    secure: env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 60 * 60 * 1000,
+  });
+  if (refresh_token) {
+    res.cookie('sb-refresh-token', refresh_token, {
+      httpOnly: true,
+      secure: env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    });
+  }
+  res.json({ ok: true });
+});
+
+app.post('/auth/logout', (req, res) => {
+  res.clearCookie('sb-access-token');
+  res.clearCookie('sb-refresh-token');
+  res.json({ ok: true });
+});
+
+// ============================================================
+//  DASHBOARD ROUTES — serve HTML pages (auth required)
+// ============================================================
+app.get('/dashboard', requireUser, (req, res) => {
   res.sendFile('dashboard/team.html', { root: path.join(__dirname, 'public') });
 });
 
-app.get('/dashboard/signup', (req, res) => {
+app.get('/dashboard/signup', requireUser, (req, res) => {
   res.sendFile('dashboard/signup.html', { root: path.join(__dirname, 'public') });
 });
 
-app.get('/dashboard/:clientId', (req, res) => {
-  // Don't match 'signup' as a clientId
-  if (req.params.clientId === 'signup') {
-    return res.sendFile('dashboard/signup.html', { root: path.join(__dirname, 'public') });
-  }
+app.get('/dashboard/:clientId', requireUser, requireClientOwnership, (req, res) => {
   res.sendFile('dashboard/client.html', { root: path.join(__dirname, 'public') });
 });
 
-app.get('/dashboard/:clientId/prospect/:prospectId', (req, res) => {
+app.get('/dashboard/:clientId/prospect/:prospectId', requireUser, requireClientOwnership, (req, res) => {
   res.sendFile('dashboard/prospect.html', { root: path.join(__dirname, 'public') });
 });
 
-app.get('/dashboard/:clientId/calls/:callId', (req, res) => {
+app.get('/dashboard/:clientId/calls/:callId', requireUser, requireClientOwnership, (req, res) => {
   res.sendFile('dashboard/call.html', { root: path.join(__dirname, 'public') });
 });
 
 // ============================================================
 // POST /clients — Full onboarding: soul + agents + save + api_key
 // ============================================================
-app.post('/clients', async (req, res) => {
+app.post('/clients', requireUser, async (req, res) => {
   try {
     const clientData = req.body;
     if (!clientData.business_name || !clientData.agent_name) {
@@ -236,6 +365,7 @@ app.post('/clients', async (req, res) => {
     // Generate API key for multi-tenant auth
     clientData.api_key = crypto.randomUUID();
     clientData.base_url = env.BASE_URL;
+    clientData.owner_id = req.user.id;
 
     const { data: client, error } = await supabase
       .from('clients')
@@ -488,12 +618,13 @@ app.get('/calls/:callId/status', async (req, res) => {
 //  TEAM DASHBOARD API — aggregate endpoints for admin view
 // ============================================================
 
-// GET /api/team/clients — all clients
-app.get('/api/team/clients', async (req, res) => {
+// GET /api/my/clients — clients owned by the logged-in user
+app.get('/api/my/clients', requireUser, async (req, res) => {
   try {
     const { data: clients, error } = await supabase
       .from('clients')
       .select('id, agent_name, business_name, retell_agent_id, elevenlabs_voice_id, created_at')
+      .eq('owner_id', req.user.id)
       .order('created_at', { ascending: false });
 
     if (error) return res.status(500).json({ error: error.message });
@@ -530,24 +661,39 @@ app.get('/api/team/clients', async (req, res) => {
   }
 });
 
-// GET /api/team/stats — aggregate stats across all clients
-app.get('/api/team/stats', async (req, res) => {
+// GET /api/my/stats — aggregate stats across clients owned by the logged-in user
+app.get('/api/my/stats', requireUser, async (req, res) => {
   try {
-    const { count: totalAgents } = await supabase
+    const { data: ownedClients } = await supabase
       .from('clients')
-      .select('id', { count: 'exact', head: true });
+      .select('id')
+      .eq('owner_id', req.user.id);
+
+    const ownedIds = (ownedClients || []).map(c => c.id);
+
+    if (ownedIds.length === 0) {
+      return res.json({
+        total_agents: 0,
+        total_calls: 0,
+        total_prospects: 0,
+        avg_detection_risk: null,
+      });
+    }
 
     const { count: totalCalls } = await supabase
       .from('calls')
-      .select('id', { count: 'exact', head: true });
+      .select('id', { count: 'exact', head: true })
+      .in('client_id', ownedIds);
 
     const { count: totalProspects } = await supabase
       .from('prospects')
-      .select('id', { count: 'exact', head: true });
+      .select('id', { count: 'exact', head: true })
+      .in('client_id', ownedIds);
 
     const { data: riskData } = await supabase
       .from('calls')
       .select('detection_risk_score')
+      .in('client_id', ownedIds)
       .not('detection_risk_score', 'is', null);
 
     let avgDetectionRisk = null;
@@ -557,7 +703,7 @@ app.get('/api/team/stats', async (req, res) => {
     }
 
     res.json({
-      total_agents: totalAgents || 0,
+      total_agents: ownedIds.length,
       total_calls: totalCalls || 0,
       total_prospects: totalProspects || 0,
       avg_detection_risk: avgDetectionRisk,
@@ -567,14 +713,23 @@ app.get('/api/team/stats', async (req, res) => {
   }
 });
 
-// GET /api/team/calls — recent calls across all clients
-app.get('/api/team/calls', async (req, res) => {
+// GET /api/my/calls — recent calls across the logged-in user's clients
+app.get('/api/my/calls', requireUser, async (req, res) => {
   try {
     const limit = Math.min(parseInt(req.query.limit) || 10, 50);
+
+    const { data: ownedClients } = await supabase
+      .from('clients')
+      .select('id')
+      .eq('owner_id', req.user.id);
+    const ownedIds = (ownedClients || []).map(c => c.id);
+
+    if (ownedIds.length === 0) return res.json([]);
 
     const { data: calls, error } = await supabase
       .from('calls')
       .select('id, prospect_id, client_id, call_type, duration_seconds, outcome, detection_risk_score, call_summary, claude_analysis, status, created_at')
+      .in('client_id', ownedIds)
       .order('created_at', { ascending: false })
       .limit(limit);
 
@@ -609,12 +764,21 @@ app.get('/api/team/calls', async (req, res) => {
   }
 });
 
-// GET /api/team/prospects — all prospects across all clients
-app.get('/api/team/prospects', async (req, res) => {
+// GET /api/my/prospects — prospects across the logged-in user's clients
+app.get('/api/my/prospects', requireUser, async (req, res) => {
   try {
+    const { data: ownedClients } = await supabase
+      .from('clients')
+      .select('id')
+      .eq('owner_id', req.user.id);
+    const ownedIds = (ownedClients || []).map(c => c.id);
+
+    if (ownedIds.length === 0) return res.json([]);
+
     const { data: prospects, error } = await supabase
       .from('prospects')
       .select('*')
+      .in('client_id', ownedIds)
       .order('created_at', { ascending: false })
       .limit(100);
 
@@ -631,7 +795,7 @@ app.get('/api/team/prospects', async (req, res) => {
 // ============================================================
 
 // GET /api/clients/:clientId/info — client basic info (for dashboard)
-app.get('/api/clients/:clientId/info', async (req, res) => {
+app.get('/api/clients/:clientId/info', requireUser, requireClientOwnership, async (req, res) => {
   try {
     const { clientId } = req.params;
     const { data: client, error } = await supabase
@@ -648,7 +812,7 @@ app.get('/api/clients/:clientId/info', async (req, res) => {
 });
 
 // GET /api/clients/:clientId/stats — aggregate stats
-app.get('/api/clients/:clientId/stats', async (req, res) => {
+app.get('/api/clients/:clientId/stats', requireUser, requireClientOwnership, async (req, res) => {
   try {
     const { clientId } = req.params;
 
@@ -711,7 +875,7 @@ app.get('/api/clients/:clientId/stats', async (req, res) => {
 });
 
 // GET /api/clients/:clientId/calls — paginated call history
-app.get('/api/clients/:clientId/calls', async (req, res) => {
+app.get('/api/clients/:clientId/calls', requireUser, requireClientOwnership, async (req, res) => {
   try {
     const { clientId } = req.params;
     const page = parseInt(req.query.page) || 1;
@@ -804,7 +968,7 @@ app.get('/api/clients/:clientId/calls', async (req, res) => {
 });
 
 // GET /api/clients/:clientId/prospects — all prospects
-app.get('/api/clients/:clientId/prospects', async (req, res) => {
+app.get('/api/clients/:clientId/prospects', requireUser, requireClientOwnership, async (req, res) => {
   try {
     const { clientId } = req.params;
 
@@ -823,7 +987,7 @@ app.get('/api/clients/:clientId/prospects', async (req, res) => {
 });
 
 // POST /api/clients/:clientId/prospects — create prospect
-app.post('/api/clients/:clientId/prospects', async (req, res) => {
+app.post('/api/clients/:clientId/prospects', requireUser, requireClientOwnership, async (req, res) => {
   try {
     const { clientId } = req.params;
     const { name, phone, email, pain_points, funnel_stage } = req.body;
@@ -851,7 +1015,7 @@ app.post('/api/clients/:clientId/prospects', async (req, res) => {
 });
 
 // GET /api/calls/:callId/full — full call detail
-app.get('/api/calls/:callId/full', async (req, res) => {
+app.get('/api/calls/:callId/full', requireUser, async (req, res) => {
   try {
     const { callId } = req.params;
 
@@ -863,18 +1027,14 @@ app.get('/api/calls/:callId/full', async (req, res) => {
 
     if (error || !call) return res.status(404).json({ error: 'Call not found' });
 
-    // Verify the call belongs to the requesting client if X-API-Key is provided
-    const apiKey = req.headers['x-api-key'];
-    if (apiKey) {
-      const { data: client } = await supabase
-        .from('clients')
-        .select('id')
-        .eq('api_key', apiKey)
-        .single();
-
-      if (client && call.client_id !== client.id) {
-        return res.status(403).json({ error: 'Access denied: call does not belong to this client' });
-      }
+    // Verify the authenticated user owns the client this call belongs to
+    const { data: callClient } = await supabase
+      .from('clients')
+      .select('id, owner_id')
+      .eq('id', call.client_id)
+      .single();
+    if (!callClient || callClient.owner_id !== req.user.id) {
+      return res.status(403).json({ error: 'Forbidden' });
     }
 
     // Get prospect name
@@ -900,7 +1060,7 @@ app.get('/api/calls/:callId/full', async (req, res) => {
 });
 
 // GET /api/clients/:clientId/prompt/preview — agent prompt preview (null prospect)
-app.get('/api/clients/:clientId/prompt/preview', async (req, res) => {
+app.get('/api/clients/:clientId/prompt/preview', requireUser, requireClientOwnership, async (req, res) => {
   try {
     const { clientId } = req.params;
     const prompt = await buildSystemPrompt(clientId, null);
@@ -996,12 +1156,22 @@ app.post('/api/calls/test', async (req, res) => {
 });
 
 // GET /api/prospects/:prospectId/memory — proxy for dashboard (same as existing)
-app.get('/api/prospects/:prospectId/memory', async (req, res) => {
+app.get('/api/prospects/:prospectId/memory', requireUser, async (req, res) => {
   try {
     const { prospectId } = req.params;
     const { data: prospect, error } = await supabase
       .from('prospects').select('*').eq('id', prospectId).single();
     if (error || !prospect) return res.status(404).json({ error: 'Prospect not found' });
+
+    // Verify the authenticated user owns the client this prospect belongs to
+    const { data: pClient } = await supabase
+      .from('clients')
+      .select('id, owner_id')
+      .eq('id', prospect.client_id)
+      .single();
+    if (!pClient || pClient.owner_id !== req.user.id) {
+      return res.status(403).json({ error: 'Forbidden' });
+    }
 
     const { data: calls } = await supabase
       .from('calls')

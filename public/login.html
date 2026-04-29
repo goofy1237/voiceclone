@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In — AI Closer Platform</title>
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <style>
+    body { display:flex; align-items:center; justify-content:center; min-height:100vh; margin:0; }
+    .auth-wrap { width: 100%; max-width: 420px; padding: 1.5rem; }
+    .auth-logo { display:flex; align-items:center; gap:0.6rem; justify-content:center; margin-bottom:1.5rem; }
+    .auth-logo .logo { width: 36px; height: 36px; border-radius: 8px; background: var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; }
+    .auth-tabs { display:flex; gap:0; border-bottom:1px solid var(--border); margin-bottom:1.25rem; }
+    .auth-tab { flex:1; padding:0.75rem; text-align:center; cursor:pointer; color:var(--text-muted); font-size:0.9rem; font-weight:500; border-bottom:2px solid transparent; }
+    .auth-tab.active { color: var(--text); border-bottom-color: var(--accent); }
+    .auth-msg { margin-top:0.85rem; padding:0.75rem; border-radius:var(--radius); font-size:0.85rem; }
+    .auth-msg.error { background: var(--red-bg); border:1px solid var(--red); color: var(--red); }
+    .auth-msg.success { background: var(--green-bg, rgba(34,197,94,0.1)); border:1px solid var(--green, #22c55e); color: var(--green, #22c55e); }
+    .hidden { display:none; }
+  </style>
+</head>
+<body>
+
+  <div class="auth-wrap">
+    <div class="auth-logo">
+      <div class="logo">AC</div>
+      <h1 style="font-size:1.1rem;font-weight:600;">AI Closer Platform</h1>
+    </div>
+
+    <div class="card">
+      <div class="auth-tabs">
+        <div class="auth-tab active" data-tab="login" onclick="switchTab('login')">Log In</div>
+        <div class="auth-tab" data-tab="signup" onclick="switchTab('signup')">Sign Up</div>
+      </div>
+
+      <!-- Log In tab -->
+      <form id="loginForm" data-mode="login">
+        <div class="form-group">
+          <label class="form-label" for="loginEmail">Email</label>
+          <input class="form-input" type="email" id="loginEmail" required autocomplete="email" placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="loginPassword">Password</label>
+          <input class="form-input" type="password" id="loginPassword" autocomplete="current-password" placeholder="Optional — leave blank for magic link">
+          <div class="form-hint">Leave blank and we'll email you a magic link.</div>
+        </div>
+        <button type="submit" class="btn btn-primary w-full" id="loginBtn">Log In</button>
+      </form>
+
+      <!-- Sign Up tab -->
+      <form id="signupForm" data-mode="signup" class="hidden">
+        <div class="form-group">
+          <label class="form-label" for="signupEmail">Email</label>
+          <input class="form-input" type="email" id="signupEmail" required autocomplete="email" placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="signupPassword">Password</label>
+          <input class="form-input" type="password" id="signupPassword" autocomplete="new-password" placeholder="Optional — leave blank for magic link">
+          <div class="form-hint">Leave blank and we'll email you a magic link.</div>
+        </div>
+        <button type="submit" class="btn btn-primary w-full" id="signupBtn">Sign Up</button>
+      </form>
+
+      <div class="auth-msg hidden" id="authMsg"></div>
+    </div>
+  </div>
+
+  <script>
+    function switchTab(tab) {
+      document.querySelectorAll('.auth-tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.tab === tab);
+      });
+      document.getElementById('loginForm').classList.toggle('hidden', tab !== 'login');
+      document.getElementById('signupForm').classList.toggle('hidden', tab !== 'signup');
+      hideMsg();
+    }
+
+    function showMsg(text, kind) {
+      const el = document.getElementById('authMsg');
+      el.textContent = text;
+      el.className = 'auth-msg ' + (kind || 'success');
+    }
+    function hideMsg() {
+      document.getElementById('authMsg').className = 'auth-msg hidden';
+    }
+
+    async function submit(form, endpoint, btn) {
+      hideMsg();
+      const mode = form.dataset.mode;
+      const emailEl = document.getElementById(mode + 'Email');
+      const passwordEl = document.getElementById(mode + 'Password');
+      const email = emailEl.value.trim();
+      const password = passwordEl.value;
+
+      if (!email) { showMsg('Email is required.', 'error'); return; }
+
+      btn.disabled = true;
+      const originalText = btn.textContent;
+      btn.textContent = 'Working…';
+
+      try {
+        const body = { email };
+        if (password) body.password = password;
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          showMsg(data.error || 'Request failed', 'error');
+          return;
+        }
+
+        if (data.access_token) {
+          window.location.href = '/dashboard';
+          return;
+        }
+
+        showMsg(data.message || 'Check your email.', 'success');
+      } catch (err) {
+        showMsg(err.message, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = originalText;
+      }
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      submit(e.target, '/auth/login', document.getElementById('loginBtn'));
+    });
+    document.getElementById('signupForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      submit(e.target, '/auth/signup', document.getElementById('signupBtn'));
+    });
+  </script>
+</body>
+</html>
