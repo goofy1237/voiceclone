@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Clients — AI Closer Platform</title>
   <link rel="stylesheet" href="/css/dashboard.css">
+  <script type="module">
+    try {
+      const mod = await import('https://esm.sh/retell-client-js-sdk@2.0.7');
+      window.RetellWebClient = mod.RetellWebClient || mod.default?.RetellWebClient || mod.default;
+      window.dispatchEvent(new Event('retell-sdk-ready'));
+      console.log('[retell-sdk] loaded:', typeof window.RetellWebClient);
+    } catch (err) {
+      console.error('[retell-sdk] load failed:', err);
+      window.dispatchEvent(new CustomEvent('retell-sdk-failed', { detail: err.message }));
+    }
+  </script>
   <style>
     body { display: flex; min-height: 100vh; margin: 0; }
 
@@ -208,6 +219,59 @@
     /* Quick prospect form */
     .quick-form { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
     .quick-form .form-row-sm { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.5rem; }
+
+    /* Web call card */
+    .webcall-card {
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(99, 102, 241, 0.08));
+      border: 1px solid rgba(124, 58, 237, 0.4);
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .webcall-card h4 { margin: 0 0 0.25rem 0; font-size: 0.95rem; }
+    .webcall-card .webcall-desc { color: var(--text-muted); font-size: 0.82rem; margin: 0 0 0.75rem 0; }
+    .btn-webcall {
+      width: 100%;
+      background: linear-gradient(135deg, #7c3aed, #4f46e5);
+      color: #fff;
+      border: 0;
+      padding: 0.8rem 1.25rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: var(--radius);
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(124, 58, 237, 0.3);
+      transition: transform 0.08s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    }
+    .btn-webcall:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(124, 58, 237, 0.45); }
+    .btn-webcall:disabled { opacity: 0.55; cursor: not-allowed; }
+    .btn-end-call {
+      width: 100%;
+      margin-top: 0.5rem;
+      background: #dc2626; color: #fff; border: 0;
+      padding: 0.65rem 1rem; font-size: 0.9rem; font-weight: 600;
+      border-radius: var(--radius); cursor: pointer;
+    }
+    .btn-end-call:hover { background: #b91c1c; }
+    .webcall-status {
+      margin-top: 0.75rem; padding: 0.6rem 0.75rem;
+      background: rgba(0,0,0,0.18); border: 1px solid var(--border);
+      border-radius: var(--radius); font-size: 0.85rem;
+      display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
+    }
+    .webcall-status.error { border-color: var(--red); color: var(--red); background: var(--red-bg); }
+    .webcall-status.success { border-color: var(--green); color: var(--green); background: var(--green-bg); }
+    .live-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: #22c55e; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+      animation: live-pulse 1.4s ease-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes live-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+      70%  { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
   </style>
 </head>
 <body>
@@ -357,6 +421,15 @@
 
           <!-- Right panel — Call section -->
           <div class="detail-panel">
+            <!-- In-browser web call (Retell Web SDK) -->
+            <div class="webcall-card">
+              <h4>&#127908; Talk to your agent in-browser</h4>
+              <p class="webcall-desc">No phone needed. Mic + speakers only. ~$0.10/min while connected.</p>
+              <button id="webcallStartBtn" class="btn-webcall" onclick="startWebCall()">&#127908; Start Conversation</button>
+              <button id="webcallEndBtn" class="btn-end-call" style="display:none;" onclick="endWebCall()">End Call</button>
+              <div id="webcallStatus" class="webcall-status" style="display:none;"></div>
+            </div>
+
             <h4 style="margin-bottom:1rem;">Test Call</h4>
 
             <button class="call-btn" id="callMeNowBtn" onclick="callMeNow()">&#128222; Call Me Now</button>
@@ -992,6 +1065,148 @@
       } catch {}
       window.location.href = '/login';
     }
+
+    // --- Web Call (in-browser test, mirrors callMeNow's agent-id pattern) ---
+    let webcallClient = null;
+    let webcallActive = false;
+
+    function setWebcallStatus(text, kind) {
+      const el = document.getElementById('webcallStatus');
+      if (!text) {
+        el.style.display = 'none';
+        el.innerHTML = '';
+        el.className = 'webcall-status';
+        return;
+      }
+      el.style.display = 'flex';
+      el.className = 'webcall-status' + (kind ? ' ' + kind : '');
+      if (kind === 'live') {
+        el.innerHTML = '<span class="live-dot"></span><span>' + esc(text) + '</span>';
+      } else {
+        el.textContent = text;
+      }
+    }
+
+    function getRetellWebClientCtor() {
+      if (typeof window.RetellWebClient === 'function') return window.RetellWebClient;
+      const ns = window.retellClientJsSdk || window.RetellClientJsSdk;
+      if (ns && typeof ns.RetellWebClient === 'function') return ns.RetellWebClient;
+      return null;
+    }
+
+    async function ensureSDKReady(timeoutMs = 5000) {
+      if (window.RetellWebClient) return true;
+      return new Promise(resolve => {
+        const onReady = () => { cleanup(); resolve(true); };
+        const onFail = () => { cleanup(); resolve(false); };
+        const cleanup = () => {
+          window.removeEventListener('retell-sdk-ready', onReady);
+          window.removeEventListener('retell-sdk-failed', onFail);
+          clearTimeout(timer);
+        };
+        window.addEventListener('retell-sdk-ready', onReady, { once: true });
+        window.addEventListener('retell-sdk-failed', onFail, { once: true });
+        const timer = setTimeout(() => { cleanup(); resolve(!!window.RetellWebClient); }, timeoutMs);
+      });
+    }
+
+    async function startWebCall() {
+      const startBtn = document.getElementById('webcallStartBtn');
+      const endBtn = document.getElementById('webcallEndBtn');
+
+      setWebcallStatus('Loading SDK…', null);
+      const ready = await ensureSDKReady();
+      if (!ready || !window.RetellWebClient) {
+        setWebcallStatus('Web call SDK failed to load. Check browser console.', 'error');
+        return;
+      }
+
+      const Ctor = getRetellWebClientCtor();
+      if (!Ctor) {
+        setWebcallStatus('Web call SDK failed to load. Try refreshing the page.', 'error');
+        return;
+      }
+
+      // Read agent the same way callMeNow does
+      const agentSel = document.getElementById('callAgent');
+      const clientId = agentSel ? agentSel.value : selectedClientId;
+      if (!clientId) {
+        setWebcallStatus('No agent selected', 'error');
+        return;
+      }
+
+      startBtn.disabled = true;
+      startBtn.textContent = 'Requesting access...';
+      setWebcallStatus('Setting up call...', null);
+
+      let accessToken;
+      try {
+        const res = await fetch('/api/clients/' + clientId + '/web-call', { method: 'POST' });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Failed to create web call');
+        accessToken = data.access_token;
+        if (!accessToken) throw new Error('No access token returned');
+      } catch (err) {
+        setWebcallStatus('Could not start call: ' + err.message, 'error');
+        startBtn.disabled = false;
+        startBtn.innerHTML = '\u{1F3A4} Start Conversation';
+        return;
+      }
+
+      try {
+        webcallClient = new Ctor();
+
+        webcallClient.on('call_started', () => {
+          webcallActive = true;
+          setWebcallStatus('Connected — speak now', 'live');
+          endBtn.style.display = 'block';
+        });
+
+        webcallClient.on('call_ended', () => {
+          webcallActive = false;
+          setWebcallStatus('\u{1F4DE} Call ended. Memory loop processing in background... Refresh in ~10s to see this call’s analysis and prospect memory updates.', 'success');
+          endBtn.style.display = 'none';
+          startBtn.disabled = false;
+          startBtn.innerHTML = '\u{1F3A4} Start Conversation';
+          webcallClient = null;
+        });
+
+        webcallClient.on('error', (err) => {
+          const msg = (err && (err.message || err.toString())) || 'Unknown SDK error';
+          setWebcallStatus('Call error: ' + msg, 'error');
+          webcallActive = false;
+          endBtn.style.display = 'none';
+          startBtn.disabled = false;
+          startBtn.innerHTML = '\u{1F3A4} Start Conversation';
+          try { webcallClient && webcallClient.stopCall(); } catch (_) {}
+          webcallClient = null;
+        });
+
+        await webcallClient.startCall({ accessToken });
+      } catch (err) {
+        const msg = (err && err.message) || String(err);
+        const lower = msg.toLowerCase();
+        if (lower.includes('permission') || lower.includes('denied') || lower.includes('notallowed')) {
+          setWebcallStatus('Mic access required. Allow microphone access in your browser and try again.', 'error');
+        } else {
+          setWebcallStatus('Could not start call: ' + msg, 'error');
+        }
+        startBtn.disabled = false;
+        startBtn.innerHTML = '\u{1F3A4} Start Conversation';
+        webcallClient = null;
+      }
+    }
+
+    function endWebCall() {
+      if (!webcallClient) return;
+      try { webcallClient.stopCall(); } catch (err) { console.warn('[webcall] stopCall threw:', err); }
+    }
+
+    window.addEventListener('beforeunload', () => {
+      if (webcallActive && webcallClient) {
+        try { webcallClient.stopCall(); } catch (_) {}
+      }
+    });
 
     // --- Start ---
     init();

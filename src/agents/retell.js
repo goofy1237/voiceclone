@@ -370,6 +370,41 @@ async function getRetellCallStatus(retellCallId) {
 }
 
 /**
+ * Create a Retell web call (browser-based test, no phone number).
+ * Returns { access_token, call_id } — frontend feeds access_token to RetellWebClient.
+ *
+ * Endpoint: POST /v2/create-web-call (per Retell docs as of 2026-04).
+ * If Retell ever flips this to /create-web-call, just swap the path.
+ */
+async function createWebCall(clientId) {
+  const { data: client, error } = await supabase
+    .from('clients')
+    .select('retell_agent_id')
+    .eq('id', clientId)
+    .single();
+
+  if (error || !client) throw new Error(`Client not found: ${clientId}`);
+
+  const agentId = await ensureRetellAgentExists(clientId);
+
+  const { data } = await axios.post(
+    `${RETELL_API_BASE}/v2/create-web-call`,
+    { agent_id: agentId },
+    { headers: retellHeaders },
+  );
+
+  if (!data?.access_token) {
+    throw new Error(`Retell create-web-call returned no access_token. Response: ${JSON.stringify(data)}`);
+  }
+
+  console.log(`[retell] Web call created: agent=${agentId} call_id=${data.call_id}`);
+  return {
+    access_token: data.access_token,
+    call_id: data.call_id,
+  };
+}
+
+/**
  * Update the Retell LLM with a fresh BASE prompt — used when the soul changes.
  * Unlike updateAgentForProspect (which injects per-prospect memory before each
  * call), this writes the global prompt that future calls start from.
@@ -414,4 +449,4 @@ async function updateAgentBasePrompt(clientId) {
   }
 }
 
-module.exports = { createRetellAgent, ensureRetellAgentExists, updateAgentForProspect, updateAgentBasePrompt, initiateOutboundCall, getRetellCallStatus, registerVoiceWithRetell };
+module.exports = { createRetellAgent, ensureRetellAgentExists, updateAgentForProspect, updateAgentBasePrompt, initiateOutboundCall, createWebCall, getRetellCallStatus, registerVoiceWithRetell };

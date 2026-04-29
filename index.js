@@ -12,7 +12,7 @@ const supabase = require('./src/database/client');
 const { verifyConnection } = require('./src/database/client');
 const webhooks = require('./src/webhooks/index');
 const { generateAndSaveSoul } = require('./src/soul/generator');
-const { createRetellAgent, updateAgentForProspect, updateAgentBasePrompt, initiateOutboundCall, getRetellCallStatus, registerVoiceWithRetell } = require('./src/agents/retell');
+const { createRetellAgent, updateAgentForProspect, updateAgentBasePrompt, initiateOutboundCall, createWebCall, getRetellCallStatus, registerVoiceWithRetell } = require('./src/agents/retell');
 const { refineSoul } = require('./src/soul/refiner');
 const { buildSystemPrompt } = require('./src/prompts/builder');
 const { RETELL_API_BASE } = require('./config/constants');
@@ -884,6 +884,17 @@ app.post('/api/clients/:clientId/soul/apply', requireUser, requireClientOwnershi
     res.json({ ok: true, soul });
   } catch (err) {
     console.error('[soul/apply] failed:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /api/clients/:clientId/web-call — create a Retell web call for in-browser testing
+app.post('/api/clients/:clientId/web-call', requireUser, requireClientOwnership, async (req, res) => {
+  try {
+    const result = await createWebCall(req.params.clientId);
+    res.json(result);
+  } catch (err) {
+    console.error('[web-call] failed:', err.message);
     res.status(500).json({ error: err.message });
   }
 });
