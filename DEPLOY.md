@@ -1,5 +1,9 @@
 # Deployment Guide — AI Closer Platform
 
+Production deploys to **Railway** (Nixpacks build, config in `railway.toml`).
+A `Dockerfile` + `fly.toml` are also kept for ad-hoc Fly.io test instances —
+see the bottom of this file.
+
 ## Railway Setup
 
 ### 1. Install Railway CLI
@@ -22,9 +26,10 @@ railway variables set RETELL_API_KEY=key_ff9c78ea...
 railway variables set RETELL_PHONE_NUMBER=+1XXXXXXXXXX
 railway variables set ELEVENLABS_API_KEY=2b2c2b47...
 railway variables set ELEVENLABS_VOICE_ID=BIvP0GN1...
-railway variables set SUPABASE_URL=https://sfnwkvpnpwntmyigycrd.supabase.co
+railway variables set FISH_AUDIO_API_KEY=dd77a6c8...
+railway variables set SUPABASE_URL=https://YOUR.supabase.co
 railway variables set SUPABASE_SERVICE_ROLE_KEY=eyJhbGci...
-railway variables set SUPABASE_ACCESS_TOKEN=sbp_83c2...
+railway variables set SUPABASE_ACCESS_TOKEN=sb_secret_...
 railway variables set NODE_ENV=production
 railway variables set PORT=3000
 ```
@@ -33,6 +38,8 @@ railway variables set PORT=3000
 ```bash
 railway up
 ```
+
+Or `npm run deploy`.
 
 ### 5. Get Your URL
 ```bash
@@ -51,7 +58,7 @@ railway up
 ## Webhook Registration (After Deploy)
 
 ### Retell
-1. Go to https://dashboard.retell.ai
+1. Go to https://dashboard.retellai.com
 2. Settings → Webhooks
 3. Add URL: `https://your-app.railway.app/webhooks/retell`
 
@@ -85,7 +92,7 @@ Expected response:
 ```json
 {
   "status": "ok",
-  "timestamp": "2026-04-29T...",
+  "timestamp": "2026-...",
   "version": "1.0.0",
   "services": {
     "supabase": "connected",
@@ -103,12 +110,35 @@ Expected response:
 - The server logs which vars are missing on startup
 
 ### Health check returns 503
-- Supabase is unreachable — check SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY
+- Supabase is unreachable — check `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` (must be the **service_role** key, not anon)
 
 ### Webhooks not firing
-- Verify BASE_URL is set to your Railway URL (not localhost)
+- Verify `BASE_URL` is set to your Railway URL (not localhost)
 - Check webhook registrations in each service's dashboard
 
 ### Rate limited (429)
 - General: 100 requests per 15 minutes per IP
 - Webhooks: 200 requests per minute per IP
+
+---
+
+## Fly.io (testing only)
+
+`fly.toml` + `Dockerfile` are kept for spinning up throwaway test environments.
+Production stays on Railway.
+
+```bash
+fly auth login
+fly apps create ai-closer-mvp        # first time only; or edit fly.toml
+fly secrets set ANTHROPIC_API_KEY=... RETELL_API_KEY=... \
+                SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... \
+                BASE_URL=https://ai-closer-mvp.fly.dev
+fly deploy
+```
+
+`.github/workflows/fly-deploy.yml` runs `flyctl deploy --remote-only` on every
+push to `main` (requires the `FLY_API_TOKEN` GitHub secret). Disable that
+workflow if you don't want test deploys on every commit.
+
+If `fly` commands return **`failed to list active VMs: trial has ended`**, add a
+credit card at https://fly.io/trial — Fly blocks all CLI ops until billing is enabled.

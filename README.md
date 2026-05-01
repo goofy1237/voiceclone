@@ -51,3 +51,5 @@ See `.env` for the full list including the optional `SUPABASE_ACCESS_TOKEN` (aut
 ## Deployment
 
 Deploys cleanly to Railway. See [DEPLOY.md](DEPLOY.md) for env vars, webhook registration, and the verification curl.
+
+A `Dockerfile` + `fly.toml` are also kept for spinning up Fly.io test instances; CI in `.github/workflows/fly-deploy.yml` pushes to Fly on every commit to `main` (requires the `FLY_API_TOKEN` GitHub secret). Production is Railway.
