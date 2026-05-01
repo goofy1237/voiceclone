@@ -1,0 +1,15 @@
+node_modules
+npm-debug.log
+.env
+.env.*
+.env.example
+.git
+.gitignore
+.vscode
+.idea
+.DS_Store
+test/
+SESSION_HANDOFF.md
+NGROK_SETUP.md
+DEPLOY.md
+*.log
